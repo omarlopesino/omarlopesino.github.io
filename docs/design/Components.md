@@ -45,3 +45,5 @@
 * Post metatags
 
 * Box (as an accordion alternative)
+
+* Link, study how to work on the link view respective of its container.
