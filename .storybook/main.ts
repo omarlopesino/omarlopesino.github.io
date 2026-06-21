@@ -1,11 +1,12 @@
+import type { StorybookConfig } from '@storybook-astro/framework';
 import { react } from '@storybook-astro/framework/integrations';
 import tailwindcss from '@tailwindcss/vite';
 
-export default {
+const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
-      '@storybook/addon-a11y',
-      '@storybook/addon-themes',
+    '@storybook/addon-a11y',
+    '@storybook/addon-themes',
   ],
   framework: {
     name: '@storybook-astro/framework',
@@ -20,3 +21,5 @@ export default {
     return config;
   },
 };
+
+export default config;

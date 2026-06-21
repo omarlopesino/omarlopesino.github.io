@@ -1,7 +1,8 @@
+import type { Preview } from '@storybook/react';
 import { withThemeByClassName } from '@storybook/addon-themes';
 import '../src/styles/global.css';
 
-const preview = {
+const preview: Preview = {
   parameters: {
     renderer: 'react',
     controls: {
@@ -23,4 +24,3 @@ const preview = {
 };
 
 export default preview;
-
