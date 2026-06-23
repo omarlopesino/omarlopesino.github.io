@@ -5,12 +5,12 @@ function Menu({ className, logo, children, ...props }: React.ComponentProps<"nav
   logo: React.ReactNode
 }) {
   return (
-    <nav className={cn(className, 'navbar max-md:flex-col max-md:items-start shadow-sm')} {...props}>
-      <div className="flex-2 pl-10">
+    <nav role="navigation" className={cn(className, 'navbar max-md:flex-col max-md:items-center shadow-sm')} {...props}>
+      <div className="flex-2 max-md:pl-0 max-md:w-full max-md:text-center">
         {logo}
       </div>
       <div className="flex-none">
-        <ul className="menu md:menu-horizontal">
+        <ul className="menu menu-horizontal items-center">
           {children}
         </ul>
       </div>
