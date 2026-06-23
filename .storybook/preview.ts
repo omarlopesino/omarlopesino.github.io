@@ -1,11 +1,9 @@
-import React from 'react';
-import type { Preview } from '@storybook/react';
+import type { Preview } from '@storybook-astro/framework';
 import { withThemeByDataAttribute } from '@storybook/addon-themes';
 import '../src/styles/global.css';
 
 const preview: Preview = {
   parameters: {
-    renderer: 'react',
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -14,11 +12,6 @@ const preview: Preview = {
     },
   },
   decorators: [
-    (Story) => (
-      <div className="max-w-5xl mx-auto px-4 max-md:px-0">
-        <Story />
-      </div>
-    ),
     withThemeByDataAttribute({
       themes: {
         light: 'light',
