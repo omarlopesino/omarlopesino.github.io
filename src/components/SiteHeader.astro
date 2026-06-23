@@ -1,0 +1,11 @@
+---
+import Menu from './ui/Menu.astro';
+import MenuLink from './ui/MenuLink.astro';
+import Logo from './ui/Logo.astro';
+---
+<Menu>
+  <Logo slot="logo" />
+  <MenuLink href="/about">About</MenuLink>
+  <MenuLink href="/blog">Blog</MenuLink>
+  <MenuLink href="/contact" class="px-4 rounded-lg border border-current">Contact</MenuLink>
+</Menu>

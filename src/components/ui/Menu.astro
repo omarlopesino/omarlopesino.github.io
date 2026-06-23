@@ -1,0 +1,18 @@
+---
+interface Props {
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { class: className, ...rest } = Astro.props;
+---
+<nav role="navigation" class:list={['navbar max-md:flex-col max-md:items-center shadow-sm', className]} {...rest}>
+  <div class="flex-2 max-md:pl-0 max-md:w-full max-md:text-center">
+    <slot name="logo" />
+  </div>
+  <div class="flex-none">
+    <ul class="menu menu-horizontal items-center">
+      <slot />
+    </ul>
+  </div>
+</nav>
