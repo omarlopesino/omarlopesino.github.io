@@ -35,7 +35,7 @@
 
 * DAte interval
 
-* Button
+* Button -> Use native -> Done
 
 * Image
 
