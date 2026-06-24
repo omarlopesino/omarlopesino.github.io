@@ -11,9 +11,10 @@ const { class: className, ...rest } = Astro.props;
   <div class="flex-2 max-md:pl-0 max-md:w-full max-md:text-center">
     <slot name="start" />
   </div>
-  <div class="flex-none">
+  <div class="flex-none flex items-center">
     <ul class="menu menu-horizontal items-center [&_a:hover]:bg-base-content [&_a:hover]:text-base-100 [&_a:hover]:transition-colors">
       <slot />
     </ul>
+    <slot name="end" />
   </div>
 </nav>
