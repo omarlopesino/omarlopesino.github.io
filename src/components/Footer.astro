@@ -1,0 +1,12 @@
+---
+import Menu from './ui/Menu.astro';
+import MenuLink from './ui/MenuLink.astro';
+import { Icon } from 'astro-icon/components';
+const iconClass = 'text-base-content w-5 h-5';
+---
+<Menu class="shadow-top text-center">
+  <span class="text-sm" slot="start">2026 Omar Lopesino</span>
+  <MenuLink href="https://github.com/omarlopesino"><Icon class={iconClass} name="mdi:github" /></MenuLink>
+  <MenuLink href="https://www.linkedin.com/in/omar-mohamad-el-hassan-lopesino-ba639462/"><Icon class={iconClass} name="mdi:linkedin" /></MenuLink>
+  <MenuLink href="mailto:omarmoper@gmail.com"><Icon class={iconClass} name="mdi:email-outline" /></MenuLink>
+</Menu>

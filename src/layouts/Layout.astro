@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
-import SiteHeader from '../components/SiteHeader.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import { getLangFromUrl } from '@/i18n/utils';
 
 interface Props {
@@ -28,8 +29,11 @@ const { title, description, refresh } = Astro.props;
     <header class="lg:px-4">
       <Header />
     </header>
-    <main class="mt-6 px-4">
+    <main class="my-6 px-6">
       <slot />
     </main>
+    <footer class="lg:px-4">
+      <Footer />
+    </footer>
   </body>
 </html>
