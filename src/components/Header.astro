@@ -4,6 +4,9 @@ import MenuLink from './ui/MenuLink.astro';
 import Logo from './ui/Logo.astro';
 import LanguageSwitcher from './ui/LanguageSwitcher.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import type { Alternate } from '../i18n/routes';
+
+const { alternates = [] } : { alternates?: Alternate[] } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -11,8 +14,8 @@ const t = useTranslations(lang);
 ---
 <Menu class="shadow-sm">
   <Logo slot="start" />
-  <MenuLink href="/blog">{t('nav.blog')}</MenuLink>
-  <MenuLink href="/about">{t('nav.about')}</MenuLink>
-  <MenuLink href="/contact" class="px-4 rounded-lg border border-current">{t('nav.contact')}</MenuLink>
-  <li><LanguageSwitcher lang={lang} /></li>
+  <MenuLink href={"/" + lang + "/blog"}>{t('nav.blog')}</MenuLink>
+  <MenuLink href={"/" + lang + "/about"}>{t('nav.about')}</MenuLink>
+  <MenuLink href={"/" + lang + "/contact"} class="px-4 rounded-lg border border-current">{t('nav.contact')}</MenuLink>
+  <li><LanguageSwitcher lang={lang} alternates={alternates} /></li>
 </Menu>

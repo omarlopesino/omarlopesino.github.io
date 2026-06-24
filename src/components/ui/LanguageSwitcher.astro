@@ -1,4 +1,6 @@
 ---
+import type { Alternate } from '../../i18n/routes';
+
 let classes : Record<string, string[]> = {
     "es": [],
     "en": []
@@ -6,11 +8,12 @@ let classes : Record<string, string[]> = {
 
 let linkClasses = 'p-1 rounded';
 
-const { lang: lang } = Astro.props;
+const { lang, alternates = [] } : { lang: string; alternates?: Alternate[] } = Astro.props;
 
 if (Array.isArray(classes[lang])) {
     classes[lang].push("font-bold");
 }
 
+const hrefFor = (code: string) => alternates.find((a) => a.lang === code)?.path ?? `/${code}/`;
 ---
-<span class="hover:bg-transparent"><a href="/en" class:list={[classes.en, linkClasses]}>en</a> / <a href="/es" class:list={[classes.es, linkClasses]}>es</a></span>
+<span class="hover:bg-transparent"><a href={hrefFor('en')} class:list={[classes.en, linkClasses]}>en</a> / <a href={hrefFor('es')} class:list={[classes.es, linkClasses]}>es</a></span>
