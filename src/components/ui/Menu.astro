@@ -5,13 +5,14 @@ interface Props {
 }
 
 const { class: className, ...rest } = Astro.props;
+
 ---
-<nav role="navigation" class:list={['navbar max-md:flex-col max-md:items-center shadow-sm', className]} {...rest}>
+<nav role="navigation" class:list={['navbar max-md:flex-col max-md:items-center shadow-sm max-md:w-full max-md:max-w-full', className]} {...rest}>
   <div class="flex-2 max-md:pl-0 max-md:w-full max-md:text-center">
     <slot name="logo" />
   </div>
   <div class="flex-none">
-    <ul class="menu menu-horizontal items-center">
+    <ul class="menu menu-horizontal items-center [&_a:hover]:bg-base-content [&_a:hover]:text-base-100 [&_a:hover]:transition-colors">
       <slot />
     </ul>
   </div>
