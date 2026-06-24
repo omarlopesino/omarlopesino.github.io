@@ -10,11 +10,10 @@ interface Props {
   description?: string;
   refresh?: string;
   languageRedirect?: boolean;
+  lang?: string;
 }
 
-const lang = getLangFromUrl(Astro.url);
-
-const { title, description, refresh, languageRedirect } = Astro.props;
+const { title, description, refresh, languageRedirect, lang } = Astro.props;
 ---
 
 <html lang={lang}>
