@@ -1,6 +1,6 @@
 # Hello!
 
-I am a Senior Backend Developer focused on Drupal and devops.
+I am a Senior Backend Developer focused on Drupal and DevOps.
 
 I work for [Metadrop](https://metadrop.net). In my daily job I:
 
