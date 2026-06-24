@@ -27,3 +27,7 @@ docs/.obsidian
 
 
 *.log
+
+# Storybook
+storybook-server
+storybook-static
