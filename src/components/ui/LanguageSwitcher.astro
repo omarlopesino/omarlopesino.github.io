@@ -2,7 +2,12 @@
 import { Icon } from 'astro-icon/components';
 import type { Alternate } from '../../i18n/routes';
 
-const { lang, alternates = [] } : { lang: string; alternates?: Alternate[] } = Astro.props;
+interface Props {
+  lang: string; 
+  alternates?: Alternate[]
+}
+
+const { lang, alternates = [] } = Astro.props;
 
 const hrefFor = (code: string) => alternates.find((a) => a.lang === code)?.path ?? `/${code}/`;
 const langs = ['en', 'es'];
