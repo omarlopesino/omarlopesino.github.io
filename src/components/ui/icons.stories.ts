@@ -4,15 +4,15 @@ export default {
   title: 'Components/Icons',
   component: Icon,
   args: {
-    name: 'mdi:linkedin',
+    name: 'simple-icons:linkedin',
     class: 'text-base-content w-8 h-8',
   },
   argTypes: {
     name: {
       control: 'select',
       options: [
-        'mdi:linkedin',
-        'mdi:github',
+        'simple-icons:linkedin',
+        'simple-icons:github',
         'mdi:email-outline',
         'mdi:rss',
       ],
