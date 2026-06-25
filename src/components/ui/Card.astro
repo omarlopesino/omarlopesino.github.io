@@ -1,0 +1,22 @@
+---
+
+interface Props {
+  class?: string;
+  [key: string]: unknown;
+  title: string;
+  description: string;
+}
+
+const { class: className, title, description, ...rest } = Astro.props;
+---
+
+<div class:list={['card shadow-sm w-96', className]} {...rest}>
+    <slot name="image" />
+    <div class="card-body">
+        <h2 class="card-title">{title}</h2>
+        <p>{description}</p>
+        <div class="card-actions justify-end">
+            <slot name="cta"></slot>
+        </div>
+    </div>
+</div>
