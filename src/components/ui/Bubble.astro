@@ -1,0 +1,14 @@
+---
+interface Props {
+  tag?: string;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { tag = 'span', class: className, ...rest } = Astro.props;
+
+const BubbleElement = tag;
+let classList = ['badge', className];
+
+---
+<BubbleElement class:list={classList} {...rest}><slot /></BubbleElement>
