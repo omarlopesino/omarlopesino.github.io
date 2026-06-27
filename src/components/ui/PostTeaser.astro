@@ -17,8 +17,6 @@ interface Props {
     width: number;
     height: number;
   },
-  imageSrc: string;
-  imageAlt: string;
   [key: string]: unknown;
 }
 
@@ -26,7 +24,7 @@ const { class: className, title, description, url, date, image, tags = [], ...re
 
 ---
 
-<Card url={url} tag="article" title={title} url={url} class:list={['shadow-sm', className]} {...rest}>
+<Card url={url} tag="article" title={title} url={url} class:list={[className]} {...rest}>
     <Image slot="image" src={image.src} alt={image.alt} width={image.width} height={image.height} />
     <div slot="content" class="flex gap-3 py-2">
         <time datetime={date} class="text-sm">{date}</time>

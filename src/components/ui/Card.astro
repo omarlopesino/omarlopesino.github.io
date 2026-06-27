@@ -14,7 +14,7 @@ const { class: className, title, url, actionClass, actions = false, tag = 'div',
 
 const CardElement = tag;
 
-let classList = ['card', className];
+let classList = ['card', 'bg-base-100', 'shadow-md dark:shadow-white/10', className];
 
 if (url != null) {
     classList.push('relative');
@@ -22,7 +22,9 @@ if (url != null) {
 ---
 
 <CardElement class:list={classList} {...rest}>
-    <slot name="image" />
+    <figure>
+        <slot name="image" />
+    </figure>
     <div class="card-body">
         <h3 class="card-title">
             {url && <a href={url} class="after:absolute after:inset-0">{title}</a>}
