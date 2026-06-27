@@ -12,7 +12,9 @@ export const ui = {
     'nav.blog': 'Blog',
     'nav.contact': 'Contact',
     'nav.share': 'Share',
-    'nav.shareTitle': 'Share this post in social networks!'
+    'nav.shareTitle': 'Share this post in social networks!',
+    'post.tagsLabel': 'Post tags',
+    'post.shareTitle': 'Share this article in social networks',
   },
   es: {
     'nav.home': 'Inicio',
@@ -20,6 +22,8 @@ export const ui = {
     'nav.blog': 'Blog',
     'nav.contact': 'Contactar',
     'nav.share': 'Compartir',
-    'nav.shareTitle': '¡Comparte esta publicación en redes sociales!'
+    'nav.shareTitle': '¡Comparte esta publicación en redes sociales!',
+    'post.tagsLabel': 'Etiquetas del post',
+    'post.shareTitle': 'Comparte el artículo en redes sociales',
   },
 } as const;
