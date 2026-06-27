@@ -2,14 +2,19 @@
 import { Image } from 'astro:assets';
 import Bubble from './Bubble.astro';
 import Share from './Share.astro';
-import { getLangFromUrl, useTranslations, useFormatDate } from '@/i18n/utils';
+import { getLangFromUrl, useTranslations, useFormatDate, useUrl } from '@/i18n/utils';
+
+type PostTag = {
+  name: string;
+  path: string;
+};
 
 interface Props {
   title: string;
   description: string;
   url: string;
   date: string
-  tags?: string[];
+  tags?: PostTag[];
   class?: string;
   image: {
     src: string;
@@ -23,6 +28,7 @@ interface Props {
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const formatDate = useFormatDate(lang);
+const localizedUrl = useUrl(lang);
 
 const { class: className, title, description, url, date, image, tags = [], ...rest } = Astro.props;
 
@@ -37,7 +43,9 @@ const shareId = `share_${crypto.randomUUID()}`;
         <ul class="flex gap-3 list-none p-0! m-0!" aria-label={t('post.tagsLabel')}>
             {
                 tags.map((tag) => (
-                    <li class="m-0 p-0"><Bubble class:list={['badge-accent']}>{tag}</Bubble></li>
+                    <li class="m-0 p-0">
+                        <Bubble tag="a" href={localizedUrl(tag.path)} class:list={['badge-accent', 'dark:badge-secondary', 'no-underline']}>{tag.name}</Bubble>
+                    </li>
                 ))
             }
         </ul>

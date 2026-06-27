@@ -26,7 +26,10 @@ export default {
   args:  {
     title: 'My awesome post',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    tags: ['Tag 1', 'Tag 2'],
+    tags: [
+      { name: 'Tag 1', path: 'blog/tags/tag-1' },
+      { name: 'Tag 2', path: 'blog/tags/tag-2' },
+    ],
     date: '2026-06-26',
     image: {
         src: '/placeholder.png',

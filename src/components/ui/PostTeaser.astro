@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Bubble from './Bubble.astro';
 import Card from './Card.astro';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
 
 interface Props {
@@ -21,6 +22,8 @@ interface Props {
 }
 
 const { class: className, title, description, url, date, image, tags = [], ...rest } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 ---
 
@@ -28,13 +31,13 @@ const { class: className, title, description, url, date, image, tags = [], ...re
     <Image slot="image" src={image.src} alt={image.alt} width={image.width} height={image.height} />
     <div slot="content" class="flex gap-3 py-2">
         <time datetime={date} class="text-sm">{date}</time>
-        <div class="flex gap-3">
+        <ul class="flex gap-3 list-none p-0! m-0!" aria-label={t('post.tagsLabel')}>
             {
                 tags.map((tag) => (
-                    <Bubble class:list={['badge-accent']}>{tag}</Bubble>
+                    <li class="m-0 p-0"><Bubble class:list={['badge-accent', 'dark:badge-secondary']}>{tag}</Bubble></li>
                 ))
             }
-        </div>
+        </ul>
     </div>
     <p slot="content">{description}</p>
 </Card>
