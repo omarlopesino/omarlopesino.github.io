@@ -1,0 +1,40 @@
+---
+interface Props {
+  header?: string[],
+  rows: {
+    head?: string,
+    cells: string[],
+  }[],
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { class: className, header = [], rows,...rest } = Astro.props;
+
+---
+<div class:list={[className, "overflow-x-auto rounded-box border border-base-content/5 bg-base-100"]} {...rest}>
+  <table class="table">
+     {
+        header.length > 0 && 
+        <thead>
+            {
+                header.map((headerCell) => <th>{headerCell}</th>)
+            }
+        </thead>
+     }
+    <tbody>
+        {
+            rows.map((row) => (
+                <tr>
+                    <th>{row.head}</th>
+                    {
+                        row.cells.map((cell) => (
+                            <td>{cell}</td>
+                        ))
+                    }
+                </tr>
+            ))
+        }
+    </tbody>
+  </table>
+</div>
