@@ -1,9 +1,9 @@
 ---
 import { Image } from 'astro:assets';
-import Bubble from './Bubble.astro';
 import Card from './Card.astro';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import type { PostInterface } from '@/types';
+import PostCategory from './PostCategory.astro';
 
 interface Props extends PostInterface {
 }
@@ -18,7 +18,7 @@ const t = useTranslations(lang);
     <Image slot="image" src={image.src} alt={image.alt} width={image.width} height={image.height} />
     <div slot="content" class="flex gap-3 py-2">
         <time datetime={date} class="text-sm">{date}</time>
-        <span class="font-bold text-purple-600 dark:text-base-content">{category}</span>
+        <PostCategory category={category} />
     </div>
     <p slot="content">{description}</p>
 </Card>
