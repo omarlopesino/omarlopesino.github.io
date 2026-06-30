@@ -1,0 +1,28 @@
+---
+import { type Image } from '@/types';
+import ProfilePicture from './ProfilePicture.astro';
+
+interface Props {
+  text: string;
+  link: {
+    href: string,
+    text: string,
+  },
+  image: Image,
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { text, class: className, image, link, ...rest } = Astro.props;
+
+
+---
+
+<div class:list={[className, "flex justify-center gap-3"]} {...rest}>
+    <div class="w-24 h-24">
+        <ProfilePicture class="rounded-full" image={image} />
+    </div>
+    <div class="text-sm">
+        <p>{text}</p> <a class="btn btn-xs btn-primary bg-none rounded-full" href={link.href}>{link.text}</a>
+    </div>
+</div>
