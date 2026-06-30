@@ -15,7 +15,7 @@ type Post = {
     title: string;
     description: string;
     url: string;
-    date: string;
+    publishedDate: string;
     category: string;
     tags?: PostTag[];
     image: Image,

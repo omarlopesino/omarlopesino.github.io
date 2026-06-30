@@ -18,7 +18,7 @@ export default {
         key: 'tag2',
       },
     ],
-    date: '2026-06-26',
+    publishedDate: '2026-06-26',
     image: {
         src: '/960x540.jpg',
         alt: 'My awesome image',
