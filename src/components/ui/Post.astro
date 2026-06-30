@@ -5,6 +5,7 @@ import Share from './Share.astro';
 import { getLangFromUrl, useTranslations, useFormatDate, useUrl } from '@/i18n/utils';
 import { type PostInterface } from '@/types';
 import PostCategory from './PostCategory.astro';
+import Date from './Date.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -23,7 +24,7 @@ const shareId = `share_${crypto.randomUUID()}`;
     <h1 class="m-0 text-center">{title}</h1>
     <Image src={image.src} alt={image.alt} width={image.width} height={image.height} class="mx-auto w-full aspect-[21/9] object-cover mb-2" />
     <div class="flex items-center gap-3 justify-center">
-        <time datetime={date} class="text-sm">{formatDate(date)}</time>
+        <Date date={date} />
         <PostCategory category={category} />
     </div>
     <p>{description}</p>

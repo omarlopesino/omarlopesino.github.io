@@ -4,6 +4,7 @@ import Card from './Card.astro';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import type { PostInterface } from '@/types';
 import PostCategory from './PostCategory.astro';
+import Date from './Date.astro';
 
 interface Props extends PostInterface {
 }
@@ -17,7 +18,7 @@ const t = useTranslations(lang);
 <Card url={url} tag="article" title={title} url={url} class:list={[className]} {...rest}>
     <Image slot="image" src={image.src} alt={image.alt} width={image.width} height={image.height} />
     <div slot="content" class="flex gap-3 py-2">
-        <time datetime={date} class="text-sm">{date}</time>
+        <Date date={date} />
         <PostCategory category={category} />
     </div>
     <p slot="content">{description}</p>
