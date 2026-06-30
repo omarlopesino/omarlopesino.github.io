@@ -34,12 +34,12 @@
 
 * Table -> Done
 
-* Big Icon + text -> Depends on homepage
+* Recommended posts -> Done
 
-* Recommended posts
+* Date interval -> Done
 
-* Date interval
+* Image + text using card variant -> Done
 
-* Image + Text : possibility to set image side (right or left)
+* Big Icon + text (Card) -> Done
 
-* Hero: the coolest hero to present myself.
+* Hero: the coolest hero to present myself. Depends on homepage
