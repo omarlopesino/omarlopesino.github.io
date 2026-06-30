@@ -44,3 +44,14 @@ export const PostTeaser = {
     },
   },
 };
+
+export const Side = {
+  args: {
+    class: 'card-side',
+    actions: true,
+    actionClass: actionClass,
+    slots: {
+      ...defaultSlots,
+    },
+  },
+};
