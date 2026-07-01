@@ -17,13 +17,13 @@ export default {
       {
         name: 'Tag 1',
         id: 'tag1',
-        path: 'tag1',
+        slug: 'tag1',
         language: 'es',
       },
       {
         name: 'Tag 2',
         id: 'tag2',
-        path: 'tag2',
+        slug: 'tag2',
         language: 'es',
       },
     ],

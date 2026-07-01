@@ -14,10 +14,10 @@ const taxonomyCollection =  (collectionName : string) => {
 			},
 		}),
 		schema: z.object({
-			'name': z.string(),
-			'path': z.string(),
-			'language': z.string(),
-			'id': z.string(),
+			name: z.string(),
+			slug: z.string(),
+			language: z.string(),
+			id: z.string(),
 		}),
 	});
 }

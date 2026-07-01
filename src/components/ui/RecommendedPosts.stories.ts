@@ -36,11 +36,13 @@ export default {
             tags: [
             {
                 name: 'Tag 1',
-                key: 'tag1',
+                id: 'tag1',
+                slug: 'tag1',
             },
             {
                 name: 'Tag 2',
-                key: 'tag2',
+                id: 'tag2',
+                slug: 'tag2',
             },
             ],
             pubDate: '2026-06-26',

@@ -28,13 +28,13 @@ export default {
     category: {
       name: 'Test',
       id: 'test',
-      path: 'test',
+      slug: 'test',
       language: 'es',
     },
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     tags: [
-      { name: 'Tag 1', path: 'blog/tags/tag-1' },
-      { name: 'Tag 2', path: 'blog/tags/tag-2' },
+      { name: 'Tag 1', slug: 'blog/tags/tag-1' },
+      { name: 'Tag 2', slug: 'blog/tags/tag-2' },
     ],
     pubDate: '2026-06-26',
     image: {

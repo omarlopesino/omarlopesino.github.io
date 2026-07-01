@@ -8,7 +8,7 @@ export type Image = {
 
 export type Term = {
   name: string;
-  path: string;
+  slug: string;
   language: string;
   id: string;
 };
