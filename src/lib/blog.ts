@@ -1,15 +1,15 @@
 import type { GetStaticPaths } from "astro";
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionKey } from "astro:content";
 
-export function buildStaticPaths(language: string) : GetStaticPaths {
+export function staticPaths(type: CollectionKey, language: string) : GetStaticPaths {
   return async () => {
-    const posts = await getCollection('blog', ({data}) => {
+    const posts = await getCollection(type, ({data}) => {
       return data.language == language;
     });
 
-    return posts.map(post => ({
-      params: { id: post.data.slug },
-      props: { post },
+    return posts.map(entry => ({
+      params: { id: entry.data.slug },
+      props: { entry },
     }));
   };
-} 
+}
