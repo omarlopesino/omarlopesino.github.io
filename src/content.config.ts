@@ -1,7 +1,13 @@
 import { defineCollection, reference } from 'astro:content';
 import { z } from 'astro/zod';
-import { file, glob } from 'astro/loaders';
+import { glob } from 'astro/loaders';
 
+const typeImage = z.object({
+	src: z.string(),
+	alt: z.string(),
+	width: z.int().default(960),
+	height: z.int().default(540)
+});
 // @todo evaluate if we can calculate language from path!
 const taxonomyCollection =  (collectionName : string) => {
 	return defineCollection({
@@ -9,11 +15,14 @@ const taxonomyCollection =  (collectionName : string) => {
 			base: "./src/data", 
 			pattern: collectionName + "/**/*.json",
 			generateId: ({data}) => {
+				console.log('generateid', data.cid + '/' + data.language);
 				return data.cid + '/' + data.language;
 			},
 		}),
 		schema: z.object({
 			name: z.string(),
+			description: z.string(),
+			image: typeImage,
 			slug: z.string(),
 			language: z.string(),
 			cid: z.string(),
@@ -40,12 +49,7 @@ const blog = defineCollection({
 		description: z.string(),
 		language: z.string(),
 		pubDate: z.coerce.date(),
-		image: z.object({
-            src: z.string(),
-            alt: z.string(),
-			width: z.int().default(960),
-			height: z.int().default(540)
-        }),
+		image: typeImage,
         category: reference('category'),
 		tags: z.array(reference('tag')) ,
         recommended: z.optional(z.array(reference("blog"))),

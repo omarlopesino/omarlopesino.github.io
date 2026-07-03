@@ -2,5 +2,10 @@
     "name": "Prueba",
     "slug": "prueba",
     "cid": "test",
-    "language": "es"
+    "language": "es",
+    "description": "Test",
+    "image": {
+        "src": "/960x540.jpg",
+        "alt": "Image alt sample"
+    }
 }
