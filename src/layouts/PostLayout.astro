@@ -10,19 +10,19 @@ const Content = content;
 import { formatDateYmd } from '@/lib/utils';
 import { getEntry } from 'astro:content';
 import type { Term } from '@/types';
+import { getContentAlternateUrls } from '@/lib/blog';
+import type { Alternate } from '@/i18n/routes';
 
 // @todo unify ID generation!
-const loadedTags = await Promise.all(
-  post.data.tags.map((tag: Term) => getEntry('tag', tag.id + '/' + post.data.language))
-)
-
+const loadedTags = await Promise.all(post.data.tags.map((tag: Term) => getEntry('tag', tag.id + '/' + post.data.language)));
 const tags = loadedTags.map((tag) => tag.data);
 
 const category = await getEntry('category', post.data.category.id + '/' + post.data.language);
+const alternates : Alternate[] = await getContentAlternateUrls('blog', post.data);
 
 ---
 
-<Layout title={post.data.title} description={post.data.description} lang={post.data.language}>
+<Layout title={post.data.title} description={post.data.description} lang={post.data.language} alternates={alternates}>
 	<Post 
         title={post.data.title} 
         description={post.data.description} 
