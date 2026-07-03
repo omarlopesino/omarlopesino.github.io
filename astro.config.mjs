@@ -15,8 +15,7 @@ export default defineConfig({
     defaultLocale: "en"
   },
   vite: {
-      plugins: [tailwindcss()],
-    },
-
+    plugins: [tailwindcss()],
+  },
   integrations: [mdx(), icon()],
 });
