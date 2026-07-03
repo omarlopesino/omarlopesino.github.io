@@ -9,15 +9,14 @@ const taxonomyCollection =  (collectionName : string) => {
 			base: "./src/data", 
 			pattern: collectionName + "/**/*.json",
 			generateId: ({data}) => {
-				// @todo use ID instead of slug.
-				return data.id + '/' + data.language;
+				return data.cid + '/' + data.language;
 			},
 		}),
 		schema: z.object({
 			name: z.string(),
 			slug: z.string(),
 			language: z.string(),
-			id: z.string(),
+			cid: z.string(),
 		}),
 	});
 }
@@ -50,6 +49,7 @@ const blog = defineCollection({
         category: reference('category'),
 		tags: z.array(reference('tag')) ,
         recommended: z.optional(z.array(reference("blog"))),
+		cid: z.string()
 	}),
 });
 
