@@ -45,3 +45,6 @@
 * Web Intro (introduction about myself -> Done
 
 * Hero -> Done (using horizontal card)
+
+* PostsList -> Done
+* GridList -> Done
