@@ -2,12 +2,10 @@
 import Layout from './Layout.astro';
 import Post from '../components/ui/Post.astro'
 
-/** @TODO language as argument! */
 const { post, content } = Astro.props;
 
 const Content = content;
 
-import { formatDateYmd } from '@/lib/utils';
 import { getEntry } from 'astro:content';
 import type { Term } from '@/types';
 import { getContentAlternateUrls } from '@/lib/blog';
@@ -26,11 +24,11 @@ const alternates : Alternate[] = await getContentAlternateUrls('blog', post.data
 	<Post 
         title={post.data.title} 
         description={post.data.description} 
-        category={category.data}
-        pubDate={formatDateYmd(post.data.pubDate)}
+        category={category}
+        pubDate={post.data.pubDate}
         image={post.data.image}
         tags={tags}
-        url={post.data.language + '/blog/' + post.data.slug}
+        url={post.data.url}
     >
         <Content slot="content" />
     </Post>
