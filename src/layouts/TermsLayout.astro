@@ -5,14 +5,18 @@ const { term, type } = Astro.props;
 
 import { getContentAlternateUrls, getPostCategory, getPostTags } from '@/lib/blog';
 import type { Alternate } from '@/i18n/routes';
-import PostTeaser from '@/components/ui/PostTeaser.astro';
+import GridList from '@/components/ui/GridList.astro';
 import { getCollection } from 'astro:content';
 
 const alternates : Alternate[] = await getContentAlternateUrls(type, term.data);
 
 const posts = await Promise.all((await getCollection('blog', (post) => post.data.language == term.data.language))
     .map(async (post) => ({
-        data: post.data,
+        title: post.data.title,
+        description: post.data.description,
+        url: post.data.url,
+        pubDate: post.data.pubDate,
+        image: post.data.image,
         category: await getPostCategory(post),
         tags: await getPostTags(post),
     })));
@@ -24,24 +28,6 @@ const posts = await Promise.all((await getCollection('blog', (post) => post.data
     <p class="text-sm">
         {term.data.description}
     </p>
-    <div class="bg-gray-100 dark:bg-base-300 rounded-box max-w-full p-4">
-        <h2 class="text-center font-bold text-lg mb-2">Related posts</h2>
-        <div class:list={["md:flex md:justify-center space-x-4 p-2"]}>
-            {
-                posts.map((post) => (
-                    <PostTeaser 
-                        class:list="max-md:w-55 md:w-70"
-                        title={post.data.title} 
-                        description={post.data.description} 
-                        category={post.category}
-                        pubDate={post.data.pubDate}
-                        image={post.data.image}
-                        tags={post.tags}
-                        url={post.data.url}
-                    />
-                ))
-            }
-        </div>
-    </div>
+    <GridList posts={posts} />
 
 </Layout>
