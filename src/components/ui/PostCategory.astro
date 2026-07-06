@@ -6,7 +6,7 @@ interface Props extends Term {
     [key: string]: unknown;
 }
 
-const { class: className, name, path, id, language, ...rest } = Astro.props;
+const { class: className, name, path, cid, language, ...rest } = Astro.props;
 
 ---
 <span class:list={[className, "font-bold text-purple-500 dark:text-base-content"]} {...rest}>{name}</span>

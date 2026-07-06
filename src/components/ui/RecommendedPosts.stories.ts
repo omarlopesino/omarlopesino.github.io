@@ -36,12 +36,12 @@ export default {
             tags: [
             {
                 name: 'Tag 1',
-                id: 'tag1',
+                cid: 'tag1',
                 slug: 'tag1',
             },
             {
                 name: 'Tag 2',
-                id: 'tag2',
+                cid: 'tag2',
                 slug: 'tag2',
             },
             ],

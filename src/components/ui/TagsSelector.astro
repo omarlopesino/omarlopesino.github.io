@@ -59,7 +59,7 @@ const datalist_id = inputName + '_list';
       const tagsDictionary = [];
       for (let tagIndex in tags) {
         let currentTag = tags[tagIndex];
-        tagsDictionary[currentTag.id] = currentTag.name;
+        tagsDictionary[currentTag.cid] = currentTag.name;
       }
       return tagsDictionary;
     }
@@ -137,7 +137,7 @@ const datalist_id = inputName + '_list';
   <datalist id={datalist_id}>
     {
       tags.map((tag) => (
-        <option value={tag.id} label={tag.name} />
+        <option value={tag.cid} label={tag.name} />
       ))
     }
   </datalist>

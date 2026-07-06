@@ -27,7 +27,7 @@ export default {
     title: 'My awesome post',
     category: {
       name: 'Test',
-      id: 'test',
+      cid: 'test',
       slug: 'test',
       language: 'es',
     },

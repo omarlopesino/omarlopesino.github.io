@@ -7,7 +7,7 @@ export default {
     class: 'w-70',
     category: {
       name: 'Test',
-      id: 'test',
+      cid: 'test',
       path: 'test',
       language: 'es',
     },
@@ -16,18 +16,18 @@ export default {
     tags: [
       {
         name: 'Tag 1',
-        id: 'tag1',
+        cid: 'tag1',
         slug: 'tag1',
         language: 'es',
       },
       {
         name: 'Tag 2',
-        id: 'tag2',
+        cid: 'tag2',
         slug: 'tag2',
         language: 'es',
       },
     ],
-    pubDate: '2026-06-26',
+    pubDate: new Date('2026-06-26'),
     image: {
         src: '/960x540.jpg',
         alt: 'My awesome image',
