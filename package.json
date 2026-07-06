@@ -18,13 +18,13 @@
     "@fontsource-variable/geist": "^5.2.9",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/simple-icons": "^1.2.87",
-    "@tailwindcss/vite": "^4.2.1",
+    "@tailwindcss/vite": "^4.3.2",
     "@types/canvas-confetti": "^1.9.0",
     "astro": "^7.0.3",
     "astro-icon": "^1.1.5",
     "canvas-confetti": "^1.9.4",
     "daisyui": "^5.6.5",
-    "tailwindcss": "^4.2.1",
+    "tailwindcss": "^4.3.2",
     "vite": "^7.3.2"
   },
   "devDependencies": {
