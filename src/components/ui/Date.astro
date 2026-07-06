@@ -2,7 +2,7 @@
 import { getLangFromUrl, useFormatDate } from '@/i18n/utils';
 
 interface Props {
-    date: string,
+    date: string | Date,
     class?: string;
     [key: string]: unknown;
 }
@@ -10,6 +10,7 @@ interface Props {
 const lang = getLangFromUrl(Astro.url);
 const formatDate = useFormatDate(lang);
 const { class: className, date, ...rest } = Astro.props;
+const isoDate = date instanceof Date ? date.toISOString() : date;
 
 ---
-<time datetime={date} class="text-sm" {...rest}>{formatDate(date)}</time>
+<time datetime={isoDate} class="text-sm" {...rest}>{formatDate(date)}</time>

@@ -36,7 +36,7 @@ export default {
       { name: 'Tag 1', slug: 'blog/tags/tag-1' },
       { name: 'Tag 2', slug: 'blog/tags/tag-2' },
     ],
-    pubDate: '2026-06-26',
+    pubDate: new Date('2026-06-26'),
     image: {
         src: '/960x540.jpg',
         alt: 'My awesome image',

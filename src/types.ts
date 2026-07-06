@@ -10,14 +10,14 @@ export type Term = {
   name: string;
   slug: string;
   language: string;
-  id: string;
+  cid: string;
 };
 
 type Post = {
     title: string;
     description: string;
     url: string;
-    pubDate: string;
+    pubDate: Date;
     category: Term;
     tags?: Term[];
     image: Image,

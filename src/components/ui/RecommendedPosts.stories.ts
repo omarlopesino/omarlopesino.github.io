@@ -20,7 +20,7 @@ export default {
                 key: 'tag2',
             },
             ],
-            pubDate: '2026-06-26',
+            pubDate: new Date('2026-06-26'),
             image: {
                 src: '/960x540.jpg',
                 alt: 'My awesome image',
@@ -45,7 +45,7 @@ export default {
                 slug: 'tag2',
             },
             ],
-            pubDate: '2026-06-26',
+            pubDate: new Date('2026-06-26'),
             image: {
                 src: '/960x540.jpg',
                 alt: 'My awesome image',
