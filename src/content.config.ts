@@ -54,7 +54,10 @@ const blog = defineCollection({
 		tags: z.array(reference('tag')) ,
         recommended: z.optional(z.array(reference("blog"))),
 		cid: z.string()
-	}),
+	}).transform((data) => ({
+		...data,
+		url: '/' + data.language + '/blog/' + data.slug,
+	})),
 });
 
 export const collections = { category, tag, blog };
