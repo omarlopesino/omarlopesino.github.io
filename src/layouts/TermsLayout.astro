@@ -1,28 +1,21 @@
 ---
 import Layout from './Layout.astro';
 
-const { term } = Astro.props;
+const { term, type } = Astro.props;
 
-import { getContentAlternateUrls } from '@/lib/blog';
+import { getContentAlternateUrls, getPostCategory, getPostTags } from '@/lib/blog';
 import type { Alternate } from '@/i18n/routes';
 import PostTeaser from '@/components/ui/PostTeaser.astro';
 import { getCollection } from 'astro:content';
-import { getEntry } from 'astro:content';
 
-const alternates : Alternate[] = await getContentAlternateUrls('blog', term.data);
+const alternates : Alternate[] = await getContentAlternateUrls(type, term.data);
 
 const posts = await Promise.all((await getCollection('blog', (post) => post.data.language == term.data.language))
-    .map(async (post) => {
-
-        const tags = (await Promise.all(post.data.tags.map((tag) => getEntry('tag', tag.id + '/' + post.data.language)))).map((tag) => tag?.data);
-        const category = (await getEntry('category', post.data.category.id + '/' + post.data.language))?.data;
-
-        return {
-            data: post.data,
-            category: category,
-            tags: tags,
-        }
-    }));
+    .map(async (post) => ({
+        data: post.data,
+        category: await getPostCategory(post),
+        tags: await getPostTags(post),
+    })));
 
 ---
 

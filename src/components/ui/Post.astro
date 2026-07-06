@@ -32,7 +32,7 @@ const shareId = `share_${crypto.randomUUID()}`;
         {
             tags.map((tag) => (
                 <li class="m-0 p-0">
-                    <Bubble tag="a" href={localizedUrl(t('tags.path') + '/' + tag.slug)} class:list={['badge-accent', 'dark:badge-secondary', 'no-underline']}>{tag.name}</Bubble>
+                    <Bubble tag="a" href={localizedUrl(t('tag.path') + '/' + tag.slug)} class:list={['badge-accent', 'dark:badge-secondary', 'no-underline']}>{tag.name}</Bubble>
                 </li>
             ))
         }

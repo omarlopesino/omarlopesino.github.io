@@ -1,6 +1,7 @@
 import type { GetStaticPaths } from "astro";
-import { getCollection, type CollectionKey, type DataEntryMap } from "astro:content";
+import { getCollection, getEntry, type CollectionEntry, type CollectionKey, type DataEntryMap } from "astro:content";
 import type { Alternate } from "@/i18n/routes";
+import { ui } from "@/i18n/ui";
 
 export function staticPaths(type: CollectionKey, language: string) : GetStaticPaths {
   return async () => {
@@ -26,10 +27,22 @@ export async function getContentAlternateUrls(type : keyof DataEntryMap, entry :
   return (await getContentAlternates(type, entry))
     .map(
     (entry) => {
+      const lang = entry.data.language as keyof typeof ui;
+      const pathSegment = ui[lang][`${type}.path`];
       return {
-        'lang': entry?.data.language  || '',
-        'path': '/' + entry?.data.language + '/blog/' + entry?.data.slug,
+        'lang': lang,
+        'path': '/' + lang + '/' + pathSegment + '/' + entry.data.slug,
       };
     }
   );
+}
+
+// @todo unify ID generation, so we don't need to re-append the language here!
+export async function getPostCategory(post: CollectionEntry<'blog'>) {
+  return (await getEntry('category', post.data.category.id + '/' + post.data.language))?.data;
+}
+
+export async function getPostTags(post: CollectionEntry<'blog'>) {
+  const tags = await Promise.all(post.data.tags.map((tag) => getEntry('tag', tag.id + '/' + post.data.language)));
+  return tags.map((tag) => tag?.data).filter((tag): tag is NonNullable<typeof tag> => Boolean(tag));
 }

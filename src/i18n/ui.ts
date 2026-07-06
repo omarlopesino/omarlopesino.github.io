@@ -18,8 +18,9 @@ export const ui = {
     'search.search': 'Search',
     'taxonomy.tags': 'Tags',
     'search.clear': 'Clear',
-    'tags.path': 'tags',
-    'categories.path': 'categories',
+    'blog.path': 'blog',
+    'tag.path': 'tags',
+    'category.path': 'categories',
   },
   es: {
     'nav.home': 'Inicio',
@@ -33,7 +34,8 @@ export const ui = {
     'search.search': 'Busca',
     'taxonomy.tags': 'Etiquetas',
     'search.clear': 'Limpiar',
-    'tags.path': 'etiquetas',
-    'categories.path': 'categorías',
+    'blog.path': 'blog',
+    'tag.path': 'etiquetas',
+    'category.path': 'categorías',
   },
 } as const;
