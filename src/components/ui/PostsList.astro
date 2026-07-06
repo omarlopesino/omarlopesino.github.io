@@ -1,0 +1,22 @@
+---
+import type { PostsListProps } from '@/types';
+
+import PostTeaser from './PostTeaser.astro';
+
+interface Props extends PostsListProps {
+}
+
+const { title, class: className, posts = [], itemClass = "", ...rest } = Astro.props;
+
+---
+
+<div class="rounded-box max-w-full p-4">
+    {title && <h2 class="text-center font-bold text-lg mb-2">{title}</h2>}
+    <div class:list={[className, "md:justify-center"]} {...rest}>
+        {
+            posts.map((post) => (
+                <PostTeaser class={itemClass} {...post} />
+            ))
+        }
+    </div>
+</div>

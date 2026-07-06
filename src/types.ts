@@ -27,3 +27,11 @@ type Post = {
 
 export interface PostInterface extends Post {
 }
+
+export type PostsListProps = {
+    title?: string;
+    posts: PostInterface[];
+    class?: string;
+    itemClass?: string;
+    [key: string]: unknown;
+}
