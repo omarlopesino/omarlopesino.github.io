@@ -1,9 +1,7 @@
 ---
-
-import { render } from 'astro:content';
 import { staticPaths } from '@/lib/blog';
 import type { CollectionEntry } from 'astro:content';
-import Layout from '@/layouts/Layout.astro';
+import TermsLayout from '@/layouts/TermsLayout.astro';
 
 interface Props {
   entry: CollectionEntry<'category'>;
@@ -13,9 +11,6 @@ export const getStaticPaths = staticPaths('category', 'es');
 
 // 2. For your template, you can get the entry directly from the prop
 const { entry } = Astro.props;
-const { Content } = await render(entry);
 ---
 
-<Layout title={entry.data.name} description="@todo" lang="es">
-	{entry.data.name}
-</Layout>
+<TermsLayout term={entry} type="category"/>
