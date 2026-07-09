@@ -11,6 +11,8 @@ export type Term = {
   slug: string;
   language: string;
   cid: string;
+  description?: string;
+  image?: Image;
 };
 
 type Post = {
