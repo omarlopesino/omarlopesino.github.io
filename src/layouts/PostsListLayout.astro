@@ -1,0 +1,16 @@
+---
+import GridList from '@/components/ui/GridList.astro';
+import Layout from './Layout.astro';
+
+const { title, description, language, alternates, posts } = Astro.props;
+
+---
+
+<Layout title={title} description={description} lang={language} alternates={alternates}>
+    <h1>{title}</h1>
+    <p class="text-sm">
+        {description}
+    </p>
+    <GridList posts={posts} />
+
+</Layout>
