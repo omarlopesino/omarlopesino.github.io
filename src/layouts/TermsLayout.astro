@@ -1,33 +1,53 @@
 ---
-import Layout from './Layout.astro';
 
-const { term, type } = Astro.props;
-
-import { getContentAlternateUrls, getPostCategory, getPostTags } from '@/lib/blog';
-import type { Alternate } from '@/i18n/routes';
-import GridList from '@/components/ui/GridList.astro';
 import { getCollection } from 'astro:content';
+import Layout from './Layout.astro';
+import type { Alternate } from '@/i18n/routes';
+import { useTranslations, useUrl } from '@/i18n/utils';
+import Bubble from '@/components/ui/Bubble.astro';
 
-const alternates : Alternate[] = await getContentAlternateUrls(type, term.data);
 
-const posts = await Promise.all((await getCollection('blog', (post) => post.data.language == term.data.language))
+interface Props {
+  title: string,
+  description: string,
+  type : 'tag' | 'category',
+  lang: 'en' | 'es',
+  alternates: Alternate[],
+  page?: number,
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { title, description, type, lang, alternates, page = 0 } = Astro.props;
+
+const terms = await Promise.all((await getCollection(type, (post) => post.data.language == lang))
     .map(async (post) => ({
-        title: post.data.title,
+        name: post.data.name,
         description: post.data.description,
-        url: post.data.url,
-        pubDate: post.data.pubDate,
-        image: post.data.image,
-        category: await getPostCategory(post),
-        tags: await getPostTags(post),
+        image: post.data.name,
+        slug: post.data.name,
+        language: post.data.name,
+        cid: post.data.name,
     })));
 
+const t = useTranslations(lang);
+const localizedUrl = useUrl(lang);
 ---
 
-<Layout title={term.data.title} description={term.data.description} lang={term.data.language} alternates={alternates}>
-    <h1>{term.data.title}</h1>
+<Layout title={title} description={description} lang={lang} alternates={alternates}>
+    <h1>{title}</h1>
     <p class="text-sm">
-        {term.data.description}
+        {description}
     </p>
-    <GridList posts={posts} />
+
+    <ul class="flex gap-3 list-none p-0! m-0!" aria-label={t('post.tagsLabel')}>
+        {
+            terms.map((term) => (
+                <li class="m-0 p-0">
+                    <Bubble tag="a" href={localizedUrl(t(`${type}.path`) + '/' + term.cid.toLowerCase())} class:list={['badge-accent', 'dark:badge-secondary', 'no-underline']}>{term.name}</Bubble>
+                </li>
+            ))
+        }
+    </ul>
 
 </Layout>

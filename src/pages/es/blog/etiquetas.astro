@@ -1,0 +1,9 @@
+---
+import { getAlternates } from '@/i18n/routes';
+import TermsLayout from '@/layouts/TermsLayout.astro';
+
+const { title, description, page = 0 } = Astro.props;
+
+---
+
+<TermsLayout title={title} type="tag" lang="es" description={description} alternates={getAlternates('blogTags')} />
