@@ -1,7 +1,7 @@
 ---
 import { staticPaths } from '@/lib/blog';
 import type { CollectionEntry } from 'astro:content';
-import TermsLayout from '@/layouts/TermsLayout.astro';
+import TermPostsLayout from '@/layouts/TermPostsLayout.astro';
 
 interface Props {
   entry: CollectionEntry<'category'>;
@@ -13,4 +13,4 @@ export const getStaticPaths = staticPaths('category', 'es');
 const { entry } = Astro.props;
 ---
 
-<TermsLayout term={entry} type="category"/>
+<TermPostsLayout term={entry} type="category"/>

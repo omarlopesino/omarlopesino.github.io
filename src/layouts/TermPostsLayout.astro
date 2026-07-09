@@ -1,0 +1,25 @@
+---
+import { getContentAlternateUrls, getPostCategory, getPostTags } from '@/lib/blog';
+import type { Alternate } from '@/i18n/routes';
+import { getCollection } from 'astro:content';
+import PostsListLayout from './PostsListLayout.astro';
+
+const { term, type } = Astro.props;
+
+const alternates : Alternate[] = await getContentAlternateUrls(type, term.data);
+
+const posts = await Promise.all((await getCollection('blog', (post) => post.data.language == term.data.language))
+    .map(async (post) => ({
+        title: post.data.title,
+        description: post.data.description,
+        url: post.data.url,
+        pubDate: post.data.pubDate,
+        image: post.data.image,
+        category: await getPostCategory(post),
+        tags: await getPostTags(post),
+    })));
+
+---
+
+<PostsListLayout title={term.data.title} description={term.data.description} lang={term.data.language} alternates={alternates} posts={posts} >
+</PostsListLayout>
