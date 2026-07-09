@@ -8,14 +8,12 @@ const typeImage = z.object({
 	width: z.int().default(960),
 	height: z.int().default(540)
 });
-// @todo evaluate if we can calculate language from path!
 const taxonomyCollection =  (collectionName : string) => {
 	return defineCollection({
 		loader: glob({
 			base: "./src/data", 
 			pattern: collectionName + "/**/*.json",
 			generateId: ({data}) => {
-				console.log('generateid', data.cid + '/' + data.language);
 				return data.cid + '/' + data.language;
 			},
 		}),
@@ -39,7 +37,6 @@ const blog = defineCollection({
 		base: './src/blog', 
 		pattern: '**/*.{md,mdx}',
 		generateId: ({data}) => {
-			// @todo use ID instead of slug.
 			return data.slug + '/' + data.language;
 		},
 	}),

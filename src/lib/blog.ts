@@ -37,7 +37,6 @@ export async function getContentAlternateUrls(type : keyof DataEntryMap, entry :
   );
 }
 
-// @todo unify ID generation, so we don't need to re-append the language here!
 export async function getPostCategory(post: CollectionEntry<'blog'>) {
   return (await getEntry('category', post.data.category.id + '/' + post.data.language))?.data;
 }
