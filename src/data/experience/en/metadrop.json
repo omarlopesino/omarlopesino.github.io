@@ -2,18 +2,7 @@
     "title": "Web application developer",
     "organization": "Metadrop",
     "startDate": "2014-07-01",
-    "summary": "Ten years building and running Drupal platforms for NGOs, public administrations and news media, as a backend developer and technical lead.",
-    "highlights": [
-        "Mentoring and technical leadership in teams of up to ten people.",
-        "Server-side backend development and custom Drupal modules.",
-        "Integrating single-page applications — Angular, Vue — into Drupal.",
-        "Designing, building and operating databases, and the REST applications on top of them.",
-        "Content migrations into Drupal from WordPress, Fatwire, ezPublish and older Drupal, with thousands of items.",
-        "Authentication integrations: OpenID Connect and Microsoft Azure Active Directory.",
-        "Syncing site data into CRMs such as Salesforce and Microsoft Dynamics.",
-        "Building and evolving continuous integration systems.",
-        "Working directly with clients to scope requirements, plan the work and publish the result."
-    ],
+    "summary": "Ten years at Metadrop building and running Drupal platforms for NGOs, public administrations and news media — mostly server-side work, and increasingly leading the team and scoping it with the client.",
     "order": 1,
     "cid": "metadrop",
     "language": "en"

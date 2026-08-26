@@ -2,18 +2,7 @@
     "title": "Desarrollador de aplicaciones web",
     "organization": "Metadrop",
     "startDate": "2014-07-01",
-    "summary": "Diez años construyendo y explotando plataformas Drupal para ONGs, administraciones públicas y medios de comunicación, como desarrollador backend y responsable técnico.",
-    "highlights": [
-        "Mentoría y liderazgo técnico en equipos de hasta diez personas.",
-        "Desarrollo backend en lado de servidor y módulos a medida en Drupal.",
-        "Integración de aplicaciones SPA —Angular, Vue— en Drupal.",
-        "Diseño, creación y explotación de bases de datos, y de las aplicaciones REST que las usan.",
-        "Migraciones de contenido a Drupal desde WordPress, Fatwire, ezPublish y versiones anteriores de Drupal, con miles de contenidos.",
-        "Integración con sistemas de autenticación: OpenID Connect y Microsoft Azure Active Directory.",
-        "Sincronización de datos de la web con CRMs como Salesforce y Microsoft Dynamics.",
-        "Desarrollo y evolución de sistemas de integración continua.",
-        "Comunicación directa con cliente para analizar requisitos, planificar tareas y publicar el resultado."
-    ],
+    "summary": "Diez años en Metadrop construyendo y explotando plataformas Drupal para ONGs, administraciones públicas y medios de comunicación: sobre todo trabajo de servidor y, cada vez más, liderar el equipo y analizarlo con el cliente.",
     "order": 1,
     "cid": "metadrop",
     "language": "es"
