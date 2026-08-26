@@ -12,3 +12,10 @@ export default {
 };
 
 export const Default = {};
+
+export const WithLabel = {
+  args: {
+    id: 'share_labelled',
+    label: 'Share',
+  },
+};

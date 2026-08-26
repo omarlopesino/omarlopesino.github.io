@@ -9,10 +9,11 @@ interface Props {
   title: string;
   text: string;
   url: string;
+  label?: string;
   [key: string]: unknown;
 }
 
-const { id = 'share', title, text, url, class: className, ...rest } = Astro.props;
+const { id = 'share', title, text, url, label, class: className, ...rest } = Astro.props;
 
 const buttonId = `${id}_button`;
 const modalId = `${id}_modal`;
@@ -58,12 +59,17 @@ const iconClass = 'text-base-content w-6 h-6';
 </script>
 
 <button id={buttonId} 
-    aria-label={t('nav.share')} 
+    aria-label={label ? undefined : t('nav.share')} 
     data-share-url={url} 
     data-share-text={text} 
     data-share-title={title}
-    class:list={[className, 'bg-transparent cursor-pointer inline-flex items-center justify-center  p-1 w-8 h-8 border-2 rounded-full']} {...rest}>
+    class:list={[
+        className,
+        'bg-transparent cursor-pointer inline-flex items-center justify-center rounded-full',
+        label ? 'gap-2 h-9 px-4 border border-base-300 text-sm' : 'p-1 w-8 h-8 border-2',
+    ]} {...rest}>
     <Icon name="mdi:share" />
+    {label}
 </button>
 <dialog id={modalId} class="modal">
   <div class="modal-box">
