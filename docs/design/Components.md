@@ -53,4 +53,4 @@
 * Breadcrumb -> Done
 * Post meta (date + category + reading time) -> Done
 * Post tags (linked chip list) -> Done
-* Table of contents -> Done (own component; Details takes a description string, not a list)
+* Table of contents -> Done (own component; Details renders one block, not a nested list)
