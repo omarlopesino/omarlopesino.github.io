@@ -29,6 +29,7 @@ export const ui = {
     'blog.path': 'blog',
     'tag.path': 'tags',
     'category.path': 'categories',
+    'about.path': 'about-me',
   },
   es: {
     'nav.home': 'Inicio',
@@ -53,5 +54,6 @@ export const ui = {
     'blog.path': 'blog',
     'tag.path': 'etiquetas',
     'category.path': 'categorías',
+    'about.path': 'sobre-mi',
   },
 } as const;
