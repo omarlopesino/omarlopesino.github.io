@@ -2,12 +2,14 @@
 import GridList from '@/components/ui/GridList.astro';
 import Layout from './Layout.astro';
 
-const { title, description, lang, alternates, posts } = Astro.props;
+// The heading falls back to the document title; the front page sets its own so the browser tab
+// keeps the site name while the page leads with what I do.
+const { title, heading = title, description, lang, alternates, posts } = Astro.props;
 
 ---
 
 <Layout title={title} description={description} lang={lang} alternates={alternates}>
-    <h1>{title}</h1>
+    <h1>{heading}</h1>
     <GridList posts={posts} />
 
 </Layout>
