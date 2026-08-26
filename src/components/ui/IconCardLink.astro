@@ -1,0 +1,27 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+    icon: string;
+    label: string;
+    href: string;
+    iconClass?: string;
+    class?: string;
+    [key: string]: unknown;
+}
+
+const { icon, label, href, iconClass = 'w-8 h-8', class: className, ...rest } = Astro.props;
+---
+
+<a
+    href={href}
+    class:list={[
+        'flex items-center gap-4 min-h-14 px-4 py-3 rounded-box border border-base-300 no-underline',
+        'md:flex-col md:gap-2 md:py-6 hover:bg-base-200',
+        className,
+    ]}
+    {...rest}
+>
+    <Icon name={icon} class:list={['shrink-0 text-primary', iconClass]} />
+    <span class="font-medium">{label}</span>
+</a>
