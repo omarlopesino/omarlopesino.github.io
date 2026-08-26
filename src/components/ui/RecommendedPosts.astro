@@ -14,7 +14,7 @@ const { title, posts, class: className, ...rest } = Astro.props;
 <PostsList
     title={title}
     posts={posts}
-    class:list={[className, "bg-gray-100 dark:bg-base-300 md:flex space-x-4 p-2 carousel carousel-center"]}
+    class:list={[className, "bg-base-200 md:flex space-x-4 p-2 carousel carousel-center"]}
     itemClass="carousel-item max-md:w-55 md:w-70"
     {...rest}
 />
