@@ -1,0 +1,44 @@
+---
+import Bubble from './Bubble.astro';
+import Tab from './Tab.astro';
+import Tabs from './Tabs.astro';
+
+interface Props {
+    groups: {
+        id: string,
+        label: string,
+        items: { name: string, description: string }[],
+    }[];
+    class?: string;
+    [key: string]: unknown;
+}
+
+const { groups, class: className, ...rest } = Astro.props;
+
+// One radio group per instance, so two Skills on a page don't steal each other's selection.
+const group = 'skills-' + crypto.randomUUID();
+---
+
+<Tabs class={className} {...rest}>
+    {
+        groups.map((skillGroup, index) => (
+            <Tab group={group} label={skillGroup.label} checked={index === 0} panelClass="md:w-2/3 mx-auto pt-3">
+                {/* Two columns from md up; below it the row stacks, so a long skill name never
+                    forces the page sideways. */}
+                <table class="block md:table w-full text-left border-collapse">
+                    <tbody class="block md:table-row-group">
+                        {skillGroup.items.map((item) => (
+                            <tr class="block md:table-row border-b border-base-content/10 last:border-0">
+                                <td class="block md:table-cell md:w-px md:whitespace-nowrap align-top pt-2.5 md:py-2.5 md:pe-4">
+                                    {/* Accent, not primary: a skill is a highlight that must not read as clickable. */}
+                                    <Bubble class="badge-accent badge-sm">{item.name}</Bubble>
+                                </td>
+                                <td class="block md:table-cell align-top pt-1 pb-2.5 md:py-2.5 leading-relaxed text-base-content/70">{item.description}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </Tab>
+        ))
+    }
+</Tabs>
