@@ -120,12 +120,14 @@ code, no narrating alternatives that were weighed, no history. One line wherever
 
 ## Testing Guidelines
 
-Add or update Storybook stories for reusable UI changes, especially new variants, slots, or
-interactive states. Name stories by visible behavior, for example `WithAction` or `PostTeaser`.
+Every new component in `src/components/ui/` ships with a `*.stories.ts` beside it, in the same
+commit — no exceptions. Update the stories of existing components too, especially for new variants,
+slots, or interactive states. Name stories by visible behavior, for example `WithAction` or `PostTeaser`.
 Stories are plain CSF objects (`args`, plus a `slots` arg for named slots) — see
 `src/components/ui/post.stories.ts`.
 
-Before a pull request run `npm run build`; for component work also run `npm run storybook-build`.
+Before a pull request run `npm run build`; for component work check the stories in
+`npm run storybook-dev` (`npm run storybook-build` is broken — see Current state).
 
 `.storybook/main.ts` contains a deliberate workaround: astro-icon ships its Vite plugin inside an
 Astro *integration*, and Storybook runs its own Vite without executing integrations, so the
@@ -163,9 +165,13 @@ sole source of `site` in `astro.config.mjs`, and therefore of every canonical an
 The site is mid-build; `notas.txt` (Spanish) is the working TODO list. Several term pages are still
 wired up incorrectly and are known to need work rather than being conventions to imitate:
 
-- `src/pages/en/blog/tags.astro` and `src/pages/en/tags/[id].astro` pass `type="category"`.
-- `TermPostsLayout` reads `term.data.title` and doesn't filter posts by the term.
-- `TermsLayout` maps every term field from `post.data.name`.
+- `src/pages/en/blog/tags.astro` passes `type="category"`.
+- `TermsLayout` maps every term field from `post.data.name`, and builds links from
+  `cid.toLowerCase()` rather than the term slug.
+- `PostTeaser` forwards leftover props to `Card`, so post `tags` land in the DOM as
+  `<article tags="[object Object]">`.
+- `npm run storybook-build` fails at the prerender step with `Cannot find module
+  'virtual:astro-icon'`; `npm run storybook-dev` works.
 - `PostsListLayout` destructures `language` while its callers pass `lang`.
 - `src/pages/en/index.astro` is a `@TODO` placeholder; the about-me and contact pages don't exist yet
   (their `MenuLink`s are commented out in `Header.astro`).
