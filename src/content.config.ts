@@ -67,6 +67,17 @@ const experience = cvCollection('experience');
 
 const education = cvCollection('education');
 
+// What I can be hired to do, in the visitor's terms rather than in technologies.
+const ability = defineCollection({
+	loader: dataLoader('abilities'),
+	schema: z.object({
+		name: z.string(),
+		description: z.string(),
+		order: z.int(),
+		...translatable,
+	}),
+});
+
 const skill = defineCollection({
 	loader: dataLoader('skills'),
 	schema: z.object({
@@ -115,4 +126,4 @@ const blog = defineCollection({
 	})),
 });
 
-export const collections = { category, tag, blog, experience, education, skill, spokenLanguage };
+export const collections = { category, tag, blog, ability, experience, education, skill, spokenLanguage };
