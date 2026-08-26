@@ -27,3 +27,10 @@ export const LeftAligned = {
     titleClass: 'text-title',
   },
 };
+
+// Inside a container that brings its own padding — a modal box — the section drops its margins.
+export const WithoutOuterSpacing = {
+  args: {
+    spacingClass: 'my-0',
+  },
+};

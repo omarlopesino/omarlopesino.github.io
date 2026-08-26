@@ -4,6 +4,7 @@ interface Props {
     title: string;
     intro?: string;
     titleClass?: string;
+    spacingClass?: string;
     class?: string;
     [key: string]: unknown;
 }
@@ -13,12 +14,15 @@ const {
     title,
     intro,
     titleClass = 'text-title text-center',
+    // Its own prop rather than part of the class list: a caller passing my-0 there would lose to
+    // the default, whichever order the two land in the stylesheet.
+    spacingClass = 'my-12',
     class: className,
     ...rest
 } = Astro.props;
 ---
 
-<section id={id} class:list={['flex flex-col gap-4 my-12', className]} {...rest}>
+<section id={id} class:list={['flex flex-col gap-4', spacingClass, className]} {...rest}>
     <h2 class:list={[titleClass]}>{title}</h2>
     {intro && <p class="text-base text-center text-base-content/70 max-w-prose mx-auto">{intro}</p>}
     <slot />
