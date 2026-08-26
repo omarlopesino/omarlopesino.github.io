@@ -16,8 +16,8 @@ const url = useUrl(lang);
 ---
 <Menu class="border-b border-base-300">
   <Logo slot="start" />
-  <MenuLink href={url('blog')}>{t('nav.blog')}</MenuLink>
-  <!-- <MenuLink href={url('about')}>{t('nav.about')}</MenuLink> -->
+  <MenuLink href={url()}>{t('nav.blog')}</MenuLink>
+  <MenuLink href={url(t('about.path'))}>{t('nav.about')}</MenuLink>
   <!-- <MenuLink href={url('contact')} class="px-4 rounded-lg border border-current">{t('nav.contact')}</MenuLink> -->
   <div slot="end" class="flex items-center">
     <LanguageSwitcher lang={lang} alternates={alternates} />
