@@ -1,0 +1,32 @@
+---
+import { Icon } from 'astro-icon/components';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  items: { label: string; href?: string }[];
+  class?: string;
+  [key: string]: unknown;
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const { items, class: className, ...rest } = Astro.props;
+---
+
+<nav aria-label={t('nav.breadcrumb')} class:list={['text-meta text-base-content/60', className]} {...rest}>
+  <ol class="flex flex-wrap items-center gap-1.5 list-none p-0 m-0">
+    {
+      items.map((item, index) => (
+        <li class="flex items-center gap-1.5">
+          {index > 0 && <Icon name="mdi:chevron-right" class="w-3.5 h-3.5 opacity-40" aria-hidden="true" />}
+          {
+            item.href
+              ? <a href={item.href} class="link link-hover">{item.label}</a>
+              : <span class="text-base-content/45" aria-current="page">{item.label}</span>
+          }
+        </li>
+      ))
+    }
+  </ol>
+</nav>
