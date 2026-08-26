@@ -59,3 +59,4 @@
 * Timeline entry (collapsible dated record: job, qualification, project) -> Done
 * Tabs + Tab (radio-input panels, no JavaScript, every panel stays in the HTML) -> Done
 * Skills (Tabs, one per group, each a bubble + description table) -> Done
+* Modal (checkbox popup, no JavaScript, opened by any label for it) -> Done

@@ -1,0 +1,25 @@
+---
+interface Props {
+    id: string;
+    closeLabel: string;
+    label?: string;
+    triggerClass?: string;
+    boxClass?: string;
+    class?: string;
+    [key: string]: unknown;
+}
+
+const { id, closeLabel, label, triggerClass, boxClass, class: className, ...rest } = Astro.props;
+---
+
+{/* A checkbox rather than a <dialog>: it opens with no JavaScript, and any other <label for> on
+    the page can open it too. The content stays in the HTML for a crawler to read either way. */}
+{label && <label for={id} class:list={['btn', triggerClass]}>{label}</label>}
+<input type="checkbox" id={id} class="modal-toggle" />
+<div class:list={['modal', className]} role="dialog" {...rest}>
+    <div class:list={['modal-box', boxClass]}>
+        <label for={id} class="btn btn-sm btn-circle btn-ghost absolute end-3 top-3" aria-label={closeLabel}>✕</label>
+        <slot />
+    </div>
+    <label class="modal-backdrop" for={id}>{closeLabel}</label>
+</div>
