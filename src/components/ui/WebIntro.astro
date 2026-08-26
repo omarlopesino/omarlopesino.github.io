@@ -18,12 +18,12 @@ const { text, class: className, image, link, ...rest } = Astro.props;
 
 ---
 
-<div class:list={[className, "flex justify-center gap-3"]} {...rest}>
-    <div class="w-24 h-24">
+<div class:list={[className, "flex items-center gap-4"]} {...rest}>
+    <div class="w-16 h-16 shrink-0">
         <ProfilePicture class="rounded-full" image={image} />
     </div>
-    <div class="text-sm">
-        <p>{text}</p>
+    <div class="flex flex-col items-start gap-2 text-sm">
+        <p class="m-0">{text}</p>
         {link && <a class="btn btn-xs btn-primary bg-none rounded-full" href={link.href}>{link.text}</a>}
     </div>
 </div>
