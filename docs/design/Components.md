@@ -48,3 +48,5 @@
 
 * PostsList -> Done
 * GridList -> Done
+* Image + text (standalone, not a card) -> Done
+* Term hero (title + image + description for a tag or category detail) -> Done
