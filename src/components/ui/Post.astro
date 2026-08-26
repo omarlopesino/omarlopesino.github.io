@@ -4,7 +4,7 @@ import { Image } from 'astro:assets';
 import { getLangFromUrl, useTranslations, useUrl } from '@/i18n/utils';
 import { type PostInterface } from '@/types';
 import Breadcrumb from './Breadcrumb.astro';
-import GridList from './GridList.astro';
+import PostsRelated from './PostsRelated.astro';
 import PostMeta from './PostMeta.astro';
 import PostTags from './PostTags.astro';
 import Share from './Share.astro';
@@ -83,5 +83,11 @@ const trail = [
             image={{ src: '/200x200.jpg', alt: 'Omar Lopesino', width: 200, height: 200 }}
         />
     </article>
-    {recommended.length > 0 && <GridList class="mt-10" title={t('post.recommended')} posts={recommended} />}
+    {recommended.length > 0 && (
+        <PostsRelated
+            class="mx-auto mt-12 w-full max-w-prose"
+            title={t('post.recommended')}
+            posts={recommended}
+        />
+    )}
 </div>
