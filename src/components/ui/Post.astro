@@ -2,6 +2,7 @@
 import type { MarkdownHeading } from 'astro';
 import { Image } from 'astro:assets';
 import { getLangFromUrl, useTranslations, useUrl } from '@/i18n/utils';
+import { avatar } from '@/lib/profile';
 import { type PostInterface } from '@/types';
 import Breadcrumb from './Breadcrumb.astro';
 import GridList from './GridList.astro';
@@ -83,7 +84,7 @@ const trail = [
             class="rounded-box bg-base-200 p-5"
             text={t('post.authorBio')}
             link={authorLink}
-            image={{ src: '/200x200.jpg', alt: 'Omar Lopesino', width: 200, height: 200 }}
+            image={avatar}
         />
     </article>
     {recommended.length > 0 && (
