@@ -54,3 +54,4 @@
 * Post meta (date + category + reading time) -> Done
 * Post tags (linked chip list) -> Done
 * Table of contents -> Done (own component; Details takes a description string, not a list)
+* Posts related (compact vertical cards under an article) -> Done
