@@ -1,0 +1,7 @@
+{
+    "name": "Integraciones",
+    "description": "Webs conectadas al proveedor de identidad que ya tienes —Microsoft Entra ID, Keycloak— para que se entre una sola vez.",
+    "order": 3,
+    "cid": "integrations",
+    "language": "es"
+}

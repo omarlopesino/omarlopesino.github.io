@@ -1,0 +1,7 @@
+{
+    "name": "REST APIs",
+    "description": "Consumable REST APIs for whatever needs your data: a mobile app, a single-page front end, or a partner's system.",
+    "order": 2,
+    "cid": "rest-apis",
+    "language": "en"
+}

@@ -1,0 +1,7 @@
+{
+    "name": "APIs REST",
+    "description": "APIs REST consumibles por lo que haga falta: una app móvil, un front end de página única o el sistema de un tercero.",
+    "order": 2,
+    "cid": "rest-apis",
+    "language": "es"
+}
