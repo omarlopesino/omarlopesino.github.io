@@ -79,15 +79,23 @@ export async function getTermPosts(type: 'tag' | 'category', term: {cid: string,
   );
 }
 
-// Posts a post points at, in frontmatter order. `recommended` holds bare cids just like `tags`,
-// so the post's own language has to be re-appended before the lookup.
+// Posts a post points at, in the order its frontmatter lists them. `recommended` holds bare cids,
+// but a blog entry's id is keyed on its slug, which is translated — so unlike a tag or a category
+// the id cannot be rebuilt from the cid and the entries have to be matched on cid instead.
 export async function getRecommendedPosts(post: CollectionEntry<'blog'>) : Promise<PostInterface[]> {
-  const entries = await Promise.all(
-    (post.data.recommended ?? []).map((ref) => getEntry('blog', ref.id + '/' + post.data.language))
-  );
+  const cids = (post.data.recommended ?? []).map((reference) => reference.id);
+
+  if (cids.length == 0) {
+    return [];
+  }
+
+  const posts = await getCollection('blog', ({data}) => {
+    return data.language == post.data.language && cids.includes(data.cid);
+  });
 
   return await Promise.all(
-    entries
+    cids
+      .map((cid) => posts.find((entry) => entry.data.cid == cid))
       .filter((entry): entry is NonNullable<typeof entry> => Boolean(entry))
       .map(toPostInterface)
   );
