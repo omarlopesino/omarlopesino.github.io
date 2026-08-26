@@ -1,0 +1,17 @@
+---
+import { Image } from 'astro:assets';
+import type { Image as TypeImage } from '@/types';
+
+interface Props {
+    image: TypeImage;
+    text?: string;
+    class?: string;
+}
+
+const { image, text, class: className } = Astro.props;
+---
+
+<div class:list={['flex max-md:flex-col md:items-center gap-4 md:gap-6', className]}>
+    <Image src={image.src} alt={image.alt} width={image.width} height={image.height} class="w-full md:w-1/3 rounded-box aspect-[16/9] object-cover" />
+    <p class="md:w-2/3 text-lg/relaxed">{text}</p>
+</div>
