@@ -1,20 +1,12 @@
 ---
 const { title, description, lang, alternates, page = 0 } = Astro.props;
 
-import { getPostCategory, getPostTags } from '@/lib/blog';
+import { toPostInterface } from '@/lib/blog';
 import { getCollection } from 'astro:content';
 import PostsListLayout from './PostsListLayout.astro';
 
 const posts = await Promise.all((await getCollection('blog', (post) => post.data.language == lang))
-    .map(async (post) => ({
-        title: post.data.title,
-        description: post.data.description,
-        url: post.data.url,
-        pubDate: post.data.pubDate,
-        image: post.data.image,
-        category: await getPostCategory(post),
-        tags: await getPostTags(post),
-    })));
+    .map(toPostInterface));
 
 ---
 
