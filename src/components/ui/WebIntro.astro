@@ -4,7 +4,7 @@ import ProfilePicture from './ProfilePicture.astro';
 
 interface Props {
   text: string;
-  link: {
+  link?: {
     href: string,
     text: string,
   },
@@ -23,6 +23,7 @@ const { text, class: className, image, link, ...rest } = Astro.props;
         <ProfilePicture class="rounded-full" image={image} />
     </div>
     <div class="text-sm">
-        <p>{text}</p> <a class="btn btn-xs btn-primary bg-none rounded-full" href={link.href}>{link.text}</a>
+        <p>{text}</p>
+        {link && <a class="btn btn-xs btn-primary bg-none rounded-full" href={link.href}>{link.text}</a>}
     </div>
 </div>

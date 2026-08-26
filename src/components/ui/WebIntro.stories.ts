@@ -21,3 +21,9 @@ export default {
 };
 
 export const Default = {};
+
+export const WithoutLink = {
+  args: {
+    link: undefined,
+  },
+};
