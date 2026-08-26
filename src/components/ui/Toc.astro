@@ -1,0 +1,50 @@
+---
+import type { MarkdownHeading } from 'astro';
+import { Icon } from 'astro-icon/components';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+interface Props {
+    headings: MarkdownHeading[];
+    open?: boolean;
+    class?: string;
+    [key: string]: unknown;
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const { headings, open = false, class: className, ...rest } = Astro.props;
+
+// Only the two levels a reader navigates by; deeper ones make the list longer than the post.
+// Sub-headings are indented rather than numbered, so the numbers count sections.
+let section = 0;
+const items = headings
+    .filter((heading) => heading.depth === 2 || heading.depth === 3)
+    .map((heading) => ({ ...heading, number: heading.depth === 2 ? ++section : null }));
+---
+
+{
+    items.length > 0 && (
+        <details open={open} class:list={['group rounded-box border border-base-300 overflow-hidden', className]} {...rest}>
+            <summary class="flex items-center justify-between gap-3 cursor-pointer bg-base-200 px-4 py-3 text-sm font-semibold">
+                <span class="inline-flex items-center gap-2">
+                    <Icon name="mdi:format-list-bulleted" class="w-4 h-4" aria-hidden="true" />
+                    {t('post.toc')}
+                </span>
+                <Icon name="mdi:chevron-down" class="w-4 h-4 opacity-60 transition-transform group-open:rotate-180" aria-hidden="true" />
+            </summary>
+            <ol class="flex flex-col gap-2 list-none m-0 px-4 py-3">
+                {items.map((heading) => (
+                    <li class:list={['flex gap-2.5', heading.depth === 3 && 'pl-6']}>
+                        {heading.number && (
+                            <span class="text-meta text-base-content/45 tabular-nums">
+                                {String(heading.number).padStart(2, '0')}
+                            </span>
+                        )}
+                        <a href={'#' + heading.slug} class="link link-hover text-sm leading-snug">{heading.text}</a>
+                    </li>
+                ))}
+            </ol>
+        </details>
+    )
+}
