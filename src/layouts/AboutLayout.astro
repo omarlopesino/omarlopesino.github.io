@@ -25,7 +25,6 @@ const byOrder = (a: { data: { order: number } }, b: { data: { order: number } })
 const inLang = (entry: { data: { language: string } }) => entry.data.language === lang;
 
 const experience = (await getCollection('experience', inLang)).sort(byOrder);
-const education = (await getCollection('education', inLang)).sort(byOrder);
 const skills = (await getCollection('skill', inLang)).sort(byOrder);
 const spokenLanguages = (await getCollection('spokenLanguage', inLang)).sort(byOrder);
 
@@ -62,12 +61,6 @@ const tableClass = 'md:w-2/3 mx-auto';
         textClass="text-lede"
     />
 
-    <div class="grid gap-4 my-10 md:grid-cols-3">
-        <IconCardLink icon="mdi:briefcase-outline" label={t('about.ctaWork')} href={`#${anchors.work}`} />
-        <IconCardLink icon="mdi:school-outline" label={t('about.ctaStudies')} href={`#${anchors.studies}`} />
-        <IconCardLink icon="mdi:tools" label={t('about.ctaSkills')} href={`#${anchors.skills}`} />
-    </div>
-
     <Section id={anchors.work} title={t('about.work')} intro={t('about.workIntro')}>
         {
             experience.map(({ data }) => (
@@ -83,26 +76,9 @@ const tableClass = 'md:w-2/3 mx-auto';
         }
     </Section>
 
-    <Section id={anchors.studies} title={t('about.studies')} intro={t('about.studiesIntro')}>
-        {
-            education.map(({ data }) => (
-                <RecordCard
-                    title={data.title}
-                    organization={data.organization}
-                    startDate={year(data.startDate)}
-                    endDate={year(data.endDate)}
-                    summary={data.summary}
-                    highlights={data.highlights}
-                />
-            ))
-        }
-    </Section>
 
     <Section id={anchors.skills} title={t('about.skills')} intro={t('about.skillsIntro')}>
         <Skills groups={skillGroups} />
     </Section>
 
-    <Section title={t('about.languages')}>
-        <Table rows={languageRows} class={tableClass} />
-    </Section>
 </Layout>
