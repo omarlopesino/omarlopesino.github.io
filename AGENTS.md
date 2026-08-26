@@ -58,6 +58,10 @@ Astro i18n config (`astro.config.mjs`) declares locales `["en", "es"]`, default 
 stripping — every real page lives under `/en/` or `/es/`. `src/pages/index.astro` is a meta-refresh
 redirect to `/en/` (GitHub Pages can't do server redirects).
 
+`/<lang>/` **is** the blog listing — there is no separate `/en/blog` page. Note that `blog.path` is
+therefore not the listing URL but the post URL prefix: `getContentAlternateUrls('blog', …)` and the
+`url` transform in `src/content.config.ts` both build `/<lang>/blog/<slug>` from it.
+
 **Route segments are translated, and the page directory names match them literally**:
 `src/pages/es/categorías/[id].astro`, `src/pages/es/etiquetas/[id].astro` (accented/Spanish
 directory names are intentional). Three things must agree when adding or changing a user-facing
@@ -65,8 +69,8 @@ route or label:
 
 1. the directory under `src/pages/<lang>/`,
 2. `src/i18n/routes.ts` — the `routes` map, whose keys feed `getAlternates()` for hreflang,
-3. `src/i18n/ui.ts` — the `*.path` keys (`blog.path`, `tag.path`, `category.path`), which components
-   use at runtime to build links via `useUrl(lang)` + `t('tag.path')`.
+3. `src/i18n/ui.ts` — the `*.path` keys (`blog.path`, `tag.path`, `category.path`, `about.path`),
+   which components use at runtime to build links via `useUrl(lang)` + `t('tag.path')`.
 
 `src/i18n/utils.ts` exposes the runtime helpers: `getLangFromUrl(Astro.url)` (parses the first path
 segment), `useTranslations`, `useUrl`, `useFormatDate` (formats in UTC on purpose — the ISO dates in
@@ -172,6 +176,6 @@ wired up incorrectly and are known to need work rather than being conventions to
   `<article tags="[object Object]">`.
 - `npm run storybook-build` fails at the prerender step with `Cannot find module
   'virtual:astro-icon'`; `npm run storybook-dev` works.
-- `PostsListLayout` destructures `language` while its callers pass `lang`.
-- `src/pages/en/index.astro` is a `@TODO` placeholder; the about-me and contact pages don't exist yet
-  (their `MenuLink`s are commented out in `Header.astro`).
+- The about-me pages (`/en/about-me`, `/es/sobre-mi`) are routed and linked but their body is still a
+  `@TODO` placeholder. The contact page doesn't exist yet — its `MenuLink` stays commented out in
+  `Header.astro`.

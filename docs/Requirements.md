@@ -23,7 +23,8 @@ We need to show through different pages:
 - A small presentation about me.
 * Blog
 
-It is pending to decide to show first the about me or the blog entries. A small presentation sounds cool. 
+The blog entries show first: the site root is the blog listing. The presentation about me lives on
+its own page, linked from the menu and from the author block at the end of every post.
 ## Search
 
 ### External
