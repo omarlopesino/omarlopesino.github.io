@@ -8,9 +8,6 @@ const { title, description, lang, alternates, posts } = Astro.props;
 
 <Layout title={title} description={description} lang={lang} alternates={alternates}>
     <h1>{title}</h1>
-    <p class="text-sm">
-        {description}
-    </p>
     <GridList posts={posts} />
 
 </Layout>
