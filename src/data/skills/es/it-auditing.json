@@ -1,0 +1,8 @@
+{
+    "name": "Auditoría informática",
+    "description": "Revisar una plataforma heredada y convertir los hallazgos en tareas que un cliente pueda planificar de verdad.",
+    "group": "practice",
+    "order": 2,
+    "cid": "it-auditing",
+    "language": "es"
+}

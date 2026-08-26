@@ -1,0 +1,8 @@
+{
+    "name": "Cloud task automation",
+    "description": "Scheduled and event-driven jobs in the cloud: data ingestion, synchronisation, and everything that should not need a person.",
+    "group": "devops",
+    "order": 8,
+    "cid": "cloud-automation",
+    "language": "en"
+}

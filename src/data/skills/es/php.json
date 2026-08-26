@@ -1,0 +1,8 @@
+{
+    "name": "PHP",
+    "description": "El lenguaje que hay debajo de todas las plataformas que mantengo: una década, del legado heredado al código tipado de hoy.",
+    "group": "backend",
+    "order": 1,
+    "cid": "php",
+    "language": "es"
+}

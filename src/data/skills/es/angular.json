@@ -1,0 +1,8 @@
+{
+    "name": "Angular",
+    "description": "Integrar aplicaciones SPA en Drupal para que la parte editorial y la aplicación compartan una única fuente de contenido.",
+    "group": "frontend",
+    "order": 1,
+    "cid": "angular",
+    "language": "es"
+}

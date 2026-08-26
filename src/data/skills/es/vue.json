@@ -1,0 +1,8 @@
+{
+    "name": "Vue",
+    "description": "La opción ligera para empotrar piezas interactivas —formularios donativos, paneles— en una página renderizada en servidor.",
+    "group": "frontend",
+    "order": 2,
+    "cid": "vue",
+    "language": "es"
+}

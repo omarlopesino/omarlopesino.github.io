@@ -1,0 +1,8 @@
+{
+    "name": "Angular",
+    "description": "Integrating single-page applications into Drupal so the editorial side and the app share one source of content.",
+    "group": "frontend",
+    "order": 1,
+    "cid": "angular",
+    "language": "en"
+}

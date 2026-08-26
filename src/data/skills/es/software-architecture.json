@@ -1,0 +1,8 @@
+{
+    "name": "Arquitectura de software",
+    "description": "Que el software encaje con el sistema en el que corre en vez de pelearse con él, y decirlo pronto cuando no encaja.",
+    "group": "practice",
+    "order": 4,
+    "cid": "software-architecture",
+    "language": "es"
+}

@@ -1,0 +1,8 @@
+{
+    "name": "MySQL",
+    "description": "The database under most of what I build, from schema design to the slow query that only shows up in production.",
+    "group": "data",
+    "order": 1,
+    "cid": "mysql",
+    "language": "en"
+}

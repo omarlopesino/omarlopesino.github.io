@@ -1,0 +1,8 @@
+{
+    "name": "Git",
+    "description": "Estrategias de ramas y flujos de revisión que permiten a un equipo de diez trabajar sobre una plataforma sin pisarse.",
+    "group": "devops",
+    "order": 4,
+    "cid": "git",
+    "language": "es"
+}

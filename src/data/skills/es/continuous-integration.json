@@ -1,0 +1,8 @@
+{
+    "name": "Integración continua",
+    "description": "Tests y despliegues automatizados por defecto, para que publicar en producción sea un paso rutinario y no un acontecimiento.",
+    "group": "devops",
+    "order": 6,
+    "cid": "continuous-integration",
+    "language": "es"
+}

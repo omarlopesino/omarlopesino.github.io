@@ -1,0 +1,8 @@
+{
+    "name": "Virtualisation",
+    "description": "Managing the environments a platform runs in, and keeping local, staging and production close enough to trust.",
+    "group": "devops",
+    "order": 7,
+    "cid": "virtualisation",
+    "language": "en"
+}

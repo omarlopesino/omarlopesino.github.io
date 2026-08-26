@@ -1,0 +1,8 @@
+{
+    "name": "Herramientas de bases de datos",
+    "description": "Las herramientas alrededor de los datos: migraciones, copias de seguridad, entornos con datos e importaciones repetibles.",
+    "group": "data",
+    "order": 5,
+    "cid": "database-tooling",
+    "language": "es"
+}

@@ -1,0 +1,8 @@
+{
+    "name": "Rendimiento de sistemas",
+    "description": "Encontrar qué es lento con carga real y no qué parece lento en desarrollo: una campaña de donación es una prueba implacable.",
+    "group": "practice",
+    "order": 3,
+    "cid": "system-performance",
+    "language": "es"
+}

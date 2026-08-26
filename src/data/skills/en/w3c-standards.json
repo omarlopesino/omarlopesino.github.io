@@ -1,0 +1,8 @@
+{
+    "name": "W3C standards",
+    "description": "Building to the specification — semantic markup and accessibility, which public administrations do actually audit.",
+    "group": "frontend",
+    "order": 5,
+    "cid": "w3c-standards",
+    "language": "en"
+}

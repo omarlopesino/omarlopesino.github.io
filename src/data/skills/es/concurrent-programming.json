@@ -1,0 +1,8 @@
+{
+    "name": "Programación concurrente",
+    "description": "Colas, lotes y procesos en segundo plano: así un formulario donativo aguanta un pico de campaña en vez de agotar el tiempo.",
+    "group": "backend",
+    "order": 7,
+    "cid": "concurrent-programming",
+    "language": "es"
+}

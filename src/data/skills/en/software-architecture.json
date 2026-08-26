@@ -1,0 +1,8 @@
+{
+    "name": "Software architecture",
+    "description": "Making the software fit the system it runs in rather than fight it, and saying so early when it does not.",
+    "group": "practice",
+    "order": 4,
+    "cid": "software-architecture",
+    "language": "en"
+}

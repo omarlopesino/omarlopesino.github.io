@@ -1,0 +1,8 @@
+{
+    "name": "Continuous integration",
+    "description": "Automated tests and deployments as the default, so publishing to production is a routine step and not an event.",
+    "group": "devops",
+    "order": 6,
+    "cid": "continuous-integration",
+    "language": "en"
+}

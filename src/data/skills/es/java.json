@@ -1,0 +1,8 @@
+{
+    "name": "Java",
+    "description": "Por donde empecé, y el lenguaje del servicio interno de SSO que hay detrás de la plataforma multisitio de CISAC.",
+    "group": "backend",
+    "order": 3,
+    "cid": "java",
+    "language": "es"
+}

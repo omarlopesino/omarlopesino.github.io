@@ -1,0 +1,8 @@
+{
+    "name": "Drupal",
+    "description": "Módulos a medida, las APIs de entidad y de migración, arquitecturas multisitio y actualizaciones de Drupal 7 a Drupal 10.",
+    "group": "backend",
+    "order": 2,
+    "cid": "drupal",
+    "language": "es"
+}

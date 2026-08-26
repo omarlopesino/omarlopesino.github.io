@@ -1,0 +1,8 @@
+{
+    "name": "Bases de datos relacionales",
+    "description": "Diseñar, explotar y migrar las bases de datos de una web, incluidas migraciones de contenido de miles de elementos.",
+    "group": "data",
+    "order": 4,
+    "cid": "relational-databases",
+    "language": "es"
+}

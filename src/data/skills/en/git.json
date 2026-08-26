@@ -1,0 +1,8 @@
+{
+    "name": "Git",
+    "description": "Branching strategies and review flows that let a team of ten work on one platform without stepping on each other.",
+    "group": "devops",
+    "order": 4,
+    "cid": "git",
+    "language": "en"
+}

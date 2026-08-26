@@ -1,0 +1,8 @@
+{
+    "name": "PHP",
+    "description": "The language under every platform I maintain — a decade of it, from inherited legacy to modern typed code.",
+    "group": "backend",
+    "order": 1,
+    "cid": "php",
+    "language": "en"
+}

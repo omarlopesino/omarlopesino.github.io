@@ -1,0 +1,8 @@
+{
+    "name": "SQL",
+    "description": "Writing the query the ORM cannot, and reading the one somebody else wrote three years ago.",
+    "group": "data",
+    "order": 2,
+    "cid": "sql",
+    "language": "en"
+}

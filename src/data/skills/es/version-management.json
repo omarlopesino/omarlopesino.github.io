@@ -1,0 +1,8 @@
+{
+    "name": "Gestión de versiones de software",
+    "description": "Mantener las dependencias al día de forma deliberada, con actualización automática de paquetes de Drupal y generación de artefactos de código.",
+    "group": "devops",
+    "order": 5,
+    "cid": "version-management",
+    "language": "es"
+}

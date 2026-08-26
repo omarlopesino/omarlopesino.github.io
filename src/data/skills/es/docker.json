@@ -1,0 +1,8 @@
+{
+    "name": "Docker",
+    "description": "Docker y Docker Compose como la forma estándar de levantar cada proyecto que toco, en local y en integración continua.",
+    "group": "devops",
+    "order": 1,
+    "cid": "docker",
+    "language": "es"
+}
