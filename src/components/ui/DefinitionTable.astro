@@ -1,0 +1,30 @@
+---
+interface Props {
+    items: { name: string, description: string }[];
+    termClass?: string;
+    class?: string;
+    [key: string]: unknown;
+}
+
+// A term is bold by default; a caller wanting a chip passes the badge classes instead.
+const { items, termClass = 'font-semibold', class: className, ...rest } = Astro.props;
+---
+
+{/* Two columns from md up; below it the row stacks, so a long term never forces the page
+    sideways. Rows are separated by a hairline only — no border, no background. */}
+<table class:list={['block md:table w-full text-left border-collapse', className]} {...rest}>
+    <tbody class="block md:table-row-group">
+        {
+            items.map((item) => (
+                <tr class="block md:table-row border-b border-base-content/10 last:border-0">
+                    <td class="block md:table-cell md:w-px md:whitespace-nowrap align-top pt-2.5 md:py-2.5 md:pe-4">
+                        <span class:list={[termClass]}>{item.name}</span>
+                    </td>
+                    <td class="block md:table-cell align-top pt-1 pb-2.5 md:py-2.5 leading-relaxed text-base-content/70">
+                        {item.description}
+                    </td>
+                </tr>
+            ))
+        }
+    </tbody>
+</table>
