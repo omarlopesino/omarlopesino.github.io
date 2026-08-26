@@ -56,3 +56,4 @@
 * Table of contents -> Done (own component; Details renders one block, not a nested list)
 * Section (anchored heading + optional lede + body, centred) -> Done
 * Icon card link (big icon + caption, links anywhere) -> Done
+* Timeline entry (collapsible dated record: job, qualification, project) -> Done
