@@ -1,0 +1,17 @@
+{
+    "title": "Ciclo Formativo de Grado Superior en Desarrollo de Aplicaciones Web",
+    "organization": "IES Tetúan de las Victorias",
+    "startDate": "2012-09-01",
+    "endDate": "2014-06-26",
+    "summary": "Ciclo formativo de grado superior de dos años, nivel 5 del MEC-EQF, que cubre el cliente, el servidor y la base de datos.",
+    "highlights": [
+        "Programación en Java.",
+        "Desarrollo de aplicaciones web en cliente mediante HTML, CSS y JavaScript.",
+        "Desarrollo de aplicaciones web en servidor mediante PHP y Java EE.",
+        "Despliegue de aplicaciones web en servidores con Apache y Tomcat.",
+        "Desarrollo de bases de datos en MySQL."
+    ],
+    "order": 1,
+    "cid": "web-application-development",
+    "language": "es"
+}

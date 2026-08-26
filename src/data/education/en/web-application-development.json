@@ -1,0 +1,17 @@
+{
+    "title": "Higher Vocational Training in Web Application Development",
+    "organization": "IES Tetúan de las Victorias",
+    "startDate": "2012-09-01",
+    "endDate": "2014-06-26",
+    "summary": "A two-year higher vocational qualification, EQF level 5, covering the client, the server and the database.",
+    "highlights": [
+        "Programming in Java.",
+        "Client-side web development with HTML, CSS and JavaScript.",
+        "Server-side web development with PHP and Java EE.",
+        "Deploying web applications on Apache and Tomcat.",
+        "Database development with MySQL."
+    ],
+    "order": 1,
+    "cid": "web-application-development",
+    "language": "en"
+}
