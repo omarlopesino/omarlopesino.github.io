@@ -7,7 +7,7 @@ import ImageText from '@/components/ui/ImageText.astro';
 import Section from '@/components/ui/Section.astro';
 import Skills from '@/components/ui/Skills.astro';
 import Table from '@/components/ui/Table.astro';
-import TimelineEntry from '@/components/ui/TimelineEntry.astro';
+import RecordCard from '@/components/ui/RecordCard.astro';
 import Layout from './Layout.astro';
 
 interface Props {
@@ -71,7 +71,7 @@ const tableClass = 'md:w-2/3 mx-auto';
     <Section id={anchors.work} title={t('about.work')} intro={t('about.workIntro')}>
         {
             experience.map(({ data }) => (
-                <TimelineEntry
+                <RecordCard
                     title={data.title}
                     organization={data.organization}
                     startDate={year(data.startDate)}
@@ -86,7 +86,7 @@ const tableClass = 'md:w-2/3 mx-auto';
     <Section id={anchors.studies} title={t('about.studies')} intro={t('about.studiesIntro')}>
         {
             education.map(({ data }) => (
-                <TimelineEntry
+                <RecordCard
                     title={data.title}
                     organization={data.organization}
                     startDate={year(data.startDate)}

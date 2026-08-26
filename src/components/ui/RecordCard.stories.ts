@@ -1,8 +1,8 @@
-import TimelineEntry from "./TimelineEntry.astro";
+import RecordCard from "./RecordCard.astro";
 
 export default {
-  title: 'Components/TimelineEntry',
-  component: TimelineEntry,
+  title: 'Components/RecordCard',
+  component: RecordCard,
   args: {
     title: 'Web application developer',
     organization: 'Metadrop',
@@ -36,5 +36,17 @@ export const Study = {
 export const SummaryOnly = {
   args: {
     highlights: [],
+  },
+};
+
+// With the organisation's logo above the title.
+export const WithLogo = {
+  args: {
+    image: {
+      src: '/200x200.jpg',
+      alt: 'Metadrop',
+      width: 200,
+      height: 200,
+    },
   },
 };
