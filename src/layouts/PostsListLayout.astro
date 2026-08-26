@@ -10,6 +10,6 @@ const { title, heading = title, description, lang, alternates, posts } = Astro.p
 
 <Layout title={title} description={description} lang={lang} alternates={alternates}>
     <h1>{heading}</h1>
+    <slot />
     <GridList posts={posts} />
-
 </Layout>
