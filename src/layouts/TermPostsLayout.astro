@@ -1,25 +1,34 @@
 ---
-import { getContentAlternateUrls, getPostCategory, getPostTags } from '@/lib/blog';
+import { getContentAlternateUrls, getTermPosts } from '@/lib/blog';
 import type { Alternate } from '@/i18n/routes';
-import { getCollection } from 'astro:content';
-import PostsListLayout from './PostsListLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+import { useTranslations } from '@/i18n/utils';
+import GridList from '@/components/ui/GridList.astro';
+import TermHero from '@/components/ui/TermHero.astro';
+import Layout from './Layout.astro';
+
+interface Props {
+    term: CollectionEntry<'tag' | 'category'>;
+    type: 'tag' | 'category';
+}
 
 const { term, type } = Astro.props;
+const { name, description, image, language } = term.data;
 
 const alternates : Alternate[] = await getContentAlternateUrls(type, term.data);
+const posts = await getTermPosts(type, term.data);
 
-const posts = await Promise.all((await getCollection('blog', (post) => post.data.language == term.data.language))
-    .map(async (post) => ({
-        title: post.data.title,
-        description: post.data.description,
-        url: post.data.url,
-        pubDate: post.data.pubDate,
-        image: post.data.image,
-        category: await getPostCategory(post),
-        tags: await getPostTags(post),
-    })));
+const t = useTranslations(language as 'en' | 'es');
 
+// The heading repeats the '#' the hero shows, so a tag reads the same way in both places.
+const displayName = type === 'tag' ? `#${name}` : name;
 ---
 
-<PostsListLayout title={term.data.title} description={term.data.description} lang={term.data.language} alternates={alternates} posts={posts} >
-</PostsListLayout>
+<Layout title={name} description={description} lang={language} alternates={alternates}>
+    <TermHero type={type} name={name} description={description} image={image} />
+    {
+        posts.length > 0
+            ? <GridList title={`${t(`${type}.postsTitle`)} ${displayName}`} posts={posts} />
+            : <p class="text-center text-sm opacity-70 py-12">{t('term.empty')}</p>
+    }
+</Layout>
