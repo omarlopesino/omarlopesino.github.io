@@ -2,12 +2,13 @@
 import { getCollection } from 'astro:content';
 import type { Alternate } from '@/i18n/routes';
 import { useTranslations } from '@/i18n/utils';
-import IconCardLink from '@/components/ui/IconCardLink.astro';
+import { avatar } from '@/lib/profile';
+import DefinitionTable from '@/components/ui/DefinitionTable.astro';
 import ImageText from '@/components/ui/ImageText.astro';
+import Modal from '@/components/ui/Modal.astro';
+import RecordCard from '@/components/ui/RecordCard.astro';
 import Section from '@/components/ui/Section.astro';
 import Skills from '@/components/ui/Skills.astro';
-import Table from '@/components/ui/Table.astro';
-import RecordCard from '@/components/ui/RecordCard.astro';
 import Layout from './Layout.astro';
 
 interface Props {
@@ -24,9 +25,9 @@ const t = useTranslations(lang);
 const byOrder = (a: { data: { order: number } }, b: { data: { order: number } }) => a.data.order - b.data.order;
 const inLang = (entry: { data: { language: string } }) => entry.data.language === lang;
 
+const abilities = (await getCollection('ability', inLang)).sort(byOrder);
 const experience = (await getCollection('experience', inLang)).sort(byOrder);
 const skills = (await getCollection('skill', inLang)).sort(byOrder);
-const spokenLanguages = (await getCollection('spokenLanguage', inLang)).sort(byOrder);
 
 // A declared order, so the tabs never reshuffle when a skill is added or a group empties.
 const groupIds = ['backend', 'frontend', 'data', 'devops', 'practice'] as const;
@@ -40,44 +41,70 @@ const skillGroups = groupIds
     }))
     .filter((group) => group.items.length > 0);
 
-const languageRows = spokenLanguages.map(({ data }) => ({ head: data.name, cells: [data.level] }));
-
-// The timeline shows years; an entry with no end date is still current.
+// A record shows years; an entry with no end date is still current.
 const year = (date?: string) => date ? date.slice(0, 4) : t('about.present');
 
-const avatar = { src: '/200x200.jpg', alt: 'Omar Lopesino', width: 200, height: 200 };
+// English in both languages, so a link to a section is the same fragment on either page.
+const anchors = { abilities: 'abilities', work: 'work' };
+const skillsModal = 'skills';
 
-// English in both languages, so the calls to action are plain fragments that need no translation.
-const anchors = { work: 'work', studies: 'studies', skills: 'skills' };
+// Cards wrap and stay centred, so a section holding a single record does not sit off to one side.
+const cardGrid = 'flex flex-wrap justify-center gap-6';
+const cardWidth = 'w-full md:w-96';
 
+const tableClass = 'md:w-2/3 mx-auto';
 ---
 
 <Layout title={title} description={description} lang={lang} alternates={alternates}>
+    {/* Stacked on a phone, the avatar and the pitch centre on each other; beside each other from
+        md up they read better ranged left. */}
     <ImageText
+        class="max-md:items-center max-md:text-center"
         image={avatar}
         text={t('about.intro')}
         imageClass="w-32 shrink-0 rounded-full aspect-square object-cover"
         textClass="text-lede"
     />
 
+    <Section id={anchors.abilities} title={t('about.abilities')}>
+        <DefinitionTable
+            items={abilities.map(({ data }) => ({ name: data.name, description: data.description }))}
+            class={tableClass}
+        />
+    </Section>
+
+    {/* The whole skill list is reference material rather than part of the story, so it sits
+        behind a button between what I do and where I have done it. */}
+    <div class="flex justify-center my-12">
+        <Modal
+            id={skillsModal}
+            label={t('about.ctaSkills')}
+            closeLabel={t('about.close')}
+            triggerClass="btn-primary"
+            boxClass="max-w-3xl"
+        >
+            <Section title={t('about.skills')} intro={t('about.skillsIntro')} spacingClass="my-0">
+                <Skills groups={skillGroups} panelClass="pt-3" />
+            </Section>
+        </Modal>
+    </div>
+
     <Section id={anchors.work} title={t('about.work')} intro={t('about.workIntro')}>
-        {
-            experience.map(({ data }) => (
-                <RecordCard
-                    title={data.title}
-                    organization={data.organization}
-                    startDate={year(data.startDate)}
-                    endDate={year(data.endDate)}
-                    summary={data.summary}
-                    highlights={data.highlights}
-                />
-            ))
-        }
+        <div class:list={[cardGrid]}>
+            {
+                experience.map(({ data }) => (
+                    <RecordCard
+                        class={cardWidth}
+                        title={data.title}
+                        organization={data.organization}
+                        startDate={year(data.startDate)}
+                        endDate={year(data.endDate)}
+                        summary={data.summary}
+                        highlights={data.highlights}
+                        image={data.image}
+                    />
+                ))
+            }
+        </div>
     </Section>
-
-
-    <Section id={anchors.skills} title={t('about.skills')} intro={t('about.skillsIntro')}>
-        <Skills groups={skillGroups} />
-    </Section>
-
 </Layout>
