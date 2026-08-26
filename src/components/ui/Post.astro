@@ -1,44 +1,87 @@
 ---
+import type { MarkdownHeading } from 'astro';
 import { Image } from 'astro:assets';
-import Bubble from './Bubble.astro';
-import Share from './Share.astro';
 import { getLangFromUrl, useTranslations, useUrl } from '@/i18n/utils';
 import { type PostInterface } from '@/types';
-import PostCategory from './PostCategory.astro';
-import Date from './Date.astro';
+import Breadcrumb from './Breadcrumb.astro';
+import GridList from './GridList.astro';
+import PostMeta from './PostMeta.astro';
+import PostTags from './PostTags.astro';
+import Share from './Share.astro';
+import Toc from './Toc.astro';
+import WebIntro from './WebIntro.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const localizedUrl = useUrl(lang);
 
 interface Props extends PostInterface {
+    headings?: MarkdownHeading[];
+    readingTime?: number;
+    recommended?: PostInterface[];
 }
 
-const { class: className, category, title, description, url, pubDate, image, tags = [], ...rest } = Astro.props;
+const {
+    class: className,
+    category,
+    title,
+    description,
+    url,
+    pubDate,
+    image,
+    tags = [],
+    headings = [],
+    readingTime,
+    recommended = [],
+    ...rest
+} = Astro.props;
 
 const shareId = `share_${crypto.randomUUID()}`;
+
+const trail = [
+    { label: t('nav.blog'), href: localizedUrl(t('blog.path')) },
+    { label: category.name, href: localizedUrl(t('category.path') + '/' + category.slug) },
+    { label: title },
+];
 ---
 
-<article class:list={['prose', className]} {...rest}>
-    <h1 class="m-0 text-center">{title}</h1>
-    <Image src={image.src} alt={image.alt} width={image.width} height={image.height} class="mx-auto w-full aspect-[16/9] object-cover mb-2" />
-    <div class="flex items-center gap-3 justify-center">
-        <Date date={pubDate} />
-        <PostCategory {...category} />
-    </div>
-    <p>{description}</p>
-    <slot name="content"></slot>
-    <ul class="flex gap-3 list-none p-0! m-0!" aria-label={t('post.tagsLabel')}>
-        {
-            tags.map((tag) => (
-                <li class="m-0 p-0">
-                    <Bubble tag="a" href={localizedUrl(t('tag.path') + '/' + tag.slug)} class:list={['badge-accent', 'dark:badge-secondary', 'no-underline']}>{tag.name}</Bubble>
-                </li>
-            ))
-        }
-    </ul>
-    <div class="flex flex-col items-center">
-        <h2 class="mt-0! mb-2 text-base font-normal">{t('post.shareTitle')}</h2>
-        <Share class="align-middle" id={shareId} url={url} title={title} text={description} />
-    </div>
-</article>
+<div class:list={['flex flex-col', className]} {...rest}>
+    <article class="mx-auto flex w-full max-w-prose flex-col gap-6">
+        <Breadcrumb items={trail} />
+        <h1 class="text-display m-0">{title}</h1>
+        <p class="text-lede m-0 border-l-[3px] border-accent pl-4 text-base-content/70">{description}</p>
+        <div class="flex flex-col gap-3">
+            <div class="h-px bg-base-300"></div>
+            <PostMeta pubDate={pubDate} category={category} readingTime={readingTime} />
+        </div>
+        <Image
+            src={image.src}
+            alt={image.alt}
+            width={image.width}
+            height={image.height}
+            class="w-full aspect-[16/9] rounded-box object-cover"
+        />
+        <Toc headings={headings} />
+        <div class="prose max-w-none">
+            <slot name="content" />
+        </div>
+        <div class="mt-2 h-px bg-base-300"></div>
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <PostTags tags={tags} />
+            <Share
+                id={shareId}
+                label={t('post.shareTitle')}
+                url={url}
+                title={title}
+                text={description}
+                class="self-start shrink-0"
+            />
+        </div>
+        <WebIntro
+            class="rounded-box bg-base-200 p-5"
+            text={t('post.authorBio')}
+            image={{ src: '/200x200.jpg', alt: 'Omar Lopesino', width: 200, height: 200 }}
+        />
+    </article>
+    {recommended.length > 0 && <GridList class="mt-10" title={t('post.recommended')} posts={recommended} />}
+</div>

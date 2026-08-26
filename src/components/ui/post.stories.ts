@@ -1,52 +1,84 @@
 import Post from "./Post.astro";
 
 const content = `
-  <h2>Introduction to Modern Web Technologies</h2>
-  <p>Web development is evolving at a frantic pace. Today, we don't just care about clean semantics, but also about performance, optimization, and user experience (UX).</p>
-  
-  <h3>Why structured content matters</h3>
-  <p>When writing a blog post, maintaining a solid HTML hierarchy is crucial for two main reasons:</p>
+  <h2 id="why-a-maintenance-window-is-the-wrong-default">Why a maintenance window is the wrong default</h2>
+  <p>A window is a promise that the site is allowed to be wrong for a while. On a site with editors in three timezones that promise costs more than the migration does, and it hides the real problem: a migration that cannot be interrupted is a migration you cannot debug.</p>
+
+  <h2 id="splitting-the-work-into-idempotent-batches">Splitting the work into idempotent batches</h2>
+  <p>The map is the whole trick. Batch on the source's own ordering, never on an offset, and record the high-water mark in <code>migrate_map_*</code> as you go.</p>
   <ul>
-    <li><strong>SEO (Search Engine Optimization):</strong> Search engines can index and understand your content much better.</li>
-    <li><strong>Accessibility:</strong> Screen readers can seamlessly guide users with visual impairments through your layout.</li>
+    <li><strong>Key on the legacy id</strong>, never on the title.</li>
+    <li>Roll back a batch, not the migration.</li>
+    <li>Log the rows you skip — they are the interesting ones.</li>
   </ul>
 
-  <blockquote>"Simplicity is the soul of efficiency." – Austin Freeman</blockquote>
+  <h3 id="the-high-water-mark">The high-water mark</h3>
+  <blockquote>A migration that cannot be run twice is a script, not a migration.</blockquote>
+  <pre><code>$ drush migrate:import legacy_node --limit=2000</code></pre>
 
-  <h3>Adding code snippets to your posts</h3>
-  <p>If your blog covers tech or development, you will eventually need to display code snippets like this one:</p>
-  <pre><code>const greet = () => console.log("Hello, world!");</code></pre>
-
-  <p>In summary, always make sure your global or component scoped CSS properly handles the margins, line-heights, and font sizes of all these standard HTML tags within the post body.</p>
+  <h2 id="what-broke-anyway">What broke anyway</h2>
+  <p>Two things, both in the source: a nullable column that was not, and a redirect table nobody had opened since 2014.</p>
 `;
+
+const category = {
+  name: 'Backend',
+  cid: 'backend',
+  slug: 'backend',
+  language: 'en',
+};
+
+const image = {
+  src: '/960x540.jpg',
+  alt: 'My awesome image',
+  width: 960,
+  height: 540,
+};
 
 export default {
   title: 'Components/Post',
   component: Post,
-  args:  {
-    title: 'My awesome post',
-    category: {
-      name: 'Test',
-      cid: 'test',
-      slug: 'test',
-      language: 'es',
-    },
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  args: {
+    title: 'Migrating 400k nodes without a maintenance window',
+    category,
+    description: 'The migrate API will happily run against a live site once you stop treating a migration as one long transaction. Here is the rollout that moved a decade of legacy content across, one idempotent batch at a time.',
     tags: [
-      { name: 'Tag 1', slug: 'blog/tags/tag-1' },
-      { name: 'Tag 2', slug: 'blog/tags/tag-2' },
+      { name: 'Drupal', slug: 'drupal', cid: 'drupal', language: 'en' },
+      { name: 'Migrations', slug: 'migrations', cid: 'migrations', language: 'en' },
+      { name: 'PHP', slug: 'php', cid: 'php', language: 'en' },
     ],
-    pubDate: new Date('2026-06-26'),
-    image: {
-        src: '/960x540.jpg',
-        alt: 'My awesome image',
-        width: 960,
-        height: 520,
-    },
+    pubDate: new Date('2026-06-30'),
+    image,
     url: '#',
+    readingTime: 8,
+    headings: [
+      { depth: 2, slug: 'why-a-maintenance-window-is-the-wrong-default', text: 'Why a maintenance window is the wrong default' },
+      { depth: 2, slug: 'splitting-the-work-into-idempotent-batches', text: 'Splitting the work into idempotent batches' },
+      { depth: 3, slug: 'the-high-water-mark', text: 'The high-water mark' },
+      { depth: 2, slug: 'what-broke-anyway', text: 'What broke anyway' },
+    ],
+    recommended: [
+      { title: 'Config split without the config drift', description: 'Two environments, one config directory, and the split that keeps them apart.', url: '#', pubDate: new Date('2026-06-12'), image, category },
+      { title: 'Entity queries that survive a schema change', description: 'Query the entity API, not the tables underneath it.', url: '#', pubDate: new Date('2026-05-28'), image, category },
+    ],
     slots: {
-      content: content,
+      content,
     },
   },
 };
+
 export const Default = {};
+
+// A short post with no headings and nothing to recommend: no contents block, no closing strip.
+export const Minimal = {
+  args: {
+    headings: [],
+    recommended: [],
+    readingTime: 1,
+    tags: [
+      { name: 'Drupal', slug: 'drupal', cid: 'drupal', language: 'en' },
+    ],
+    slots: {
+      content: '<p>One paragraph, and then it is over.</p>',
+    },
+  },
+};
