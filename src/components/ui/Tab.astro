@@ -1,0 +1,25 @@
+---
+interface Props {
+    group: string;
+    label: string;
+    checked?: boolean;
+    panelClass?: string;
+    class?: string;
+    [key: string]: unknown;
+}
+
+const { group, label, checked = false, panelClass, class: className, ...rest } = Astro.props;
+---
+
+{/* The input and its panel are siblings on purpose: that adjacency is what shows the panel, with
+    no JavaScript, and it leaves every panel in the HTML for a crawler to read. */}
+<input
+    type="radio"
+    name={group}
+    role="tab"
+    class:list={['tab', className]}
+    aria-label={label}
+    checked={checked}
+    {...rest}
+/>
+<div role="tabpanel" class:list={['tab-content', panelClass]}><slot /></div>
