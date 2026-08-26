@@ -119,6 +119,12 @@ existing files. Use two-space indentation in config and TypeScript files where p
 
 Wrapper components destructure explicit named props — do not forward `{...Astro.props}` wholesale.
 
+Components in `src/components/ui/` are reusable primitives, never a single page's furniture. Name
+and shape them for what they *are*, not for where they first appeared — `Section`, not
+`AboutSection`. Page-specific assembly belongs in the layout, which is also what keeps a component
+renderable standalone in Storybook. Before adding one, check whether an existing component does the
+job with a class or slot override; widening that one is usually the better change.
+
 Comments say what the thing does and why it exists, in as few words as it takes: no restating the
 code, no narrating alternatives that were weighed, no history. One line wherever one line does it.
 
