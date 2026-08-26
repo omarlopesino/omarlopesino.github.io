@@ -4,7 +4,7 @@ import { Image } from 'astro:assets';
 import { getLangFromUrl, useTranslations, useUrl } from '@/i18n/utils';
 import { type PostInterface } from '@/types';
 import Breadcrumb from './Breadcrumb.astro';
-import PostsRelated from './PostsRelated.astro';
+import GridList from './GridList.astro';
 import PostMeta from './PostMeta.astro';
 import PostTags from './PostTags.astro';
 import Share from './Share.astro';
@@ -84,10 +84,11 @@ const trail = [
         />
     </article>
     {recommended.length > 0 && (
-        <PostsRelated
-            class="mx-auto mt-12 w-full max-w-prose"
+        <GridList
+            class="mt-12"
             title={t('post.recommended')}
             posts={recommended}
+            imageClass="max-md:h-36 max-md:w-full max-md:object-cover"
         />
     )}
 </div>
