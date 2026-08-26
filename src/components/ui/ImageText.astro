@@ -6,12 +6,22 @@ interface Props {
     image: TypeImage;
     text?: string;
     class?: string;
+    imageClass?: string;
+    textClass?: string;
 }
 
-const { image, text, class: className } = Astro.props;
+// The defaults are the wide teaser shape; a caller wanting another scale — a round avatar, say —
+// overrides them instead of getting its own component.
+const {
+    image,
+    text,
+    class: className,
+    imageClass = 'w-full md:w-1/3 rounded-box aspect-[16/9] object-cover',
+    textClass = 'md:w-2/3 text-lg/relaxed',
+} = Astro.props;
 ---
 
 <div class:list={['flex max-md:flex-col md:items-center gap-4 md:gap-6', className]}>
-    <Image src={image.src} alt={image.alt} width={image.width} height={image.height} class="w-full md:w-1/3 rounded-box aspect-[16/9] object-cover" />
-    <p class="md:w-2/3 text-lg/relaxed">{text}</p>
+    <Image src={image.src} alt={image.alt} width={image.width} height={image.height} class:list={[imageClass]} />
+    <p class:list={[textClass]}>{Astro.slots.has('default') ? <slot /> : text}</p>
 </div>

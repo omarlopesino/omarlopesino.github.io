@@ -21,3 +21,27 @@ export const ShortText = {
     text: 'Everything about the Drupal entity API.',
   },
 };
+
+export const Avatar = {
+  args: {
+    image: {
+      src: '/200x200.jpg',
+      alt: 'Omar Lopesino',
+      width: 200,
+      height: 200,
+    },
+    imageClass: 'w-32 shrink-0 rounded-full aspect-square object-cover',
+    textClass: 'text-lede',
+    text: 'I am Omar Lopesino, a senior backend developer building and running web platforms for NGOs, public administrations and news media.',
+  },
+};
+
+export const SlottedText = {
+  args: {
+    imageClass: 'w-32 shrink-0 rounded-full aspect-square object-cover',
+    textClass: 'text-lede',
+    slots: {
+      default: 'I am <strong>Omar Lopesino</strong>, a senior backend developer.',
+    },
+  },
+};
