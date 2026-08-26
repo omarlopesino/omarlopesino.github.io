@@ -59,5 +59,5 @@
 * Timeline entry (collapsible dated record: job, qualification, project) -> Done
 * Tabs + Tab (radio-input panels, no JavaScript, every panel stays in the HTML) -> Done
 * Definition table (term + description rows, hairline separated, stacking on mobile) -> Done
-* Skills (Tabs, one per group, each a bubble + description table) -> Done
+* Skills (Tabs, one per group, each a DefinitionTable of chips) -> Done
 * Modal (checkbox popup, no JavaScript, opened by any label for it) -> Done

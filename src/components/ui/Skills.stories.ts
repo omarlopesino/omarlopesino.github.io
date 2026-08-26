@@ -49,3 +49,10 @@ export const SingleGroup = {
     ],
   },
 };
+
+// Inside a narrow container — a modal box — the panel takes the whole width it is given.
+export const FullWidthPanel = {
+  args: {
+    panelClass: 'pt-3',
+  },
+};
