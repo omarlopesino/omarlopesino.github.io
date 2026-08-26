@@ -1,6 +1,4 @@
 ---
-import Date from './Date.astro';
-
 interface Props {
     date_a: string,
     date_b: string,
@@ -11,6 +9,6 @@ interface Props {
 const { class: className, date_a, date_b, ...rest } = Astro.props;
 
 ---
-<div class="flex">
-    <span class="text-sm"> {date_a} - {date_b} </span>
+<div class:list={['flex', className]} {...rest}>
+    <span class="text-sm">{date_a} – {date_b}</span>
 </div>

@@ -8,3 +8,11 @@ export default {
   },
 };
 export const Default = {};
+
+export const Years = {
+  args: {
+    date_a: '2014',
+    date_b: 'Now',
+    class: 'opacity-70',
+  },
+};
