@@ -9,14 +9,14 @@ import Date from './Date.astro';
 interface Props extends PostInterface {
 }
 
-const { class: className, title, description, url, pubDate, image, category, tags, ...rest } = Astro.props;
+const { class: className, imageClass, title, description, url, pubDate, image, category, tags, ...rest } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 ---
 
 <Card url={url} tag="article" title={title} class:list={[className]} {...rest}>
-    <Image slot="image" src={image.src} alt={image.alt} width={image.width} height={image.height} />
+    <Image slot="image" src={image.src} alt={image.alt} width={image.width} height={image.height} class={imageClass} />
     <div slot="content" class="flex gap-3 py-2">
         <Date date={pubDate} />
         <PostCategory {...category} />

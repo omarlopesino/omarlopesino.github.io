@@ -33,3 +33,13 @@ export default {
 };
 
 export const Default = {};
+
+// The post page's related list: one card per row below md, with a cover short enough that the
+// card stays a glance on a phone.
+export const CompactCoversOnMobile = {
+  args: {
+    title: 'Keep reading',
+    posts: Array.from({ length: 3 }, () => ({ ...post })),
+    imageClass: 'max-md:h-36 max-md:w-full max-md:object-cover',
+  },
+};

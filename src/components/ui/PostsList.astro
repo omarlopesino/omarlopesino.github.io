@@ -6,7 +6,7 @@ import PostTeaser from './PostTeaser.astro';
 interface Props extends PostsListProps {
 }
 
-const { title, class: className, posts = [], itemClass = "", ...rest } = Astro.props;
+const { title, class: className, posts = [], itemClass = "", imageClass = "", ...rest } = Astro.props;
 
 ---
 
@@ -15,7 +15,7 @@ const { title, class: className, posts = [], itemClass = "", ...rest } = Astro.p
     <div class:list={[className, "md:justify-center"]} {...rest}>
         {
             posts.map((post) => (
-                <PostTeaser class={itemClass} {...post} />
+                <PostTeaser class={itemClass} imageClass={imageClass} {...post} />
             ))
         }
     </div>
