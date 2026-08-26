@@ -1,8 +1,6 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { getAlternates } from '../../i18n/routes';
+import AboutLayout from '@/layouts/AboutLayout.astro';
+import { getAlternates } from '@/i18n/routes';
 ---
 
-<Layout title="About me" description="Omar Lopesino personal's website." lang="en" alternates={getAlternates('about')}>
-	@TODO about me!
-</Layout>
+<AboutLayout title="About me" description="Omar Lopesino personal's website." lang="en" alternates={getAlternates('about')} />
