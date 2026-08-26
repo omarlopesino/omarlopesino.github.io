@@ -49,7 +49,10 @@ const cvCollection = (collectionName : string) => {
 			// Omitted means it is still current.
 			endDate: z.optional(z.string()),
 			summary: z.string(),
-			highlights: z.array(z.string()),
+			// The summary carries the record; bullets are there for one that needs them.
+			highlights: z.optional(z.array(z.string())),
+			// A logo for the organization; the record reads fine without one.
+			image: z.optional(typeImage),
 			order: z.int(),
 			...translatable,
 		}),
