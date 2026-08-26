@@ -1,6 +1,4 @@
 ---
-
-import { render } from 'astro:content';
 import { staticPaths } from '@/lib/blog';
 import type { CollectionEntry } from 'astro:content';
 import PostLayout from '@/layouts/PostLayout.astro';
@@ -11,9 +9,7 @@ interface Props {
 
 export const getStaticPaths = staticPaths('blog', 'en');
 
-// 2. For your template, you can get the entry directly from the prop
 const { entry } = Astro.props;
-const { Content } = await render(entry);
 ---
 
-<PostLayout post={entry} content={Content} />
+<PostLayout entry={entry} />
