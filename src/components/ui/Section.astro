@@ -1,0 +1,25 @@
+---
+interface Props {
+    id?: string;
+    title: string;
+    intro?: string;
+    titleClass?: string;
+    class?: string;
+    [key: string]: unknown;
+}
+
+const {
+    id,
+    title,
+    intro,
+    titleClass = 'text-title text-center',
+    class: className,
+    ...rest
+} = Astro.props;
+---
+
+<section id={id} class:list={['flex flex-col gap-4 my-12', className]} {...rest}>
+    <h2 class:list={[titleClass]}>{title}</h2>
+    {intro && <p class="text-base text-center text-base-content/70 max-w-prose mx-auto">{intro}</p>}
+    <slot />
+</section>

@@ -54,3 +54,4 @@
 * Post meta (date + category + reading time) -> Done
 * Post tags (linked chip list) -> Done
 * Table of contents -> Done (own component; Details renders one block, not a nested list)
+* Section (anchored heading + optional lede + body, centred) -> Done
