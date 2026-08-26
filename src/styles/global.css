@@ -160,3 +160,18 @@
 .prose :where(code):not(:where(pre code))::after {
     content: none;
 }
+
+/* Shiki ships both themes as variables; the syntax colours are its, the surface stays ours. */
+.astro-code,
+.astro-code span {
+    color: var(--shiki-light);
+}
+
+[data-theme='dark'] .astro-code,
+[data-theme='dark'] .astro-code span {
+    color: var(--shiki-dark);
+}
+
+.prose :where(pre.astro-code) {
+    background-color: var(--color-base-200);
+}

@@ -14,6 +14,14 @@ export default defineConfig({
     locales: ["en", "es"],
     defaultLocale: "en"
   },
+  markdown: {
+    // Both themes as CSS variables, so global.css can switch them on data-theme; with a single
+    // theme Shiki bakes its colours in and code blocks stay dark on a light page.
+    shikiConfig: {
+      themes: { light: 'github-light', dark: 'github-dark' },
+      defaultColor: false,
+    },
+  },
   vite: {
     plugins: [tailwindcss()],
   },
