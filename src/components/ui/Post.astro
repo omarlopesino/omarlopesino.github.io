@@ -38,6 +38,10 @@ const {
 
 const shareId = `share_${crypto.randomUUID()}`;
 
+// The author block points at the front page until an about page exists; the front page is where
+// the requirements put the presentation about myself anyway.
+const authorLink = { href: localizedUrl(''), text: t('nav.about') };
+
 const trail = [
     { label: t('nav.blog'), href: localizedUrl(t('blog.path')) },
     { label: category.name, href: localizedUrl(t('category.path') + '/' + category.slug) },
@@ -80,6 +84,7 @@ const trail = [
         <WebIntro
             class="rounded-box bg-base-200 p-5"
             text={t('post.authorBio')}
+            link={authorLink}
             image={{ src: '/200x200.jpg', alt: 'Omar Lopesino', width: 200, height: 200 }}
         />
     </article>
