@@ -50,3 +50,7 @@
 * GridList -> Done
 * Image + text (standalone, not a card) -> Done
 * Term hero (title + image + description for a tag or category detail) -> Done
+* Breadcrumb -> Done
+* Post meta (date + category + reading time) -> Done
+* Post tags (linked chip list) -> Done
+* Table of contents -> Done (own component; Details takes a description string, not a list)
