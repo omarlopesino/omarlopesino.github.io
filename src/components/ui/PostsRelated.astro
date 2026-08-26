@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { PostsListProps } from '@/types';
+import Card from './Card.astro';
 import Date from './Date.astro';
 
 interface Props extends PostsListProps {
@@ -11,36 +12,26 @@ const { title, posts = [], class: className, itemClass, ...rest } = Astro.props;
 
 <section class:list={['flex flex-col gap-4', className]} {...rest}>
     {title && <h2 class="m-0 text-xl font-bold tracking-tight">{title}</h2>}
-    <ul class="flex flex-col gap-3 list-none p-0 m-0">
+    <div class="flex flex-col gap-4">
         {
             posts.map((post) => (
-                <li class="m-0 p-0">
-                    <a
-                        href={post.url}
-                        class:list={[
-                            'group flex items-center gap-4 rounded-box border border-base-300 p-3 no-underline transition-colors hover:bg-base-200',
-                            itemClass,
-                        ]}
-                    >
-                        <Image
-                            src={post.image.src}
-                            alt={post.image.alt}
-                            width={post.image.width}
-                            height={post.image.height}
-                            class="w-24 shrink-0 aspect-[3/2] rounded-field object-cover"
-                        />
-                        <span class="flex min-w-0 flex-col gap-1">
-                            <span class="font-semibold leading-snug group-hover:underline">{post.title}</span>
-                            {/* The row is already a link, so the category is plain text here rather than
-                                PostCategory, which would nest an anchor inside one. */}
-                            <span class="flex flex-wrap items-center gap-x-3 gap-y-1 text-meta text-base-content/60">
-                                <Date date={post.pubDate} class="text-meta" />
-                                {post.category && <span class="font-semibold text-primary">{post.category.name}</span>}
-                            </span>
-                        </span>
-                    </a>
-                </li>
+                <Card tag="article" url={post.url} title={post.title} class:list={['w-full', itemClass]}>
+                    <Image
+                        slot="image"
+                        src={post.image.src}
+                        alt={post.image.alt}
+                        width={post.image.width}
+                        height={post.image.height}
+                        class="h-36 w-full object-cover"
+                    />
+                    {/* The card title already covers the whole card with an overlay link, so the
+                        category is plain text here rather than PostCategory's anchor. */}
+                    <div slot="content" class="flex flex-wrap items-center gap-x-3 gap-y-1 text-meta text-base-content/60">
+                        <Date date={post.pubDate} class="text-meta" />
+                        {post.category && <span class="font-semibold text-primary">{post.category.name}</span>}
+                    </div>
+                </Card>
             ))
         }
-    </ul>
+    </div>
 </section>
