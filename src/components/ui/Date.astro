@@ -13,4 +13,4 @@ const { class: className, date, ...rest } = Astro.props;
 const isoDate = date instanceof Date ? date.toISOString() : date;
 
 ---
-<time datetime={isoDate} class="text-sm" {...rest}>{formatDate(date)}</time>
+<time datetime={isoDate} class:list={['text-sm', className]} {...rest}>{formatDate(date)}</time>
