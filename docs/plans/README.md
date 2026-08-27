@@ -109,6 +109,7 @@ Newest first.
 
 | Date | Entry |
 | --- | --- |
+| 2026-08-27 | [The listing becomes alternating rows, and a card shows when it is focused](2026-08-27-7-posts-listing-as-alternating-rows.md) |
 | 2026-08-27 | [The type set in Karla, on warm paper](2026-08-27-6-type-and-paper-in-karla.md) |
 | 2026-08-27 | [A sitemap, a feed per language, and one place metatags come from](2026-08-27-5-sitemap-feeds-and-one-place-for-metatags.md) |
 | 2026-08-27 | [The rail and the taxonomy indexes come out; the archive stays](2026-08-27-4-archive-as-the-only-index.md) |
