@@ -125,6 +125,15 @@
     --container-prose: 68ch;
 }
 
+/* View transitions: the browser's native crossfade is a snappy 0.25s ease; slowing it and easing
+   it out reads calmer for a full page swap. Reduced motion is already handled by Astro's own
+   ClientRouter styles, so no query is duplicated here. */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 0.4s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 .badge {
     background-image: none;
 }
