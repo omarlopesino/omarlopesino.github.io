@@ -5,6 +5,11 @@ categories, plus an about-me / contact page. Fully bilingual (English default, S
 static HTML and deployed to GitHub Pages. `docs/Requirements.md` and `docs/design/` hold the
 product intent (SEO-first, no user data, no analytics, no cookies, no forms).
 
+`docs/plans/` is the decision log: why the code is shaped the way it is, and which alternatives were
+measured and rejected. It is **append-only** — entries are dated and immutable, and
+`docs/plans/README.md` is the one maintained page saying what is current. Record a decision by
+adding an entry (`/log-entry` drafts one from a commit range); never rewrite an older one.
+
 ## Project Structure & Module Organization
 
 - `src/pages/` contains routes. English pages live under `src/pages/en/`, Spanish pages under
@@ -207,6 +212,35 @@ secrets).
 Do not commit secrets or local environment files. Keep `BASE_URL` changes intentional — it is the
 sole source of `site` in `astro.config.mjs`, and therefore of every canonical and hreflang URL.
 
+## Do not reintroduce
+
+Each of these was removed deliberately. The link goes to the entry in `docs/plans/` holding the
+reason — read it before undoing any of them.
+
+- **shadcn/ui, or a React runtime** — the stack is daisyUI classes and Astro components
+  ([2026-06-23](docs/plans/2026-06-23-1-astro-daisyui-stack.md)).
+- **A custom asset-compression script** — the build and the CDN do it
+  ([2026-06-23](docs/plans/2026-06-23-1-astro-daisyui-stack.md)).
+- **Language redirection inside the app** — it causes SEO problems; the root page is a plain
+  meta-refresh ([2026-06-24](docs/plans/2026-06-24-1-i18n-and-translated-routes.md)).
+- **`/en/blog` and `/es/blog` as listing URLs** — `/<lang>/` is the listing
+  ([2026-08-26](docs/plans/2026-08-26-3-blog-as-front-page.md)).
+- **A sidebar or spec-rail layout for the post page** — both were drawn and rejected in favour of
+  the single editorial column
+  ([2026-08-26](docs/plans/2026-08-26-2-blog-post-page-and-design-tokens.md)).
+- **The `experience` and `skill` collections, `Skills.astro`, the skills popup and the Work
+  section** — the page was a second CV that drifted from LinkedIn
+  ([2026-08-27](docs/plans/2026-08-27-3-about-me-cut-to-linkedin.md)).
+- **The `Sidebar.astro` rail, `getTopTerms`, `TermsLayout` and the tag/category index pages** —
+  every value is reachable without them
+  ([2026-08-27](docs/plans/2026-08-27-4-archive-as-the-only-index.md)).
+
+**Easily mistaken for removals, but current:** the `ability` collection and the "My abilities"
+section on the about page; `Modal.astro` and `RecordCard.astro`, kept as reusable primitives;
+`cvCollection()` in `src/content.config.ts`, which `education` still uses; `SearchBar.astro` and
+`TagsSelector.astro`, unwired **by decision** rather than by oversight; and the archive at
+`/en/blog/archive`. The rail is *deferred*, not forbidden — `futuro.txt` asks for it.
+
 ## Current state
 
 The site is mid-build; `notas.txt` (Spanish) is the working TODO list. What follows is known to need
@@ -217,3 +251,12 @@ work rather than being a convention to imitate:
 - `npm run storybook-build` fails at the prerender step with `Cannot find module
   'virtual:astro-icon'`; `npm run storybook-dev` works.
 - The contact page doesn't exist yet — its `MenuLink` stays commented out in `Header.astro`.
+- `education` and `spokenLanguage` are declared in `src/content.config.ts` but have no data behind
+  them — `src/data/education/` and `src/data/spoken-languages/` were deleted and the collections
+  were not. Both resolve to zero entries.
+- The LinkedIn URL is written out twice, in `src/layouts/AboutLayout.astro` and in
+  `src/components/Footer.astro`. `src/lib/profile.ts` is where a single copy would go.
+- These `src/components/ui/` components currently have no caller: `Button`, `Details`,
+  `IconCardLink`, `Modal`, `RecommendedPosts`, `RecordCard`, `SearchBar`, `Submenu`, `Tab`,
+  `Table`, `Tabs`, `TagsSelector`. They are primitives with stories, not dead code — check
+  `docs/plans/` before deleting one.
