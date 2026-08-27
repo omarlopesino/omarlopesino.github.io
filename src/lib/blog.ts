@@ -129,27 +129,6 @@ export async function getYears(language: string) : Promise<{year: number, count:
     .sort((a, b) => b.year - a.year);
 }
 
-// Terms with the most posts first, for the rail that only has room for a few. Counting every post
-// once beats asking each term how many it has.
-export async function getTopTerms(type: 'tag' | 'category', language: string, limit: number) {
-  const posts = await getCollection('blog', ({data}) => data.language == language);
-
-  const counts = new Map<string, number>();
-  for (const post of posts) {
-    const cids = type == 'category' ? [post.data.category.id] : post.data.tags.map((tag) => tag.id);
-    for (const cid of cids) {
-      counts.set(cid, (counts.get(cid) ?? 0) + 1);
-    }
-  }
-
-  const terms = await getCollection(type, ({data}) => data.language == language);
-
-  return terms
-    .map(({data}) => ({ name: data.name, slug: data.slug, count: counts.get(data.cid) ?? 0 }))
-    .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, language))
-    .slice(0, limit);
-}
-
 export async function getYearPosts(language: string, year: number) : Promise<PostInterface[]> {
   const posts = await getCollection('blog', ({data}) => {
     return data.language == language && data.pubDate.getUTCFullYear() == year;
