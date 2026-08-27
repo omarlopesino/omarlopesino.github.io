@@ -311,8 +311,6 @@ work rather than being a convention to imitate:
 - `education` and `spokenLanguage` are declared in `src/content.config.ts` but have no data behind
   them — `src/data/education/` and `src/data/spoken-languages/` were deleted and the collections
   were not. Both resolve to zero entries.
-- The LinkedIn URL is written out twice, in `src/layouts/AboutLayout.astro` and in
-  `src/components/Footer.astro`. `src/lib/profile.ts` is where a single copy would go.
 - These `src/components/ui/` components currently have no caller: `Button`, `DefinitionTable`,
   `Details`, `IconCardLink`, `Modal`, `RecommendedPosts`, `RecordCard`, `Section`, `SearchBar`,
   `Submenu`, `Tab`, `Table`, `Tabs`, `TagsSelector`. They are primitives with stories, not dead

@@ -43,7 +43,6 @@ export const ui = {
     'feed.title': "Omar Lopesino's blog",
     'feed.description': 'New posts by Omar Lopesino, in English.',
     'about.intro': 'I am Omar Mohamad El Hassan Lopesino, a senior backend developer. I build and run web platforms — mostly Drupal — for NGOs, public administrations and news media.',
-    'about.linkedin': 'You can see my full professional profile on',
   },
   es: {
     'nav.home': 'Inicio',
@@ -82,6 +81,5 @@ export const ui = {
     'feed.title': 'El blog de Omar Lopesino',
     'feed.description': 'Nuevas publicaciones de Omar Lopesino, en español.',
     'about.intro': 'Soy Omar Mohamad El Hassan Lopesino, desarrollador backend senior. Construyo y mantengo plataformas web —sobre todo en Drupal— para ONGs, administraciones públicas y medios de comunicación.',
-    'about.linkedin': 'Puedes ver mi perfil profesional completo en',
   },
 } as const;

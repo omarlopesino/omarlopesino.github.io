@@ -1,7 +1,7 @@
 ---
 import type { Alternate } from '@/i18n/routes';
 import { useTranslations } from '@/i18n/utils';
-import { avatar, social } from '@/lib/profile';
+import { avatar } from '@/lib/profile';
 import { pageContext, personLd } from '@/lib/seo';
 import ImageText from '@/components/ui/ImageText.astro';
 import Layout from './Layout.astro';
@@ -16,8 +16,6 @@ interface Props {
 const { title, description, lang, alternates = [] } = Astro.props;
 
 const t = useTranslations(lang);
-
-const linkedin = social.linkedin;
 
 const meta = {
     type: 'profile' as const,
@@ -37,10 +35,4 @@ const meta = {
         imageClass="w-32 shrink-0 rounded-full aspect-square object-cover"
         textClass="text-lede"
     />
-
-    {/* The brand name stays out of the translations: it is the same word in both languages and the
-        one the link hangs on. */}
-    <p class="text-base text-center text-base-content/70">
-        {t('about.linkedin')} <a class="link link-hover font-bold text-blue-900" href={linkedin} target="_blank" rel="noopener noreferrer">Linkedin</a>
-    </p>
 </Layout>
