@@ -3,7 +3,7 @@ export const routes = {
   about: { en: '/en/about-me', es: '/es/sobre-mi' },
   blogTags: { en: '/en/blog/tags', es: '/es/blog/etiquetas'},
   blogCategories: { en: '/en/blog/categories', es: '/es/blog/categorías'},
-  blogYears: { en: '/en/blog/years', es: '/es/blog/años'}
+  blogArchive: { en: '/en/blog/archive', es: '/es/blog/archivo'}
 } as const;
 
 export type RouteKey = keyof typeof routes;
