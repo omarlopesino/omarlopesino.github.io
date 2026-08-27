@@ -1,9 +1,13 @@
 ---
 import type { Alternate } from '@/i18n/routes';
-import { useTranslations } from '@/i18n/utils';
-import { avatar } from '@/lib/profile';
+import { useTranslations, useUrl } from '@/i18n/utils';
+import { avatar, social } from '@/lib/profile';
+import { getLangPosts } from '@/lib/blog';
 import { pageContext, personLd } from '@/lib/seo';
+import { Icon } from 'astro-icon/components';
 import ImageText from '@/components/ui/ImageText.astro';
+import Bubble from '@/components/ui/Bubble.astro';
+import GridList from '@/components/ui/GridList.astro';
 import Layout from './Layout.astro';
 
 interface Props {
@@ -16,12 +20,22 @@ interface Props {
 const { title, description, lang, alternates = [] } = Astro.props;
 
 const t = useTranslations(lang);
+const localizedUrl = useUrl(lang);
 
 const meta = {
     type: 'profile' as const,
     image: avatar,
     jsonLd: [personLd(pageContext(Astro, title, t('about.intro'), lang, alternates))],
 };
+
+// Icon-and-name bubbles, in the order they should read.
+const profiles = [
+    { name: 'LinkedIn', href: social.linkedin, icon: 'simple-icons:linkedin' },
+    { name: 'GitHub', href: social.github, icon: 'simple-icons:github' },
+    { name: 'Drupal.org', href: social.drupal, icon: 'simple-icons:drupal' },
+];
+
+const recentPosts = (await getLangPosts(lang)).slice(0, 3);
 ---
 
 {/* The page leads with the pitch rather than a title, so the site name in the header is its h1. */}
@@ -35,4 +49,43 @@ const meta = {
         imageClass="w-32 shrink-0 rounded-full aspect-square object-cover"
         textClass="text-lede"
     />
+
+    <div class="flex flex-col items-center gap-3">
+        <p class="text-meta text-base-content/70 m-0">{t('about.workAt')}</p>
+        <ul class="flex flex-wrap justify-center gap-3 list-none p-0 m-0">
+            {profiles.map((profile) => (
+                <li class="m-0 p-0">
+                    <Bubble
+                        tag="a"
+                        href={profile.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="gap-2 h-auto px-5 py-3 bg-transparent border-2 border-base-content no-underline hover:bg-base-content hover:text-base-100"
+                    >
+                        <Icon name={profile.icon} class="w-5 h-5 shrink-0" aria-hidden="true" />
+                        {profile.name}
+                    </Bubble>
+                </li>
+            ))}
+        </ul>
+    </div>
+
+    {recentPosts.length > 0 && (
+        <div>
+            <GridList
+                title={t('about.recentPosts')}
+                posts={recentPosts}
+                imageClass="max-md:h-36 max-md:w-full max-md:object-cover"
+            />
+            <div class="flex justify-end">
+                <a
+                    href={localizedUrl(t('blog.path'))}
+                    class="link link-hover font-mono text-sm inline-flex items-center gap-1"
+                >
+                    {t('about.viewAllPosts')}
+                    <Icon name="mdi:arrow-right" class="w-4 h-4" aria-hidden="true" />
+                </a>
+            </div>
+        </div>
+    )}
 </Layout>
