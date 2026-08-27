@@ -39,3 +39,33 @@ export type PostsListProps = {
     itemClass?: string;
     [key: string]: unknown;
 }
+
+// A head tag in either flavour: name for standard metas, property for Open Graph.
+export type MetaTag = {
+    name?: string;
+    property?: string;
+    content: string;
+};
+
+// The SEO surface of a page. Everything is optional: what a page leaves unset is derived from its
+// title, description and language, or falls back to SITE. Mirrors the seo block in
+// content.config.ts, which is what a post fills it from.
+export type Meta = {
+    title?: string;
+    description?: string;
+    image?: Image;
+    canonical?: string;
+    type?: 'website' | 'article' | 'profile';
+    robots?: string;
+    keywords?: string[];
+    author?: string;
+    article?: {
+        publishedTime?: Date;
+        modifiedTime?: Date;
+        section?: string;
+        tags?: string[];
+    };
+    jsonLd?: Record<string, unknown>[];
+    // Whatever the fields above do not cover yet.
+    extra?: MetaTag[];
+};
