@@ -11,10 +11,11 @@ export const avatar: Image = {
     height: 200,
 };
 
-// The footer links to these, the about-me page links to LinkedIn, and structured data claims them
-// as the same person's profiles, so they are worth having in one place.
+// The footer links to these, and structured data claims them as the same person's profiles, so
+// they are worth having in one place.
 export const social = {
     github: 'https://github.com/omarlopesino',
     linkedin: 'https://www.linkedin.com/in/omar-mohamad-el-hassan-lopesino-ba639462/',
+    drupal: 'https://www.drupal.org/u/omarlopesino',
     email: 'omarmoper@gmail.com',
 };

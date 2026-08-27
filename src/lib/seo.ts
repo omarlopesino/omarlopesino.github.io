@@ -116,7 +116,7 @@ export function personLd(ctx: MetaContext): Record<string, unknown> {
         ...person(ctx.origin, ctx.lang),
         image: abs(ctx.origin, avatar.src),
         description: ctx.description,
-        sameAs: [social.github, social.linkedin],
+        sameAs: [social.github, social.linkedin, social.drupal],
     };
 }
 
