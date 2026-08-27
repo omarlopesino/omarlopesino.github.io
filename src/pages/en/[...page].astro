@@ -1,0 +1,24 @@
+---
+import type { Page } from 'astro';
+import { getAlternates } from '@/i18n/routes';
+import { blogPaths, pageAlternates } from '@/lib/blog';
+import type { PostInterface } from '@/types';
+import BlogLayout from '@/layouts/BlogLayout.astro';
+
+interface Props {
+  page: Page<PostInterface>;
+}
+
+export const getStaticPaths = blogPaths('en');
+
+const { page } = Astro.props;
+---
+
+<BlogLayout
+    title="Omar Lopesino"
+    heading="Blog"
+    description="Omar Lopesino's posts"
+    lang="en"
+    alternates={pageAlternates(getAlternates('home'), page.currentPage)}
+    page={page}
+/>
