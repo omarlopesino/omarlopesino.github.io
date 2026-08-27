@@ -8,7 +8,7 @@ interface Props {
 const { tag = 'span', class: className, ...rest } = Astro.props;
 
 const BubbleElement = tag;
-let classList = ['badge', className];
+let classList = ['badge', 'font-mono', className];
 
 ---
 <BubbleElement class:list={[classList]} {...rest}><slot /></BubbleElement>

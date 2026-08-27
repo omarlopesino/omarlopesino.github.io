@@ -14,7 +14,7 @@ const t = useTranslations(lang);
 const { items, class: className, ...rest } = Astro.props;
 ---
 
-<nav aria-label={t('nav.breadcrumb')} class:list={['text-meta text-base-content/60', className]} {...rest}>
+<nav aria-label={t('nav.breadcrumb')} class:list={['text-meta font-mono text-base-content/60', className]} {...rest}>
   <ol class="flex flex-wrap items-center gap-1.5 list-none p-0 m-0">
     {
       items.map((item, index) => (

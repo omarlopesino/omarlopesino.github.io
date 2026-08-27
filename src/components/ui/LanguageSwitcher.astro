@@ -13,7 +13,7 @@ const hrefFor = (code: string) => alternates.find((a) => a.lang === code)?.path 
 const langs = ['en', 'es'];
 ---
 <details class="dropdown dropdown-center">
-  <summary class="btn btn-ghost btn-sm m-1 uppercase gap-1"><Icon class="w-4 h-4" name="mdi:translate" />{lang}</summary>
+  <summary class="btn btn-ghost btn-sm m-1 font-mono uppercase gap-1"><Icon class="w-4 h-4" name="mdi:translate" />{lang}</summary>
   <ul class="menu dropdown-content bg-base-100 rounded-box z-1 w-24 p-2 shadow-sm">
     {langs.map((code) => (
       <li>

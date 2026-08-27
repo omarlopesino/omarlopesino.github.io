@@ -19,7 +19,7 @@ const status = t('pagination.status')
     .replace('{current}', String(currentPage))
     .replace('{last}', String(lastPage));
 
-const buttonClass = 'btn btn-sm no-underline';
+const buttonClass = 'btn btn-sm font-mono no-underline';
 const iconClass = 'w-4 h-4';
 ---
 
@@ -35,7 +35,7 @@ const iconClass = 'w-4 h-4';
                         <Icon name="mdi:chevron-left" class={iconClass} />{t('pagination.previous')}
                       </span>
             }
-            <span class="text-meta text-base-content/60">{status}</span>
+            <span class="text-meta font-mono text-base-content/60">{status}</span>
             {
                 nextUrl
                     ? <a class={buttonClass} href={nextUrl} rel="next">
