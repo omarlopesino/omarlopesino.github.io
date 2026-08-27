@@ -7,6 +7,8 @@ import mdx from '@astrojs/mdx';
 
 import icon from 'astro-icon';
 
+import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
 export default defineConfig({
   site: process.env.BASE_URL,
@@ -25,5 +27,18 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  integrations: [mdx(), icon()],
+  integrations: [
+    mdx(),
+    icon(),
+    // No i18n option on purpose: it derives alternates by swapping the locale prefix, and slugs are
+    // translated, so it would point /en/blog/hello-world at /es/blog/hello-world instead of
+    // /es/blog/hola-mundo. The hreflang links in every page's head are built from the cid.
+    sitemap({
+      filter: (page) => {
+        const { pathname } = new URL(page);
+        // '/' is the meta-refresh redirect; the feeds and llms.txt are not pages.
+        return pathname !== '/' && !/\.(xml|txt)$/.test(pathname);
+      },
+    }),
+  ],
 });
