@@ -121,7 +121,7 @@ Everything else composes downward:
 ```
 Layout            html/head/header/footer, theme boot; Seo for discovery
 ├─ PostLayout         single post → ui/Post.astro
-├─ PostsListLayout    header slot + ui/GridList + ui/Pagination, over one Page of posts
+├─ PostsListLayout    header slot + ui/PostsRows + ui/Pagination, over one Page of posts
 │  ├─ BlogLayout          a page of every post in a language
 │  ├─ TermPostsLayout     a page of one tag's or category's posts, ui/TermHero in the header slot
 │  └─ (year routes)       a page of one year's posts, used directly
@@ -131,8 +131,18 @@ Layout            html/head/header/footer, theme boot; Seo for discovery
 `PostsListLayout` takes Astro's `Page` object, not an array: it owns the empty state and the
 pagination for every listing on the site. Its `header` slot falls back to `ui/PageTitle` with the
 `heading` prop, which is how a term page swaps in its hero instead, and its `intro` slot is where
-`BlogLayout` puts the byline and the tag list. It passes `featured` to `ui/GridList`, so every
-listing leads with its newest post across the whole row rather than in a column.
+`BlogLayout` puts the byline and the tag list. It passes `lead` to `ui/PostsRows`, so every listing
+leads with its newest post on a wider cover than the rows below it.
+
+`ui/PostsRows` and `ui/GridList` are both thin wrappers over `ui/PostsList`, and they are not
+interchangeable: rows are every paginated listing, the 3-up grid is only the post page's "Keep
+reading" strip. The row layout itself — the alternating cover, its 16:9 floor, the lead — is
+`.posts-rows` in `src/styles/global.css`, because nth-child alternation and logical corner radii
+read worse as arbitrary Tailwind variants than as a dozen lines of CSS.
+
+A card with a `url` gets `.card-highlight`: one hover-and-focus treatment for the whole card. It
+has to be CSS too — `ui/Card` lays the link *over* the card, so the card itself never matches
+daisyUI's `.card:focus-visible` and needs `:has(a:focus-visible)` instead.
 
 Layouts do the content fetching (`getCollection` + mapping to the plain `PostInterface` shape from
 `src/types.ts`); `src/components/ui/` components stay presentational and are driven only by props, so
