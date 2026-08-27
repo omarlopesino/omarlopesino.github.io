@@ -1,8 +1,10 @@
 ---
 import { render, type CollectionEntry } from 'astro:content';
 import type { Alternate } from '@/i18n/routes';
-import { getContentAlternateUrls, getPostCategory, getPostTags, getRecommendedPosts } from '@/lib/blog';
+import { getContentAlternateUrls, getPostCategory, getPostTags, getRecommendedPosts, postTrail } from '@/lib/blog';
+import { articleLd, breadcrumbLd, postMeta } from '@/lib/seo';
 import { readingTime } from '@/lib/utils';
+import type { ui } from '@/i18n/ui';
 import Post from '../components/ui/Post.astro';
 import Layout from './Layout.astro';
 
@@ -19,9 +21,22 @@ const tags = await getPostTags(entry);
 const category = await getPostCategory(entry);
 const recommended = await getRecommendedPosts(entry);
 const alternates : Alternate[] = await getContentAlternateUrls('blog', entry.data);
+
+const lang = entry.data.language as keyof typeof ui;
+const origin = Astro.site?.origin ?? Astro.url.origin;
+const url = origin + entry.data.url;
+const ldContext = { title: entry.data.title, description: entry.data.description, lang, url, origin };
+
+const meta = {
+    ...postMeta(entry, category, tags),
+    jsonLd: [
+        articleLd({ ...entry.data, category, tags }, ldContext),
+        breadcrumbLd(postTrail(lang, category, entry.data.title), origin),
+    ],
+};
 ---
 
-<Layout title={entry.data.title} description={entry.data.description} lang={entry.data.language} alternates={alternates}>
+<Layout title={entry.data.title} description={entry.data.description} lang={entry.data.language} alternates={alternates} meta={meta}>
 	<Post
         title={entry.data.title}
         description={entry.data.description}
