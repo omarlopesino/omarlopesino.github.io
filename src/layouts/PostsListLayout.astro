@@ -33,7 +33,7 @@ const t = useTranslations(lang);
     <slot name="intro" />
     {
         page.data.length > 0
-            ? <GridList title={listTitle} posts={page.data} />
+            ? <GridList featured title={listTitle} posts={page.data} />
             : <p class="text-center text-sm opacity-70 py-12">{t('posts.empty')}</p>
     }
     <Pagination
