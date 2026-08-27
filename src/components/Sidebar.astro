@@ -1,0 +1,36 @@
+---
+import { getLangFromUrl, useTranslations, useUrl } from '../i18n/utils';
+import { getTopTerms, getYears } from '../lib/blog';
+import Facet from './ui/Facet.astro';
+
+// How many values each block holds before the rest are left to the index page.
+const FACET_LIMIT = 5;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const url = useUrl(lang);
+
+const termFacets = async (type: 'tag' | 'category') =>
+  (await getTopTerms(type, lang, FACET_LIMIT)).map(({ name, slug, count }) => ({
+    title: name,
+    path: url(t(`${type}.path`) + '/' + slug),
+    count,
+  }));
+
+const categories = await termFacets('category');
+const tags = await termFacets('tag');
+
+const years = (await getYears(lang)).slice(0, FACET_LIMIT).map(({ year, count }) => ({
+  title: String(year),
+  path: url(t('year.path') + '/' + year),
+  count,
+}));
+
+const more = (type: 'tag' | 'category' | 'year') => ({ title: t('facet.more'), path: url(t(`${type}.path`)) });
+---
+
+<aside class="flex flex-col gap-4 lg:w-64 lg:shrink-0">
+    <Facet title={t('category.title')} facets={categories} more={more('category')} />
+    <Facet title={t('tag.title')} facets={tags} more={more('tag')} />
+    <Facet title={t('year.title')} facets={years} more={more('year')} />
+</aside>

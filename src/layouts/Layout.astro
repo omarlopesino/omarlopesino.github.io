@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Sidebar from '../components/Sidebar.astro';
 import { defaultLang } from '../i18n/ui';
 import type { Alternate } from '../i18n/routes';
 
@@ -13,9 +14,11 @@ interface Props {
   alternates?: Alternate[];
   // The element the site name sits in: a heading on a page that has no title of its own.
   logoTag?: string;
+  // The rail of ways into the blog. On everywhere the page is part of the blog.
+  sidebar?: boolean;
 }
 
-const { title, description, refresh, lang, alternates = [], logoTag } = Astro.props;
+const { title, description, refresh, lang, alternates = [], logoTag, sidebar = true } = Astro.props;
 
 const origin = Astro.site?.origin ?? Astro.url.origin;
 const self = alternates.find((a) => a.lang === lang);
@@ -61,9 +64,12 @@ const xDefault = alternates.find((a) => a.lang === defaultLang);
     <header class="lg:px-4">
       <Header alternates={alternates} logoTag={logoTag} />
     </header>
-    <main class="my-6 px-6">
-      <slot />
-    </main>
+    <div class="my-6 px-6 flex max-lg:flex-col gap-8">
+      <main class="flex-1 min-w-0">
+        <slot />
+      </main>
+      {sidebar && <Sidebar />}
+    </div>
     <footer class="lg:px-4">
       <Footer />
     </footer>
