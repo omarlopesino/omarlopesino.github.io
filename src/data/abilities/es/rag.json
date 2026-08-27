@@ -1,7 +1,0 @@
-{
-    "name": "RAG",
-    "description": "Aplicaciones de IA listas para producción, que responden con los datos de tu negocio en lugar de adivinar.",
-    "order": 4,
-    "cid": "rag",
-    "language": "es"
-}

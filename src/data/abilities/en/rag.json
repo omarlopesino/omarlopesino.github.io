@@ -1,7 +1,0 @@
-{
-    "name": "RAG",
-    "description": "AI applications ready for production, answering from your own business data rather than guessing.",
-    "order": 4,
-    "cid": "rag",
-    "language": "en"
-}

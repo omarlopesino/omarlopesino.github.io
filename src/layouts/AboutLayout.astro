@@ -1,12 +1,9 @@
 ---
-import { getCollection } from 'astro:content';
 import type { Alternate } from '@/i18n/routes';
 import { useTranslations } from '@/i18n/utils';
 import { avatar, social } from '@/lib/profile';
 import { pageContext, personLd } from '@/lib/seo';
-import DefinitionTable from '@/components/ui/DefinitionTable.astro';
 import ImageText from '@/components/ui/ImageText.astro';
-import Section from '@/components/ui/Section.astro';
 import Layout from './Layout.astro';
 
 interface Props {
@@ -20,14 +17,6 @@ const { title, description, lang, alternates = [] } = Astro.props;
 
 const t = useTranslations(lang);
 
-const byOrder = (a: { data: { order: number } }, b: { data: { order: number } }) => a.data.order - b.data.order;
-const inLang = (entry: { data: { language: string } }) => entry.data.language === lang;
-
-const abilities = (await getCollection('ability', inLang)).sort(byOrder);
-
-// English in both languages, so a link to a section is the same fragment on either page.
-const anchors = { abilities: 'abilities' };
-
 const linkedin = social.linkedin;
 
 const meta = {
@@ -35,8 +24,6 @@ const meta = {
     image: avatar,
     jsonLd: [personLd(pageContext(Astro, title, t('about.intro'), lang, alternates))],
 };
-
-const tableClass = 'md:w-2/3 mx-auto';
 ---
 
 {/* The page leads with the pitch rather than a title, so the site name in the header is its h1. */}
@@ -50,13 +37,6 @@ const tableClass = 'md:w-2/3 mx-auto';
         imageClass="w-32 shrink-0 rounded-full aspect-square object-cover"
         textClass="text-lede"
     />
-
-    <Section id={anchors.abilities} title={t('about.abilities')}>
-        <DefinitionTable
-            items={abilities.map(({ data }) => ({ name: data.name, description: data.description }))}
-            class={tableClass}
-        />
-    </Section>
 
     {/* The brand name stays out of the translations: it is the same word in both languages and the
         one the link hangs on. */}

@@ -1,7 +1,0 @@
-{
-    "name": "Creating websites",
-    "description": "Websites with Drupal or Symfony behind them, designed and built with Twig, Vue, Angular, Drupal SDC, Tailwind or DaisyUI.",
-    "order": 1,
-    "cid": "creating-websites",
-    "language": "en"
-}

@@ -1,7 +1,0 @@
-{
-    "name": "Integrations",
-    "description": "Websites wired into the identity provider you already run — Microsoft Entra ID, Keycloak — so people sign in once.",
-    "order": 3,
-    "cid": "integrations",
-    "language": "en"
-}

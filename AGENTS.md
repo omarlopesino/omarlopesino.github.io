@@ -293,11 +293,10 @@ reason — read it before undoing any of them.
   through fontsource so the site makes no third-party request
   ([2026-08-27](docs/plans/2026-08-27-6-type-and-paper-in-karla.md)).
 
-**Easily mistaken for removals, but current:** the `ability` collection and the "My abilities"
-section on the about page; `Modal.astro` and `RecordCard.astro`, kept as reusable primitives;
-`cvCollection()` in `src/content.config.ts`, which `education` still uses; `SearchBar.astro` and
-`TagsSelector.astro`, unwired **by decision** rather than by oversight; and the archive at
-`/en/blog/archive`. The rail is *deferred*, not forbidden — `futuro.txt` asks for it.
+**Easily mistaken for removals, but current:** `Modal.astro` and `RecordCard.astro`, kept as
+reusable primitives; `cvCollection()` in `src/content.config.ts`, which `education` still uses;
+`SearchBar.astro` and `TagsSelector.astro`, unwired **by decision** rather than by oversight; and
+the archive at `/en/blog/archive`. The rail is *deferred*, not forbidden — `futuro.txt` asks for it.
 
 ## Current state
 
@@ -314,7 +313,7 @@ work rather than being a convention to imitate:
   were not. Both resolve to zero entries.
 - The LinkedIn URL is written out twice, in `src/layouts/AboutLayout.astro` and in
   `src/components/Footer.astro`. `src/lib/profile.ts` is where a single copy would go.
-- These `src/components/ui/` components currently have no caller: `Button`, `Details`,
-  `IconCardLink`, `Modal`, `RecommendedPosts`, `RecordCard`, `SearchBar`, `Submenu`, `Tab`,
-  `Table`, `Tabs`, `TagsSelector`. They are primitives with stories, not dead code — check
-  `docs/plans/` before deleting one.
+- These `src/components/ui/` components currently have no caller: `Button`, `DefinitionTable`,
+  `Details`, `IconCardLink`, `Modal`, `RecommendedPosts`, `RecordCard`, `Section`, `SearchBar`,
+  `Submenu`, `Tab`, `Table`, `Tabs`, `TagsSelector`. They are primitives with stories, not dead
+  code — check `docs/plans/` before deleting one.

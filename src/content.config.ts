@@ -78,17 +78,6 @@ const tag = taxonomyCollection('tags');
 
 const education = cvCollection('education');
 
-// What I can be hired to do, in the visitor's terms rather than in technologies.
-const ability = defineCollection({
-	loader: dataLoader('abilities'),
-	schema: z.object({
-		name: z.string(),
-		description: z.string(),
-		order: z.int(),
-		...translatable,
-	}),
-});
-
 // 'language' is the language this entry is written in; 'name' is the language it describes.
 const spokenLanguage = defineCollection({
 	loader: dataLoader('spoken-languages'),
@@ -128,4 +117,4 @@ const blog = defineCollection({
 	})),
 });
 
-export const collections = { category, tag, blog, ability, education, spokenLanguage };
+export const collections = { category, tag, blog, education, spokenLanguage };
