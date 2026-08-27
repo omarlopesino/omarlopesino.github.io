@@ -48,11 +48,13 @@ const iconClass = 'text-base-content w-6 h-6';
             }
         }
 
-        // Shares the URL on share button click.
-        const share_button = document.getElementById(buttonId);
-        const share_modal = document.getElementById(modalId);
-        share_button.addEventListener('click', function() {
-            share(share_button.dataset.shareUrl, share_button.dataset.shareTitle, share_button.dataset.shareText, share_modal);
+        // Runs on first load and after every view transition, once the DOM is in place.
+        document.addEventListener('astro:page-load', function() {
+            const share_button = document.getElementById(buttonId);
+            const share_modal = document.getElementById(modalId);
+            share_button.addEventListener('click', function() {
+                share(share_button.dataset.shareUrl, share_button.dataset.shareTitle, share_button.dataset.shareText, share_modal);
+            })
         })
     }
 
