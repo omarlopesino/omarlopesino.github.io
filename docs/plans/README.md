@@ -54,10 +54,10 @@ Read the relevant block before touching a subsystem.
   [2026-06-24](2026-06-24-1-i18n-and-translated-routes.md)
 - **Every page is prefixed `/en/` or `/es/`; no prefix stripping** —
   [2026-06-24](2026-06-24-1-i18n-and-translated-routes.md)
-- **`/<lang>/` *is* the blog listing.** There is no `/en/blog` page —
-  [2026-08-26](2026-08-26-3-blog-as-front-page.md)
-- **`blog.path` is the post URL *prefix*, not the listing URL.** Changing it breaks every post's
-  hreflang silently — [2026-08-26](2026-08-26-3-blog-as-front-page.md)
+- **`/<lang>/` *is* the about-me page**, the site's home page. The blog listing lives at
+  `/<lang>/blog` — [2026-08-27](2026-08-27-8-about-me-as-home-page.md)
+- **`blog.path` is both the listing URL and the post URL *prefix*.** Changing it breaks every post's
+  hreflang silently — [2026-08-27](2026-08-27-8-about-me-as-home-page.md)
 - **Route directory names match `t('*.path')` literally, accents included** —
   [2026-06-24](2026-06-24-1-i18n-and-translated-routes.md)
 - **Every paginated route maps its alternates through `pageAlternates()`**, or page two
@@ -109,6 +109,7 @@ Newest first.
 
 | Date | Entry |
 | --- | --- |
+| 2026-08-27 | [The about-me page becomes the home page; the blog moves to /blog](2026-08-27-8-about-me-as-home-page.md) |
 | 2026-08-27 | [The listing becomes alternating rows, and a card shows when it is focused](2026-08-27-7-posts-listing-as-alternating-rows.md) |
 | 2026-08-27 | [The type set in Karla, on warm paper](2026-08-27-6-type-and-paper-in-karla.md) |
 | 2026-08-27 | [A sitemap, a feed per language, and one place metatags come from](2026-08-27-5-sitemap-feeds-and-one-place-for-metatags.md) |

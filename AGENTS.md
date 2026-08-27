@@ -265,33 +265,10 @@ sole source of `site` in `astro.config.mjs`, and therefore of every canonical an
 
 ## Do not reintroduce
 
-Each of these was removed deliberately. The link goes to the entry in `docs/plans/` holding the
-reason — read it before undoing any of them.
-
-- **shadcn/ui, or a React runtime** — the stack is daisyUI classes and Astro components
-  ([2026-06-23](docs/plans/2026-06-23-1-astro-daisyui-stack.md)).
-- **A custom asset-compression script** — the build and the CDN do it
-  ([2026-06-23](docs/plans/2026-06-23-1-astro-daisyui-stack.md)).
-- **Language redirection inside the app** — it causes SEO problems; the root page is a plain
-  meta-refresh ([2026-06-24](docs/plans/2026-06-24-1-i18n-and-translated-routes.md)).
-- **A sidebar or spec-rail layout for the post page** — both were drawn and rejected in favour of
-  the single editorial column
-  ([2026-08-26](docs/plans/2026-08-26-2-blog-post-page-and-design-tokens.md)).
-- **The `experience` and `skill` collections, `Skills.astro`, the skills popup and the Work
-  section** — the page was a second CV that drifted from LinkedIn
-  ([2026-08-27](docs/plans/2026-08-27-3-about-me-cut-to-linkedin.md)).
-- **The `Sidebar.astro` rail, `getTopTerms`, `TermsLayout` and the tag/category index pages** —
-  every value is reachable without them
-  ([2026-08-27](docs/plans/2026-08-27-4-archive-as-the-only-index.md)).
-- **A `metatags` slot on `Layout`** — a page describes itself with the `meta` prop, and `Meta.extra`
-  takes what the builder does not cover
-  ([2026-08-27](docs/plans/2026-08-27-5-sitemap-feeds-and-one-place-for-metatags.md)).
-- **The `i18n` option on `@astrojs/sitemap`** — translated slugs make its prefix-swap alternates
-  point at pages that do not exist
-  ([2026-08-27](docs/plans/2026-08-27-5-sitemap-feeds-and-one-place-for-metatags.md)).
-- **Geist, or a webfont loaded from Google** — the type is Karla and IBM Plex Mono, self-hosted
-  through fontsource so the site makes no third-party request
-  ([2026-08-27](docs/plans/2026-08-27-6-type-and-paper-in-karla.md)).
+Every deliberate removal, and the reason for it, is logged in `docs/plans/README.md` — its
+"Settled decisions — do not undo" section for the ones still load-bearing, and each dated entry's
+own "What this removed" for the rest. Check there before reintroducing something that looks
+missing; this file does not duplicate that list.
 
 **Easily mistaken for removals, but current:** `Modal.astro` and `RecordCard.astro`, kept as
 reusable primitives; `cvCollection()` in `src/content.config.ts`, which `education` still uses;

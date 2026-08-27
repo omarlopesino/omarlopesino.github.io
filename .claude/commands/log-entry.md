@@ -46,6 +46,7 @@ Copy `TEMPLATE.md` to `docs/plans/YYYY-MM-DD-N-<what-was-done>.md`:
 - Append one row to the table in `docs/plans/README.md`, newest first.
 - Only if this entry reverses a decision in "Settled decisions — do not undo", update that one
   line. Open no older entry.
-- If it removed something, add a line to the **Do not reintroduce** section of `AGENTS.md`.
+- Removals live in this entry's "What this removed" section; `AGENTS.md`'s **Do not reintroduce**
+  section points here rather than listing them, so it needs no edit.
 
 Report the path written and the index row added. Do not commit.
