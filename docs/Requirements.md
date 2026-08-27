@@ -23,8 +23,8 @@ We need to show through different pages:
 - A small presentation about me.
 * Blog
 
-The blog entries show first: the site root is the blog listing. The presentation about me lives on
-its own page, linked from the menu and from the author block at the end of every post.
+The presentation about me shows first: the site root is the about me page. The blog lives on its
+own page, linked from the menu and from the author block at the end of every post.
 ## Search
 
 ### External
@@ -32,6 +32,10 @@ its own page, linked from the menu and from the author block at the end of every
 Since the first moment the site must be ready to be found externally. The idea is that people should be able to find the page by google / LLM searchs .
 
 Basically, a SEO strategy. URL structure, content,  metatags sed, sitemap, robots and llms txt must be creating according to this objective.
+
+Before the site can actually be found, it needs real content (not placeholder posts, categories or
+tags) and perfect Lighthouse and Core Web Vitals scores. Only once both are true should the
+`noindex, nofollow` be removed.
 
 ### Internal
 
