@@ -3,12 +3,13 @@ import Menu from './ui/Menu.astro';
 import MenuLink from './ui/MenuLink.astro';
 import { Icon } from 'astro-icon/components';
 import Small from './ui/Small.astro';
+import { social } from '@/lib/profile';
 const menuLinkClass = 'hover:bg-transparent!';
 const iconClass = 'text-base-content w-6 h-6';
 ---
 <Menu class="border-t border-base-300 text-center">
   <Small slot="start">2026 Omar Lopesino</Small>
-  <MenuLink class={menuLinkClass} aria-label="Github" target="_blank" rel="noopener noreferrer" aria-label="GitHub" href="https://github.com/omarlopesino"><Icon class={iconClass} name="simple-icons:github" /></MenuLink>
-  <MenuLink class={menuLinkClass} aria-label="Linked In" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" href="https://www.linkedin.com/in/omar-mohamad-el-hassan-lopesino-ba639462/"><Icon class={iconClass} name="simple-icons:linkedin" /></MenuLink>
-  <MenuLink class={menuLinkClass} aria-label="E-mail" target="_blank" aria-label="Email" href="mailto:omarmoper@gmail.com"><Icon class={iconClass} name="mdi:email-outline" /></MenuLink>
+  <MenuLink class={menuLinkClass} target="_blank" rel="noopener noreferrer" aria-label="GitHub" href={social.github}><Icon class={iconClass} name="simple-icons:github" /></MenuLink>
+  <MenuLink class={menuLinkClass} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" href={social.linkedin}><Icon class={iconClass} name="simple-icons:linkedin" /></MenuLink>
+  <MenuLink class={menuLinkClass} target="_blank" aria-label="Email" href={`mailto:${social.email}`}><Icon class={iconClass} name="mdi:email-outline" /></MenuLink>
 </Menu>
