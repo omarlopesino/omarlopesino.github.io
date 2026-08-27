@@ -1,53 +1,41 @@
 ---
-
 import { getCollection } from 'astro:content';
-import Layout from './Layout.astro';
 import type { Alternate } from '@/i18n/routes';
 import { useTranslations, useUrl } from '@/i18n/utils';
-import Bubble from '@/components/ui/Bubble.astro';
+import { getYears } from '@/lib/blog';
+import BubbleList from '@/components/ui/BubbleList.astro';
+import PageTitle from '@/components/ui/PageTitle.astro';
+import Layout from './Layout.astro';
 
-
+// The index of one way of grouping posts. Years have no collection behind them, so they are read
+// off the posts themselves; everything else about the page is the same.
 interface Props {
-  title: string,
-  description: string,
-  type : 'tag' | 'category',
-  lang: 'en' | 'es',
-  alternates: Alternate[],
-  page?: number,
-  class?: string;
-  [key: string]: unknown;
+  type: 'tag' | 'category' | 'year';
+  lang: 'en' | 'es';
+  alternates: Alternate[];
 }
 
-const { title, description, type, lang, alternates, page = 0 } = Astro.props;
-
-const terms = await Promise.all((await getCollection(type, (post) => post.data.language == lang))
-    .map(async (post) => ({
-        name: post.data.name,
-        description: post.data.description,
-        image: post.data.name,
-        slug: post.data.name,
-        language: post.data.name,
-        cid: post.data.name,
-    })));
+const { type, lang, alternates } = Astro.props;
 
 const t = useTranslations(lang);
 const localizedUrl = useUrl(lang);
+
+const title = t(`${type}.title`);
+const description = t(`${type}.description`);
+const termUrl = (slug: string | number) => localizedUrl(t(`${type}.path`) + '/' + slug);
+
+const items = type === 'year'
+  ? (await getYears(lang)).map(({year}) => ({ label: String(year), href: termUrl(year) }))
+  : (await getCollection(type, ({data}) => data.language == lang))
+      .sort((a, b) => a.data.name.localeCompare(b.data.name, lang))
+      .map(({data}) => ({
+        label: type === 'tag' ? `#${data.name}` : data.name,
+        href: termUrl(data.slug),
+      }));
 ---
 
 <Layout title={title} description={description} lang={lang} alternates={alternates}>
-    <h1>{title}</h1>
-    <p class="text-sm">
-        {description}
-    </p>
-
-    <ul class="flex gap-3 list-none p-0! m-0!" aria-label={t('post.tagsLabel')}>
-        {
-            terms.map((term) => (
-                <li class="m-0 p-0">
-                    <Bubble tag="a" href={localizedUrl(t(`${type}.path`) + '/' + term.cid.toLowerCase())} class:list={['badge-accent', 'dark:badge-secondary', 'no-underline']}>{term.name}</Bubble>
-                </li>
-            ))
-        }
-    </ul>
-
+    <PageTitle>{title}</PageTitle>
+    <p class="text-lede text-center max-w-prose mx-auto my-4">{description}</p>
+    <BubbleList items={items} ariaLabel={title} class="justify-center" bubbleClass="badge-accent badge-lg font-medium no-underline" />
 </Layout>
