@@ -2,8 +2,9 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { defaultLang } from '../i18n/ui';
+import Seo from '../components/Seo.astro';
 import type { Alternate } from '../i18n/routes';
+import type { Meta } from '../types';
 
 interface Props {
   title: string;
@@ -13,30 +14,27 @@ interface Props {
   alternates?: Alternate[];
   // The element the site name sits in: a heading on a page that has no title of its own.
   logoTag?: string;
+  meta?: Meta;
 }
 
-const { title, description, refresh, lang, alternates = [], logoTag } = Astro.props;
-
-const origin = Astro.site?.origin ?? Astro.url.origin;
-const self = alternates.find((a) => a.lang === lang);
-const canonical = `${origin}${self ? self.path : Astro.url.pathname}`;
-const xDefault = alternates.find((a) => a.lang === defaultLang);
+const { title, description, refresh, lang, alternates = [], logoTag, meta } = Astro.props;
 ---
 
 <html lang={lang}>
   <head>
     <meta charset="UTF-8" />
-    <!-- @todo drop when the site is ready. -->
-    <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-    {description && <meta name="description" content={description} />}
-    {!refresh && <link rel="canonical" href={canonical} />}
+    <Seo
+      title={title}
+      description={description}
+      lang={lang}
+      alternates={alternates}
+      canonical={!refresh}
+      meta={meta}
+    />
     {refresh && <meta http-equiv="refresh" content={refresh} />}
-    {alternates.map(({ lang: code, path }) => <link rel="alternate" hreflang={code} href={`${origin}${path}`} />)}
-    {xDefault && <link rel="alternate" hreflang="x-default" href={`${origin}${xDefault.path}`} />}
-    <slot name="metatags" />
     <title>{title}</title>
     <script is:inline>
       const theme = localStorage.getItem('theme');
