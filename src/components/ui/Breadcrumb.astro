@@ -14,7 +14,7 @@ const t = useTranslations(lang);
 const { items, class: className, ...rest } = Astro.props;
 ---
 
-<nav aria-label={t('nav.breadcrumb')} class:list={['text-meta font-mono text-base-content/60', className]} {...rest}>
+<nav aria-label={t('nav.breadcrumb')} class:list={['text-meta font-mono text-base-content/70', className]} {...rest}>
   <ol class="flex flex-wrap items-center gap-1.5 list-none p-0 m-0">
     {
       items.map((item, index) => (
@@ -23,7 +23,7 @@ const { items, class: className, ...rest } = Astro.props;
           {
             item.href
               ? <a href={item.href} class="link link-hover">{item.label}</a>
-              : <span class="text-base-content/45" aria-current="page">{item.label}</span>
+              : <span class="text-base-content/70" aria-current="page">{item.label}</span>
           }
         </li>
       ))

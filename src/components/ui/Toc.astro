@@ -37,7 +37,7 @@ const items = headings
                 {items.map((heading) => (
                     <li class:list={['flex gap-2.5', heading.depth === 3 && 'pl-6']}>
                         {heading.number && (
-                            <span class="text-meta text-base-content/45 tabular-nums">
+                            <span class="text-meta text-base-content/70 tabular-nums">
                                 {String(heading.number).padStart(2, '0')}
                             </span>
                         )}
