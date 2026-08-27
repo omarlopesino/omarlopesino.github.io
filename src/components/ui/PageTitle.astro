@@ -1,0 +1,13 @@
+---
+interface Props {
+    class?: string;
+    [key: string]: unknown;
+}
+
+// The title of a listing or index page, centred over the content the way Section titles are. A post
+// title is a different thing — ui/Post.astro sets its own, display-sized and ranged left in the
+// prose column.
+const { class: className, ...rest } = Astro.props;
+---
+
+<h1 class:list={['text-title text-center m-0', className]} {...rest}><slot /></h1>
