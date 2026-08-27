@@ -1,0 +1,51 @@
+---
+import type { Alternate } from '@/i18n/routes';
+import { defaultLang, ui } from '@/i18n/ui';
+import { useTranslations } from '@/i18n/utils';
+import { buildMeta } from '@/lib/seo';
+import type { Meta } from '@/types';
+
+interface Props {
+    title: string;
+    description?: string;
+    lang?: string;
+    alternates?: Alternate[];
+    // False on the redirect stub, which has no URL of its own to point at.
+    canonical?: boolean;
+    meta?: Meta;
+}
+
+const { title, description, lang, alternates = [], canonical = true, meta = {} } = Astro.props;
+
+const origin = Astro.site?.origin ?? Astro.url.origin;
+const self = alternates.find((a) => a.lang === lang);
+// og:url and the canonical must agree, so both pages of a paginated listing point at themselves.
+const url = meta.canonical ?? `${origin}${self ? self.path : Astro.url.pathname}`;
+const xDefault = alternates.find((a) => a.lang === defaultLang);
+
+const tags = buildMeta(meta, { title, description, lang: lang ?? defaultLang, url, origin });
+
+const graph = meta.jsonLd?.length
+    ? { '@context': 'https://schema.org', '@graph': meta.jsonLd }
+    : null;
+
+const feedLang = lang && lang in ui ? (lang as keyof typeof ui) : null;
+const t = feedLang ? useTranslations(feedLang) : null;
+---
+
+{tags.map(({ name, property, content }) => <meta name={name} property={property} content={content} />)}
+{canonical && <link rel="canonical" href={url} />}
+{alternates.map(({ lang: code, path }) => <link rel="alternate" hreflang={code} href={`${origin}${path}`} />)}
+{xDefault && <link rel="alternate" hreflang="x-default" href={`${origin}${xDefault.path}`} />}
+{
+    feedLang && t && (
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title={t('feed.title')}
+            href={`${origin}/${feedLang}/${t('feed.path')}`}
+        />
+    )
+}
+{/* Escaping '<' keeps a '</script>' inside a description from closing the tag early. */}
+{graph && <script type="application/ld+json" is:inline set:html={JSON.stringify(graph).replace(/</g, '\\u003c')} />}
