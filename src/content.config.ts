@@ -63,8 +63,6 @@ const category = taxonomyCollection('categories');
 
 const tag = taxonomyCollection('tags');
 
-const experience = cvCollection('experience');
-
 const education = cvCollection('education');
 
 // What I can be hired to do, in the visitor's terms rather than in technologies.
@@ -73,18 +71,6 @@ const ability = defineCollection({
 	schema: z.object({
 		name: z.string(),
 		description: z.string(),
-		order: z.int(),
-		...translatable,
-	}),
-});
-
-const skill = defineCollection({
-	loader: dataLoader('skills'),
-	schema: z.object({
-		name: z.string(),
-		description: z.string(),
-		// A stable id, never translated text, so grouping holds across languages.
-		group: z.enum(['backend', 'frontend', 'data', 'devops', 'practice']),
 		order: z.int(),
 		...translatable,
 	}),
@@ -126,4 +112,4 @@ const blog = defineCollection({
 	})),
 });
 
-export const collections = { category, tag, blog, ability, experience, education, skill, spokenLanguage };
+export const collections = { category, tag, blog, ability, education, spokenLanguage };
