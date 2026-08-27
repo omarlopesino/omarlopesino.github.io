@@ -191,3 +191,43 @@
 .prose :where(pre.astro-code) {
     background-color: var(--color-base-200);
 }
+
+/* A card that is a link highlights on hover and on keyboard focus alike. The `:has()` is the
+   whole point: ui/Card lays an overlay link over the card, so the link takes focus and daisyUI's
+   own `.card:focus-visible` outline never matches. The hairline is base-content rather than
+   black, so it stays visible under the dark theme instead of sinking into base-100. */
+.card-highlight {
+    transition: box-shadow 0.18s ease-in-out, transform 0.18s ease-in-out;
+}
+
+.card-highlight:hover,
+.card-highlight:has(a:focus-visible) {
+    box-shadow:
+        0 0 0 1px var(--color-base-content),
+        0 0 0 4px color-mix(in oklch, var(--color-accent) 30%, transparent),
+        0 12px 28px -14px oklch(0% 0 0 / 0.35);
+    transform: translateY(-1px);
+}
+
+/* The ring above is the focus indicator, and the overlay link covers the whole card, so the UA
+   outline would draw a second box around the title alone. The title underlines instead. */
+.card-highlight .card-title a:focus-visible {
+    outline: none;
+}
+
+.card-highlight:has(a:focus-visible) .card-title a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card-highlight {
+        transition: none;
+    }
+
+    .card-highlight:hover,
+    .card-highlight:has(a:focus-visible) {
+        transform: none;
+    }
+}

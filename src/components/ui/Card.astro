@@ -16,8 +16,10 @@ const CardElement = tag;
 
 let classList = ['card', 'bg-base-100', 'shadow-md dark:shadow-white/20', className];
 
+// A card with a url is one big link: the title's overlay covers it, so it takes the pointer and
+// the focus highlight too.
 if (url != null) {
-    classList.push('relative');
+    classList.push('relative', 'card-highlight');
 }
 ---
 
