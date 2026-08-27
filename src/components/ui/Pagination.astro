@@ -1,0 +1,50 @@
+---
+import { Icon } from 'astro-icon/components';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+interface Props {
+    currentPage: number;
+    lastPage: number;
+    prevUrl?: string;
+    nextUrl?: string;
+    class?: string;
+}
+
+const { currentPage, lastPage, prevUrl, nextUrl, class: className } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const status = t('pagination.status')
+    .replace('{current}', String(currentPage))
+    .replace('{last}', String(lastPage));
+
+const buttonClass = 'btn btn-sm no-underline';
+const iconClass = 'w-4 h-4';
+---
+
+{
+    lastPage > 1 && (
+        <nav aria-label={t('pagination.label')} class:list={['flex items-center justify-center gap-4 my-8', className]}>
+            {
+                prevUrl
+                    ? <a class={buttonClass} href={prevUrl} rel="prev">
+                        <Icon name="mdi:chevron-left" class={iconClass} aria-hidden="true" />{t('pagination.previous')}
+                      </a>
+                    : <span class:list={[buttonClass, 'btn-disabled']} aria-hidden="true">
+                        <Icon name="mdi:chevron-left" class={iconClass} />{t('pagination.previous')}
+                      </span>
+            }
+            <span class="text-meta text-base-content/60">{status}</span>
+            {
+                nextUrl
+                    ? <a class={buttonClass} href={nextUrl} rel="next">
+                        {t('pagination.next')}<Icon name="mdi:chevron-right" class={iconClass} aria-hidden="true" />
+                      </a>
+                    : <span class:list={[buttonClass, 'btn-disabled']} aria-hidden="true">
+                        {t('pagination.next')}<Icon name="mdi:chevron-right" class={iconClass} />
+                      </span>
+            }
+        </nav>
+    )
+}
