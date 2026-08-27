@@ -7,11 +7,7 @@ import PostsList from './PostsList.astro';
 interface Props extends PostsListProps {
 }
 
-const { title, posts, featured = false, class: className, itemClass, imageClass, ...rest } = Astro.props;
-
-// The newest post leads the listing: its card takes the whole row and its cover stretches to fill
-// it, so the image is shown taller at its own aspect ratio instead of cropped into a column.
-const featuredClass = 'md:[&>*:first-child]:col-span-3 [&>*:first-child_img]:w-full';
+const { title, posts, class: className, itemClass, imageClass, ...rest } = Astro.props;
 ---
 
-<PostsList title={title} posts={posts} class:list={["grid md:grid-cols-3 max-md:grid-cols-1 gap-2", featured && featuredClass, className]} itemClass={itemClass} imageClass={imageClass} {...rest} />
+<PostsList title={title} posts={posts} class:list={["grid md:grid-cols-3 max-md:grid-cols-1 gap-2", className]} itemClass={itemClass} imageClass={imageClass} {...rest} />

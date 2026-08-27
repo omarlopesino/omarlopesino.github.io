@@ -44,10 +44,3 @@ export const CompactCoversOnMobile = {
   },
 };
 
-// The blog and every term listing lead with their newest post across the whole row.
-export const FeaturedFirstPost = {
-  args: {
-    featured: true,
-    posts: Array.from({ length: 7 }, () => ({ ...post })),
-  },
-};
