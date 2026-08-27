@@ -1,8 +1,6 @@
 export const routes = {
   home: { en: '/en/', es: '/es/' },
   about: { en: '/en/about-me', es: '/es/sobre-mi' },
-  blogTags: { en: '/en/blog/tags', es: '/es/blog/etiquetas'},
-  blogCategories: { en: '/en/blog/categories', es: '/es/blog/categorías'},
   blogArchive: { en: '/en/blog/archive', es: '/es/blog/archivo'}
 } as const;
 
