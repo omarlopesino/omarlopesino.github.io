@@ -10,4 +10,4 @@ interface Props {
 const { class: className, ...rest } = Astro.props;
 ---
 
-<h1 class:list={['text-title text-center m-0', className]} {...rest}><slot /></h1>
+<h1 class:list={['text-title font-display text-center m-0', className]} {...rest}><slot /></h1>

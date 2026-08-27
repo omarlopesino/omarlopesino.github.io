@@ -11,7 +11,7 @@ const { title, class: className, posts = [], itemClass = "", imageClass = "", ..
 ---
 
 <div class="rounded-box max-w-full p-4">
-    {title && <h2 class="text-center font-bold text-lg mb-2">{title}</h2>}
+    {title && <h2 class="text-center font-display font-bold text-lg mb-2">{title}</h2>}
     <div class:list={[className, "md:justify-center"]} {...rest}>
         {
             posts.map((post) => (
