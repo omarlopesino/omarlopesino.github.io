@@ -17,6 +17,7 @@ const url = useUrl(lang);
 <Menu class="border-b border-base-300">
   <Logo slot="start" tag={logoTag} />
   <MenuLink href={url()}>{t('nav.blog')}</MenuLink>
+  <MenuLink href={url(t('year.path'))}>{t('nav.archive')}</MenuLink>
   <MenuLink href={url(t('about.path'))}>{t('nav.about')}</MenuLink>
   <!-- <MenuLink href={url('contact')} class="px-4 rounded-lg border border-current">{t('nav.contact')}</MenuLink> -->
   <div slot="end" class="flex items-center">
