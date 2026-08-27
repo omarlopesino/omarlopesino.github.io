@@ -43,3 +43,11 @@ export const CompactCoversOnMobile = {
     imageClass: 'max-md:h-36 max-md:w-full max-md:object-cover',
   },
 };
+
+// The blog and every term listing lead with their newest post across the whole row.
+export const FeaturedFirstPost = {
+  args: {
+    featured: true,
+    posts: Array.from({ length: 7 }, () => ({ ...post })),
+  },
+};

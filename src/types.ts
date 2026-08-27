@@ -33,6 +33,8 @@ export interface PostInterface extends Post {
 export type PostsListProps = {
     title?: string;
     posts: PostInterface[];
+    // Whether the first post leads the listing at the full width of the grid.
+    featured?: boolean;
     class?: string;
     itemClass?: string;
     [key: string]: unknown;
