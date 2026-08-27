@@ -1,0 +1,34 @@
+---
+import type { Alternate } from '@/i18n/routes';
+import { useTranslations, useUrl } from '@/i18n/utils';
+import { getYears } from '@/lib/blog';
+import Facet from '@/components/ui/Facet.astro';
+import PageTitle from '@/components/ui/PageTitle.astro';
+import Layout from './Layout.astro';
+
+// The archive: every year that has posts, newest first, with how many posts each one holds.
+interface Props {
+  lang: 'en' | 'es';
+  alternates: Alternate[];
+}
+
+const { lang, alternates } = Astro.props;
+
+const t = useTranslations(lang);
+const localizedUrl = useUrl(lang);
+
+const title = t('year.title');
+const description = t('year.description');
+
+const years = (await getYears(lang)).map(({ year, count }) => ({
+  title: String(year),
+  path: localizedUrl(t('year.path') + '/' + year),
+  count,
+}));
+---
+
+<Layout title={title} description={description} lang={lang} alternates={alternates}>
+    <PageTitle>{title}</PageTitle>
+    <p class="text-lede text-center max-w-prose mx-auto">{description}</p>
+    <Facet facets={years} class="w-full max-w-prose mx-auto" />
+</Layout>
