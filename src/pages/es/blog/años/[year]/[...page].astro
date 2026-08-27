@@ -1,0 +1,28 @@
+---
+import type { Page } from 'astro';
+import { useTranslations } from '@/i18n/utils';
+import { getYearAlternateUrls, pageAlternates, yearPaths } from '@/lib/blog';
+import type { PostInterface } from '@/types';
+import PostsListLayout from '@/layouts/PostsListLayout.astro';
+
+interface Props {
+  page: Page<PostInterface>;
+}
+
+export const getStaticPaths = yearPaths('es');
+
+const { year } = Astro.params;
+const { page } = Astro.props;
+
+const t = useTranslations('es');
+
+const heading = `${t('year.postsTitle')} ${year}`;
+---
+
+<PostsListLayout
+    title={heading}
+    description={heading}
+    lang="es"
+    alternates={pageAlternates(getYearAlternateUrls(year!), page.currentPage)}
+    page={page}
+/>
