@@ -6,21 +6,27 @@ interface Props {
     path: string;
     count?: number;
   }[],
+  // Where the values that did not fit are listed in full.
+  more?: {
+    title: string;
+    path: string;
+  };
   class?: string;
   [key: string]: unknown;
 }
 
-const { class: className, title, facets, ...rest } = Astro.props;
+const { class: className, title, facets, more, ...rest } = Astro.props;
 
 ---
 
-<div class:list={[className, "flex flex-col gap-2"]}>
+<div class:list={[className, 'flex flex-col gap-2']} {...rest}>
     <h3 class="text-md font-bold">{title}</h3>
-    <ul class="list ml-3 list-disc" {...rest}>
+    <ul class="list ml-4 list-disc text-sm">
         {
             facets.map((facet) => (
-                <li><a href={facet.path} title={facet.title}>{facet.title} {facet.count && '(' + facet.count + ')'}</a></li>
+                <li><a class="link link-hover" href={facet.path} title={facet.title}>{facet.title}{facet.count ? ` (${facet.count})` : ''}</a></li>
             ))
         }
     </ul>
+    {more && <a class="link link-hover text-meta self-end" href={more.path}>{more.title} →</a>}
 </div>

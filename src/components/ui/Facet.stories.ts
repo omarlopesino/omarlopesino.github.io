@@ -11,3 +11,18 @@ export default {
   },
 };
 export const Default = {};
+
+// The rail shows the five values with the most posts and sends the rest to the index page.
+export const WithMore = {
+  args: {
+    title: 'Categories',
+    facets: [
+      { title: 'Drupal', path: '#', count: 12 },
+      { title: 'Backend', path: '#', count: 9 },
+      { title: 'DevOps', path: '#', count: 4 },
+      { title: 'Frontend', path: '#', count: 2 },
+      { title: 'Notes', path: '#', count: 1 },
+    ],
+    more: { title: 'View more', path: '#' },
+  },
+};
