@@ -280,6 +280,9 @@ reason — read it before undoing any of them.
 - **The `i18n` option on `@astrojs/sitemap`** — translated slugs make its prefix-swap alternates
   point at pages that do not exist
   ([2026-08-27](docs/plans/2026-08-27-5-sitemap-feeds-and-one-place-for-metatags.md)).
+- **Geist, or a webfont loaded from Google** — the type is Karla and IBM Plex Mono, self-hosted
+  through fontsource so the site makes no third-party request
+  ([2026-08-27](docs/plans/2026-08-27-6-type-and-paper-in-karla.md)).
 
 **Easily mistaken for removals, but current:** the `ability` collection and the "My abilities"
 section on the about page; `Modal.astro` and `RecordCard.astro`, kept as reusable primitives;
