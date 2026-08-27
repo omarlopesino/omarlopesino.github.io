@@ -33,7 +33,7 @@ const tableClass = 'md:w-2/3 mx-auto';
 ---
 
 {/* The page leads with the pitch rather than a title, so the site name in the header is its h1. */}
-<Layout title={title} description={description} lang={lang} alternates={alternates} logoTag="h1" sidebar={false}>
+<Layout title={title} description={description} lang={lang} alternates={alternates} logoTag="h1">
     {/* Stacked on a phone, the avatar and the pitch centre on each other; beside each other from
         md up they read better ranged left. */}
     <ImageText
@@ -54,6 +54,6 @@ const tableClass = 'md:w-2/3 mx-auto';
     {/* The brand name stays out of the translations: it is the same word in both languages and the
         one the link hangs on. */}
     <p class="text-base text-center text-base-content/70">
-        {t('about.linkedin')} <a class="link link-hover" href={linkedin} target="_blank" rel="noopener noreferrer">Linkedin</a>
+        {t('about.linkedin')} <a class="link link-hover font-bold text-blue-900" href={linkedin} target="_blank" rel="noopener noreferrer">Linkedin</a>
     </p>
 </Layout>

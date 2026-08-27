@@ -27,12 +27,10 @@ const t = useTranslations(lang);
 ---
 
 <Layout title={title} description={description} lang={lang} alternates={alternates}>
-    <Fragment slot="lede">
-        <slot name="header">
-            <PageTitle>{heading}</PageTitle>
-        </slot>
-        <slot name="intro" />
-    </Fragment>
+    <slot name="header">
+        <PageTitle>{heading}</PageTitle>
+    </slot>
+    <slot name="intro" />
     {
         page.data.length > 0
             ? <GridList title={listTitle} posts={page.data} />
