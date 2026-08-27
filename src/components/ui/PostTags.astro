@@ -1,31 +1,23 @@
 ---
 import type { Term } from '@/types';
 import { getLangFromUrl, useTranslations, useUrl } from '@/i18n/utils';
-import Bubble from './Bubble.astro';
+import BubbleList from './BubbleList.astro';
 
 interface Props {
     tags: Term[];
     class?: string;
-    [key: string]: unknown;
 }
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const localizedUrl = useUrl(lang);
 
-const { tags, class: className, ...rest } = Astro.props;
+const { tags, class: className } = Astro.props;
+
+const items = tags.map((tag) => ({
+    label: tag.name,
+    href: localizedUrl(t('tag.path') + '/' + tag.slug),
+}));
 ---
 
-<ul class:list={['flex flex-wrap gap-2 list-none p-0 m-0', className]} aria-label={t('post.tagsLabel')} {...rest}>
-    {
-        tags.map((tag) => (
-            <li class="m-0 p-0">
-                <Bubble
-                    tag="a"
-                    href={localizedUrl(t('tag.path') + '/' + tag.slug)}
-                    class="badge-accent font-medium no-underline"
-                >{tag.name}</Bubble>
-            </li>
-        ))
-    }
-</ul>
+<BubbleList items={items} ariaLabel={t('post.tagsLabel')} class={className} />

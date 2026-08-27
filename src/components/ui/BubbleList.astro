@@ -1,0 +1,29 @@
+---
+import Bubble from './Bubble.astro';
+
+interface Props {
+    items: { label: string; href: string }[];
+    ariaLabel?: string;
+    bubbleClass?: string;
+    class?: string;
+    [key: string]: unknown;
+}
+
+const {
+    items,
+    ariaLabel,
+    bubbleClass = 'badge-accent font-medium no-underline',
+    class: className,
+    ...rest
+} = Astro.props;
+---
+
+<ul class:list={['flex flex-wrap gap-2 list-none p-0 m-0', className]} aria-label={ariaLabel} {...rest}>
+    {
+        items.map((item) => (
+            <li class="m-0 p-0">
+                <Bubble tag="a" href={item.href} class={bubbleClass}>{item.label}</Bubble>
+            </li>
+        ))
+    }
+</ul>
