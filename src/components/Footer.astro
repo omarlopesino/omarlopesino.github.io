@@ -4,6 +4,11 @@ import MenuLink from './ui/MenuLink.astro';
 import { Icon } from 'astro-icon/components';
 import Small from './ui/Small.astro';
 import { social } from '@/lib/profile';
+import { getLangFromUrl, useTranslations, useUrl } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const localizedUrl = useUrl(lang);
 const menuLinkClass = 'hover:bg-transparent!';
 const iconClass = 'text-base-content w-6 h-6';
 ---
@@ -12,4 +17,5 @@ const iconClass = 'text-base-content w-6 h-6';
   <MenuLink class={menuLinkClass} target="_blank" rel="noopener noreferrer" aria-label="GitHub" href={social.github}><Icon class={iconClass} name="simple-icons:github" /></MenuLink>
   <MenuLink class={menuLinkClass} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" href={social.linkedin}><Icon class={iconClass} name="simple-icons:linkedin" /></MenuLink>
   <MenuLink class={menuLinkClass} target="_blank" aria-label="Email" href={`mailto:${social.email}`}><Icon class={iconClass} name="mdi:email-outline" /></MenuLink>
+  <MenuLink class={menuLinkClass} aria-label={t('feed.title')} href={localizedUrl(t('feed.path'))}><Icon class={iconClass} name="mdi:rss" /></MenuLink>
 </Menu>
