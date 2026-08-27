@@ -3,11 +3,9 @@ import type { Page } from 'astro';
 import { getCollection } from 'astro:content';
 import type { Alternate } from '@/i18n/routes';
 import { useTranslations, useUrl } from '@/i18n/utils';
-import { avatar } from '@/lib/profile';
 import { collectionLd, pageContext } from '@/lib/seo';
 import type { PostInterface } from '@/types';
 import BubbleList from '@/components/ui/BubbleList.astro';
-import WebIntro from '@/components/ui/WebIntro.astro';
 import PostsListLayout from './PostsListLayout.astro';
 
 interface Props {
@@ -36,9 +34,5 @@ const tags = (await getCollection('tag', ({data}) => data.language == lang))
 ---
 
 <PostsListLayout title={title} heading={heading} description={description} lang={lang} alternates={alternates} page={page} meta={meta}>
-    {/* The same introduction the about-me page leads with, at the size of a byline. */}
-    <div slot="intro" class="flex flex-col gap-4">
-        <WebIntro text={t('about.intro')} image={avatar} />
-        <BubbleList items={tags} ariaLabel={t('tag.title')} bubbleClass="badge-accent badge-lg font-medium no-underline" />
-    </div>
+    <BubbleList slot="intro" items={tags} ariaLabel={t('tag.title')} bubbleClass="badge-accent badge-lg font-medium no-underline" />
 </PostsListLayout>
