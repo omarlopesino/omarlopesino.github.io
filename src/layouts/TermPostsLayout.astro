@@ -1,34 +1,38 @@
 ---
-import { getContentAlternateUrls, getTermPosts } from '@/lib/blog';
-import type { Alternate } from '@/i18n/routes';
+import type { Page } from 'astro';
 import type { CollectionEntry } from 'astro:content';
+import type { Alternate } from '@/i18n/routes';
 import { useTranslations } from '@/i18n/utils';
-import GridList from '@/components/ui/GridList.astro';
+import { getContentAlternateUrls, pageAlternates } from '@/lib/blog';
+import type { PostInterface } from '@/types';
 import TermHero from '@/components/ui/TermHero.astro';
-import Layout from './Layout.astro';
+import PostsListLayout from './PostsListLayout.astro';
 
 interface Props {
     term: CollectionEntry<'tag' | 'category'>;
     type: 'tag' | 'category';
+    page: Page<PostInterface>;
 }
 
-const { term, type } = Astro.props;
+const { term, type, page } = Astro.props;
 const { name, description, image, language } = term.data;
 
-const alternates : Alternate[] = await getContentAlternateUrls(type, term.data);
-const posts = await getTermPosts(type, term.data);
+const lang = language as 'en' | 'es';
+const t = useTranslations(lang);
 
-const t = useTranslations(language as 'en' | 'es');
+const alternates : Alternate[] = pageAlternates(await getContentAlternateUrls(type, term.data), page.currentPage);
 
-// The heading repeats the '#' the hero shows, so a tag reads the same way in both places.
+// The list heading repeats the '#' the hero shows, so a tag reads the same way in both places.
 const displayName = type === 'tag' ? `#${name}` : name;
 ---
 
-<Layout title={name} description={description} lang={language} alternates={alternates}>
-    <TermHero type={type} name={name} description={description} image={image} />
-    {
-        posts.length > 0
-            ? <GridList title={`${t(`${type}.postsTitle`)} ${displayName}`} posts={posts} />
-            : <p class="text-center text-sm opacity-70 py-12">{t('term.empty')}</p>
-    }
-</Layout>
+<PostsListLayout
+    title={name}
+    description={description}
+    lang={lang}
+    alternates={alternates}
+    page={page}
+    listTitle={`${t(`${type}.postsTitle`)} ${displayName}`}
+>
+    <TermHero slot="header" type={type} name={name} description={description} image={image} />
+</PostsListLayout>

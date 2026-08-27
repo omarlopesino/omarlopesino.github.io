@@ -1,21 +1,27 @@
 ---
-const { title, heading, description, lang, alternates, page = 0 } = Astro.props;
-
-import { getCollection } from 'astro:content';
-import WebIntro from '@/components/ui/WebIntro.astro';
+import type { Page } from 'astro';
+import type { Alternate } from '@/i18n/routes';
 import { useTranslations } from '@/i18n/utils';
-import { toPostInterface } from '@/lib/blog';
 import { avatar } from '@/lib/profile';
+import type { PostInterface } from '@/types';
+import WebIntro from '@/components/ui/WebIntro.astro';
 import PostsListLayout from './PostsListLayout.astro';
 
+interface Props {
+    title: string;
+    heading?: string;
+    description?: string;
+    lang: 'en' | 'es';
+    alternates?: Alternate[];
+    page: Page<PostInterface>;
+}
+
+const { title, heading, description, lang, alternates = [], page } = Astro.props;
+
 const t = useTranslations(lang);
-
-const posts = await Promise.all((await getCollection('blog', (post) => post.data.language == lang))
-    .map(toPostInterface));
-
 ---
 
-<PostsListLayout title={title} heading={heading} description={description} lang={lang} alternates={alternates} posts={posts} >
+<PostsListLayout title={title} heading={heading} description={description} lang={lang} alternates={alternates} page={page}>
     {/* The same introduction the about-me page leads with, at the size of a byline. */}
     <WebIntro class="my-6" text={t('about.intro')} image={avatar} />
 </PostsListLayout>
