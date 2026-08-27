@@ -35,7 +35,9 @@ const items = type === 'year'
 ---
 
 <Layout title={title} description={description} lang={lang} alternates={alternates}>
-    <PageTitle>{title}</PageTitle>
-    <p class="text-lede text-center max-w-prose mx-auto my-4">{description}</p>
+    <Fragment slot="lede">
+        <PageTitle>{title}</PageTitle>
+        <p class="text-lede text-center max-w-prose mx-auto">{description}</p>
+    </Fragment>
     <BubbleList items={items} ariaLabel={title} class="justify-center" bubbleClass="badge-accent badge-lg font-medium no-underline" />
 </Layout>

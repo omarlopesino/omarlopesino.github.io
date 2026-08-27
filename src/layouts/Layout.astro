@@ -64,12 +64,16 @@ const xDefault = alternates.find((a) => a.lang === defaultLang);
     <header class="lg:px-4">
       <Header alternates={alternates} logoTag={logoTag} />
     </header>
-    <div class="my-6 px-6 flex max-lg:flex-col gap-8">
-      <main class="flex-1 min-w-0">
-        <slot />
-      </main>
-      {sidebar && <Sidebar />}
-    </div>
+    <main class="my-6 px-6 flex flex-col gap-6">
+      {/* The page's title and standfirst run the full width; the rail starts under them. */}
+      <slot name="lede" />
+      <div class="flex max-lg:flex-col gap-8">
+        <div class="flex-1 min-w-0">
+          <slot />
+        </div>
+        {sidebar && <Sidebar />}
+      </div>
+    </main>
     <footer class="lg:px-4">
       <Footer />
     </footer>
