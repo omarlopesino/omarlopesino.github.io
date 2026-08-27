@@ -109,6 +109,7 @@ Newest first.
 
 | Date | Entry |
 | --- | --- |
+| 2026-08-27 | [A sitemap, a feed per language, and one place metatags come from](2026-08-27-5-sitemap-feeds-and-one-place-for-metatags.md) |
 | 2026-08-27 | [The rail and the taxonomy indexes come out; the archive stays](2026-08-27-4-archive-as-the-only-index.md) |
 | 2026-08-27 | [The about page stops keeping a second CV](2026-08-27-3-about-me-cut-to-linkedin.md) |
 | 2026-08-27 | [One paginated layout behind every post listing](2026-08-27-2-blog-listings-pagination-and-archives.md) |

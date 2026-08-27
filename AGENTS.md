@@ -274,6 +274,12 @@ reason — read it before undoing any of them.
 - **The `Sidebar.astro` rail, `getTopTerms`, `TermsLayout` and the tag/category index pages** —
   every value is reachable without them
   ([2026-08-27](docs/plans/2026-08-27-4-archive-as-the-only-index.md)).
+- **A `metatags` slot on `Layout`** — a page describes itself with the `meta` prop, and `Meta.extra`
+  takes what the builder does not cover
+  ([2026-08-27](docs/plans/2026-08-27-5-sitemap-feeds-and-one-place-for-metatags.md)).
+- **The `i18n` option on `@astrojs/sitemap`** — translated slugs make its prefix-swap alternates
+  point at pages that do not exist
+  ([2026-08-27](docs/plans/2026-08-27-5-sitemap-feeds-and-one-place-for-metatags.md)).
 
 **Easily mistaken for removals, but current:** the `ability` collection and the "My abilities"
 section on the about page; `Modal.astro` and `RecordCard.astro`, kept as reusable primitives;
