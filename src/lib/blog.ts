@@ -100,3 +100,111 @@ export async function getRecommendedPosts(post: CollectionEntry<'blog'>) : Promi
       .map(toPostInterface)
   );
 }
+
+// Posts per page on every listing: the blog, a term, a year.
+export const POSTS_PER_PAGE = 15;
+
+const byNewest = (a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) =>
+  b.data.pubDate.getTime() - a.data.pubDate.getTime();
+
+export async function getLangPosts(language: string) : Promise<PostInterface[]> {
+  const posts = await getCollection('blog', ({data}) => data.language == language);
+
+  return await Promise.all(posts.sort(byNewest).map(toPostInterface));
+}
+
+// The years that have posts, newest first. Read in UTC to match useFormatDate, so a post never
+// counts towards the year before the one its date shows.
+export async function getYears(language: string) : Promise<{year: number, count: number}[]> {
+  const posts = await getCollection('blog', ({data}) => data.language == language);
+
+  const counts = new Map<number, number>();
+  for (const post of posts) {
+    const year = post.data.pubDate.getUTCFullYear();
+    counts.set(year, (counts.get(year) ?? 0) + 1);
+  }
+
+  return [...counts.entries()]
+    .map(([year, count]) => ({ year, count }))
+    .sort((a, b) => b.year - a.year);
+}
+
+// Terms with the most posts first, for the rail that only has room for a few. Counting every post
+// once beats asking each term how many it has.
+export async function getTopTerms(type: 'tag' | 'category', language: string, limit: number) {
+  const posts = await getCollection('blog', ({data}) => data.language == language);
+
+  const counts = new Map<string, number>();
+  for (const post of posts) {
+    const cids = type == 'category' ? [post.data.category.id] : post.data.tags.map((tag) => tag.id);
+    for (const cid of cids) {
+      counts.set(cid, (counts.get(cid) ?? 0) + 1);
+    }
+  }
+
+  const terms = await getCollection(type, ({data}) => data.language == language);
+
+  return terms
+    .map(({data}) => ({ name: data.name, slug: data.slug, count: counts.get(data.cid) ?? 0 }))
+    .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, language))
+    .slice(0, limit);
+}
+
+export async function getYearPosts(language: string, year: number) : Promise<PostInterface[]> {
+  const posts = await getCollection('blog', ({data}) => {
+    return data.language == language && data.pubDate.getUTCFullYear() == year;
+  });
+
+  return await Promise.all(posts.sort(byNewest).map(toPostInterface));
+}
+
+export function blogPaths(language: string) : GetStaticPaths {
+  return async ({ paginate }) => {
+    return paginate(await getLangPosts(language), { pageSize: POSTS_PER_PAGE });
+  };
+}
+
+export function termPaths(type: 'tag' | 'category', language: string) : GetStaticPaths {
+  return async ({ paginate }) => {
+    const terms = await getCollection(type, ({data}) => data.language == language);
+
+    const paths = await Promise.all(terms.map(async (entry) => paginate(
+      await getTermPosts(type, entry.data),
+      { params: { id: entry.data.slug }, props: { entry }, pageSize: POSTS_PER_PAGE },
+    )));
+
+    return paths.flat();
+  };
+}
+
+export function yearPaths(language: string) : GetStaticPaths {
+  return async ({ paginate }) => {
+    const years = await getYears(language);
+
+    const paths = await Promise.all(years.map(async ({ year }) => paginate(
+      await getYearPosts(language, year),
+      { params: { year: String(year) }, pageSize: POSTS_PER_PAGE },
+    )));
+
+    return paths.flat();
+  };
+}
+
+// A year has no collection entry, so its translations are built from the route segment each
+// language uses rather than looked up by cid.
+export function getYearAlternateUrls(year: number | string) : Alternate[] {
+  return (Object.keys(ui) as (keyof typeof ui)[]).map((lang) => ({
+    lang,
+    path: '/' + lang + '/' + ui[lang]['year.path'] + '/' + year,
+  }));
+}
+
+// Alternates for one page of a paginated route. Layout builds the canonical URL from the alternate
+// matching the page's own language, so past page one they have to carry the page number too.
+export function pageAlternates(alternates: Alternate[], currentPage: number) : Alternate[] {
+  if (currentPage <= 1) {
+    return alternates;
+  }
+
+  return alternates.map(({ lang, path }) => ({ lang, path: `${path.replace(/\/$/, '')}/${currentPage}` }));
+}
