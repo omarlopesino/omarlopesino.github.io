@@ -1,8 +1,0 @@
-{
-    "name": "SQL",
-    "description": "Escribir la consulta que el ORM no puede, y leer la que escribió otra persona hace tres años.",
-    "group": "data",
-    "order": 2,
-    "cid": "sql",
-    "language": "es"
-}

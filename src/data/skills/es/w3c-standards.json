@@ -1,8 +1,0 @@
-{
-    "name": "Normas del W3C",
-    "description": "Construir según la especificación: marcado semántico y accesibilidad, algo que las administraciones públicas sí auditan.",
-    "group": "frontend",
-    "order": 5,
-    "cid": "w3c-standards",
-    "language": "es"
-}

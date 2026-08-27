@@ -1,8 +1,0 @@
-{
-    "name": "Varnish",
-    "description": "The cache in front of the application, and the invalidation rules that decide whether it helps or hurts.",
-    "group": "devops",
-    "order": 3,
-    "cid": "varnish",
-    "language": "en"
-}

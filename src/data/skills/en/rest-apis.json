@@ -1,8 +1,0 @@
-{
-    "name": "REST APIs",
-    "description": "Designing and operating the interfaces that connect a site to CRMs, payment providers and internal services.",
-    "group": "backend",
-    "order": 4,
-    "cid": "rest-apis",
-    "language": "en"
-}

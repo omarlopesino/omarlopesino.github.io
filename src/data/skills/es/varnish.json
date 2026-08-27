@@ -1,8 +1,0 @@
-{
-    "name": "Varnish",
-    "description": "La caché delante de la aplicación, y las reglas de invalidación que deciden si ayuda o estorba.",
-    "group": "devops",
-    "order": 3,
-    "cid": "varnish",
-    "language": "es"
-}

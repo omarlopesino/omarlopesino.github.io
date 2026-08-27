@@ -1,8 +1,0 @@
-{
-    "name": "Technical documentation",
-    "description": "Writing it, consulting it, and making it the thing a new developer reads instead of asking.",
-    "group": "practice",
-    "order": 1,
-    "cid": "technical-documentation",
-    "language": "en"
-}

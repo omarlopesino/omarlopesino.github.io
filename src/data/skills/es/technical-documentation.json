@@ -1,8 +1,0 @@
-{
-    "name": "Documentación técnica",
-    "description": "Escribirla, consultarla y conseguir que sea lo que lee quien acaba de llegar en vez de preguntar.",
-    "group": "practice",
-    "order": 1,
-    "cid": "technical-documentation",
-    "language": "es"
-}

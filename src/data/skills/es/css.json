@@ -1,8 +1,0 @@
-{
-    "name": "CSS",
-    "description": "Lenguajes de hoja de estilo y el trabajo de maquetación que conllevan, incluidos los sistemas de diseño que mantienen coherente un multisitio.",
-    "group": "frontend",
-    "order": 4,
-    "cid": "css",
-    "language": "es"
-}

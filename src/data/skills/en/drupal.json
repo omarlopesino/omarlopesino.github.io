@@ -1,8 +1,0 @@
-{
-    "name": "Drupal",
-    "description": "Custom modules, the entity and migration APIs, multisite architectures, and upgrades from Drupal 7 to 10.",
-    "group": "backend",
-    "order": 2,
-    "cid": "drupal",
-    "language": "en"
-}

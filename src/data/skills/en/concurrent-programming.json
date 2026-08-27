@@ -1,8 +1,0 @@
-{
-    "name": "Concurrent programming",
-    "description": "Queues, batches and background workers — how a donation form survives a campaign spike instead of timing out.",
-    "group": "backend",
-    "order": 7,
-    "cid": "concurrent-programming",
-    "language": "en"
-}

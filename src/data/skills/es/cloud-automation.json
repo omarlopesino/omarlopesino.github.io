@@ -1,8 +1,0 @@
-{
-    "name": "Automatización de tareas en la nube",
-    "description": "Tareas programadas y por eventos en la nube: ingesta de datos, sincronización y todo lo que no debería necesitar a una persona.",
-    "group": "devops",
-    "order": 8,
-    "cid": "cloud-automation",
-    "language": "es"
-}

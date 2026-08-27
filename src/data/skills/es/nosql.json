@@ -1,8 +1,0 @@
-{
-    "name": "NoSQL",
-    "description": "Redis y Firebase donde un almacén clave-valor gana a una tabla: caché, estado de sesión y datos que cambian rápido.",
-    "group": "data",
-    "order": 3,
-    "cid": "nosql",
-    "language": "es"
-}

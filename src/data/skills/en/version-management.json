@@ -1,8 +1,0 @@
-{
-    "name": "Software version management",
-    "description": "Keeping dependencies current on purpose, with automated Drupal package updates and generated code artefacts.",
-    "group": "devops",
-    "order": 5,
-    "cid": "version-management",
-    "language": "en"
-}

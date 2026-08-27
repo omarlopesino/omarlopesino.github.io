@@ -1,8 +1,0 @@
-{
-    "name": "NoSQL",
-    "description": "Redis and Firebase where a key-value store beats a table: caching, session state and fast-moving data.",
-    "group": "data",
-    "order": 3,
-    "cid": "nosql",
-    "language": "en"
-}

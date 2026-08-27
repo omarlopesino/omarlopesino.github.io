@@ -1,8 +1,0 @@
-{
-    "name": "IT auditing",
-    "description": "Reviewing an inherited platform and turning the findings into work a client can actually schedule.",
-    "group": "practice",
-    "order": 2,
-    "cid": "it-auditing",
-    "language": "en"
-}

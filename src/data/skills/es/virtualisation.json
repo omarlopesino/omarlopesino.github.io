@@ -1,8 +1,0 @@
-{
-    "name": "Virtualización",
-    "description": "Gestionar los entornos en los que corre una plataforma y mantener local, preproducción y producción lo bastante parecidos como para fiarse.",
-    "group": "devops",
-    "order": 7,
-    "cid": "virtualisation",
-    "language": "es"
-}

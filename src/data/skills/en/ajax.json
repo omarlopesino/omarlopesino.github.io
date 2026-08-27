@@ -1,8 +1,0 @@
-{
-    "name": "AJAX",
-    "description": "Loading and submitting without a full page reload, which is most of what makes a long form bearable.",
-    "group": "frontend",
-    "order": 3,
-    "cid": "ajax",
-    "language": "en"
-}

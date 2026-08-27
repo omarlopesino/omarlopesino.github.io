@@ -1,8 +1,0 @@
-{
-    "name": "Docker",
-    "description": "Docker and Docker Compose as the standard way every project I touch runs, locally and in CI.",
-    "group": "devops",
-    "order": 1,
-    "cid": "docker",
-    "language": "en"
-}

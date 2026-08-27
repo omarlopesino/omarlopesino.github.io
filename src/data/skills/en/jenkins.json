@@ -1,8 +1,0 @@
-{
-    "name": "Jenkins",
-    "description": "Building and evolving the pipelines that test and deploy a site, including one covering a whole multisite platform.",
-    "group": "devops",
-    "order": 2,
-    "cid": "jenkins",
-    "language": "en"
-}

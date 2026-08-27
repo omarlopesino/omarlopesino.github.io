@@ -1,8 +1,0 @@
-{
-    "name": "Vue",
-    "description": "The lighter option for embedding interactive pieces — donation forms, dashboards — in an otherwise server-rendered page.",
-    "group": "frontend",
-    "order": 2,
-    "cid": "vue",
-    "language": "en"
-}

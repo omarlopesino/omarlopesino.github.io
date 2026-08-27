@@ -1,8 +1,0 @@
-{
-    "name": "Functional programming",
-    "description": "Pure transformations where it is state, rather than logic, that makes a piece of code hard to follow.",
-    "group": "backend",
-    "order": 6,
-    "cid": "functional-programming",
-    "language": "en"
-}

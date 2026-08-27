@@ -1,8 +1,0 @@
-{
-    "name": "AJAX",
-    "description": "Cargar y enviar sin recargar la página entera, que es casi todo lo que hace llevadero un formulario largo.",
-    "group": "frontend",
-    "order": 3,
-    "cid": "ajax",
-    "language": "es"
-}

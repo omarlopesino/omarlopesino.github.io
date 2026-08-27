@@ -1,8 +1,0 @@
-{
-    "name": "MySQL",
-    "description": "La base de datos de casi todo lo que construyo, del diseño del esquema a la consulta lenta que solo aparece en producción.",
-    "group": "data",
-    "order": 1,
-    "cid": "mysql",
-    "language": "es"
-}

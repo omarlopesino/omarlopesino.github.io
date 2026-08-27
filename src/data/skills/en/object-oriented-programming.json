@@ -1,8 +1,0 @@
-{
-    "name": "Object-oriented programming",
-    "description": "The default shape of the code I write: small objects, clear boundaries, and dependencies you can replace in a test.",
-    "group": "backend",
-    "order": 5,
-    "cid": "object-oriented-programming",
-    "language": "en"
-}

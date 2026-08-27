@@ -1,8 +1,0 @@
-{
-    "name": "CSS",
-    "description": "Stylesheet languages and the layout work around them, including the design systems that keep a multisite consistent.",
-    "group": "frontend",
-    "order": 4,
-    "cid": "css",
-    "language": "en"
-}

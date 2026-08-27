@@ -1,8 +1,0 @@
-{
-    "name": "Database tooling",
-    "description": "The tooling around the data: migrations, backups, seeded environments and repeatable imports.",
-    "group": "data",
-    "order": 5,
-    "cid": "database-tooling",
-    "language": "en"
-}

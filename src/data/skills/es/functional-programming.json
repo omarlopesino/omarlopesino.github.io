@@ -1,8 +1,0 @@
-{
-    "name": "Programación funcional",
-    "description": "Transformaciones puras cuando lo que hace difícil de seguir un trozo de código es el estado y no la lógica.",
-    "group": "backend",
-    "order": 6,
-    "cid": "functional-programming",
-    "language": "es"
-}

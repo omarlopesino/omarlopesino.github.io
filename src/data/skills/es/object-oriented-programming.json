@@ -1,8 +1,0 @@
-{
-    "name": "Programación orientada a objetos",
-    "description": "La forma por defecto del código que escribo: objetos pequeños, límites claros y dependencias que se pueden sustituir en un test.",
-    "group": "backend",
-    "order": 5,
-    "cid": "object-oriented-programming",
-    "language": "es"
-}

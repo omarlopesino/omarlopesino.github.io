@@ -1,8 +1,0 @@
-{
-    "name": "System performance",
-    "description": "Finding what is slow under real load rather than what looks slow in development — a donation campaign is an unforgiving test.",
-    "group": "practice",
-    "order": 3,
-    "cid": "system-performance",
-    "language": "en"
-}

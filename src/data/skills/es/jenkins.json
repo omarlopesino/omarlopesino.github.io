@@ -1,8 +1,0 @@
-{
-    "name": "Jenkins",
-    "description": "Construir y evolucionar los pipelines que testean y despliegan una web, incluido uno para toda una plataforma multisitio.",
-    "group": "devops",
-    "order": 2,
-    "cid": "jenkins",
-    "language": "es"
-}

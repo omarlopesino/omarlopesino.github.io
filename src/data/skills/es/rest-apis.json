@@ -1,8 +1,0 @@
-{
-    "name": "APIs REST",
-    "description": "Diseñar y explotar las interfaces que conectan una web con CRMs, pasarelas de pago y servicios internos.",
-    "group": "backend",
-    "order": 4,
-    "cid": "rest-apis",
-    "language": "es"
-}
