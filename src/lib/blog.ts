@@ -196,7 +196,7 @@ export function postTrail(lang: keyof typeof ui, category: Term, title: string) 
   const localizedUrl = useUrl(lang);
 
   return [
-    { label: t('nav.blog'), href: localizedUrl('') },
+    { label: t('nav.blog'), href: localizedUrl(t('blog.path')) },
     { label: category.name, href: localizedUrl(t('category.path') + '/' + category.slug) },
     { label: title },
   ];

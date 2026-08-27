@@ -9,7 +9,7 @@ interface Props {
   page: Page<PostInterface>;
 }
 
-export const getStaticPaths = blogPaths('en');
+export const getStaticPaths = blogPaths('es');
 
 const { page } = Astro.props;
 ---
@@ -17,8 +17,8 @@ const { page } = Astro.props;
 <BlogLayout
     title="Omar Lopesino"
     heading="Blog"
-    description="Omar Lopesino's posts"
-    lang="en"
-    alternates={pageAlternates(getAlternates('home'), page.currentPage)}
+    description="Listado de posts creados por Omar Lopesino."
+    lang="es"
+    alternates={pageAlternates(getAlternates('blog'), page.currentPage)}
     page={page}
 />

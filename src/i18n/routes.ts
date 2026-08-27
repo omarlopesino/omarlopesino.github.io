@@ -1,6 +1,6 @@
 export const routes = {
   home: { en: '/en/', es: '/es/' },
-  about: { en: '/en/about-me', es: '/es/sobre-mi' },
+  blog: { en: '/en/blog', es: '/es/blog' },
   blogArchive: { en: '/en/blog/archive', es: '/es/blog/archivo'}
 } as const;
 

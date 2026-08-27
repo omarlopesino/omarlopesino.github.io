@@ -63,9 +63,10 @@ Astro i18n config (`astro.config.mjs`) declares locales `["en", "es"]`, default 
 stripping — every real page lives under `/en/` or `/es/`. `src/pages/index.astro` is a meta-refresh
 redirect to `/en/` (GitHub Pages can't do server redirects).
 
-`/<lang>/` **is** the blog listing — there is no separate `/en/blog` page. Note that `blog.path` is
-therefore not the listing URL but the post URL prefix: `getContentAlternateUrls('blog', …)` and the
-`url` transform in `src/content.config.ts` both build `/<lang>/blog/<slug>` from it.
+`/<lang>/` **is** the about-me page — it is the site's home page. The blog listing lives at
+`/<lang>/blog`, and `blog.path` (`'blog'` in both languages) doubles as that listing's path and the
+post URL prefix: `getContentAlternateUrls('blog', …)` and the `url` transform in
+`src/content.config.ts` both build `/<lang>/blog/<slug>` from it.
 
 **Route segments are translated, and the page directory names match them literally**:
 `src/pages/es/blog/categorías/[id]/[...page].astro`, `src/pages/es/blog/archivo/[year]/[...page].astro`
@@ -74,10 +75,10 @@ a user-facing route or label:
 
 1. the directory under `src/pages/<lang>/`,
 2. `src/i18n/routes.ts` — the `routes` map, whose keys feed `getAlternates()` for hreflang,
-3. `src/i18n/ui.ts` — the `*.path` keys (`blog.path`, `tag.path`, `category.path`, `year.path`,
-   `about.path`), which components use at runtime to build links via `useUrl(lang)` + `t('tag.path')`.
-   A taxonomy's key is the whole prefix, `blog/tags` and not `tags`, so every link to a term follows
-   the routes below by changing one string.
+3. `src/i18n/ui.ts` — the `*.path` keys (`blog.path`, `tag.path`, `category.path`, `year.path`),
+   which components use at runtime to build links via `useUrl(lang)` + `t('tag.path')`. A taxonomy's
+   key is the whole prefix, `blog/tags` and not `tags`, so every link to a term follows the routes
+   below by changing one string.
 
 Everything about the blog lives under `/<lang>/blog/`. Posts can be browsed three ways, each with a
 detail page per value holding that value's posts:
@@ -273,8 +274,6 @@ reason — read it before undoing any of them.
   ([2026-06-23](docs/plans/2026-06-23-1-astro-daisyui-stack.md)).
 - **Language redirection inside the app** — it causes SEO problems; the root page is a plain
   meta-refresh ([2026-06-24](docs/plans/2026-06-24-1-i18n-and-translated-routes.md)).
-- **`/en/blog` and `/es/blog` as listing URLs** — `/<lang>/` is the listing
-  ([2026-08-26](docs/plans/2026-08-26-3-blog-as-front-page.md)).
 - **A sidebar or spec-rail layout for the post page** — both were drawn and rejected in favour of
   the single editorial column
   ([2026-08-26](docs/plans/2026-08-26-2-blog-post-page-and-design-tokens.md)).
