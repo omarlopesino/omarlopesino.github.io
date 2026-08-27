@@ -111,15 +111,15 @@ page's own language, so without it page two would canonicalise to page one.
 
 ## Layout stack
 
-`Layout.astro` is the only place that emits `<html>`. It owns head metadata — canonical URL,
-`hreflang` alternates plus `x-default`, and the inline pre-hydration script that reads
-`localStorage.theme` onto `data-theme`. It currently emits `<meta name="robots" content="noindex">`
-behind a `@todo`; remove that when the site goes live.
+`Layout.astro` is the only place that emits `<html>`. It keeps charset, viewport, favicons, the
+meta-refresh, the `<title>` and the inline pre-hydration script that reads `localStorage.theme` onto
+`data-theme`; everything about discovery it hands to `components/Seo.astro` — see **Discovery**
+below.
 
 Everything else composes downward:
 
 ```
-Layout            html/head/header/footer, SEO, theme boot
+Layout            html/head/header/footer, theme boot; Seo for discovery
 ├─ PostLayout         single post → ui/Post.astro
 ├─ PostsListLayout    header slot + ui/GridList + ui/Pagination, over one Page of posts
 │  ├─ BlogLayout          a page of every post in a language
@@ -137,6 +137,46 @@ listing leads with its newest post across the whole row rather than in a column.
 Layouts do the content fetching (`getCollection` + mapping to the plain `PostInterface` shape from
 `src/types.ts`); `src/components/ui/` components stay presentational and are driven only by props, so
 they render standalone in Storybook.
+
+## Discovery
+
+The site is `noindex, nofollow` on every page. The value is `SITE.robots` in `src/lib/seo.ts`,
+carrying the `@todo`; **it is a single-word change and not one to make in passing** — flipping it
+publishes the site.
+
+`src/components/Seo.astro` owns the whole discovery block of the head: canonical, `hreflang` plus
+`x-default`, every metatag, the JSON-LD, and the feed link. `Layout` renders it and forwards one
+`meta` prop.
+
+`src/lib/seo.ts` is where a metatag is added — `buildMeta()` returns the whole head surface as one
+array, so a new tag is a line there and a field on `Meta` in `src/types.ts`, and no layout or page
+changes. `Meta.extra` takes tags the builder does not know about. The structured data is separate
+builders (`articleLd`, `personLd`, `collectionLd`, `breadcrumbLd`) rather than a switch on
+`Meta.type`, because the two do not line up: a listing is `og:type` `website` but schema.org `Blog`,
+and a post emits a `BlogPosting` and a `BreadcrumbList` at once. All nodes go out in one
+`@graph`.
+
+**A page says what it is; it is not told.** Every layout composes its own `Meta` — `PostLayout` from
+`postMeta(entry, category, tags)`, the rest from `collectionLd`/`personLd`. Only `Layout` and
+`PostsListLayout` take a `meta` prop, the latter because the year routes use it directly. Use
+`pageContext(Astro, …)` to build the URL, so a paginated listing describes the page being viewed
+rather than page one.
+
+A post's metatags are derived from its frontmatter. The optional `seo` block in the `blog` schema
+only overrides one of them — a title tuned for a search result, a social card that crops better at
+1.91:1, a canonical pointing where the post appeared first. `updatedDate` and `author` sit at the
+top level, being facts about the post rather than overrides.
+
+`@astrojs/sitemap` runs with **no `i18n` option, deliberately**: it derives alternates by swapping
+the locale prefix, and slugs are translated, so it would declare `/es/blog/hello-world` as the twin
+of the English post when the page is `/es/blog/hola-mundo`. Every URL is listed either way; the
+pairing lives in each page's head, built from the `cid`. Its `filter` drops the redirect root and
+the non-HTML endpoints.
+
+`/en/rss.xml` and `/es/rss.xml` are summary-only feeds built by `src/lib/feed.ts` from
+`getLangPosts()`; `/robots.txt` and `/llms.txt` are generated endpoints, not files in `public/`,
+because `BASE_URL` is the sole source of the site URL. All four fall back to the request origin,
+since `Astro.site` is unset under `astro dev` and `rss()` throws without it.
 
 ## Styling
 
