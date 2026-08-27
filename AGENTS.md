@@ -63,21 +63,44 @@ therefore not the listing URL but the post URL prefix: `getContentAlternateUrls(
 `url` transform in `src/content.config.ts` both build `/<lang>/blog/<slug>` from it.
 
 **Route segments are translated, and the page directory names match them literally**:
-`src/pages/es/categorías/[id].astro`, `src/pages/es/etiquetas/[id].astro` (accented/Spanish
-directory names are intentional). Three things must agree when adding or changing a user-facing
-route or label:
+`src/pages/es/categorías/[id]/[...page].astro`, `src/pages/es/años/[year]/[...page].astro`
+(accented/Spanish directory names are intentional). Three things must agree when adding or changing
+a user-facing route or label:
 
 1. the directory under `src/pages/<lang>/`,
 2. `src/i18n/routes.ts` — the `routes` map, whose keys feed `getAlternates()` for hreflang,
-3. `src/i18n/ui.ts` — the `*.path` keys (`blog.path`, `tag.path`, `category.path`, `about.path`),
-   which components use at runtime to build links via `useUrl(lang)` + `t('tag.path')`.
+3. `src/i18n/ui.ts` — the `*.path` keys (`blog.path`, `tag.path`, `category.path`, `year.path`,
+   `about.path`), which components use at runtime to build links via `useUrl(lang)` + `t('tag.path')`.
+   A taxonomy's key is the whole prefix, `blog/tags` and not `tags`, so every link to a term follows
+   the routes below by changing one string.
+
+Everything about the blog lives under `/<lang>/blog/`. Posts can be browsed three ways, each with an
+index page listing every value and a detail page per value holding that value's posts:
+
+| | index | detail |
+| --- | --- | --- |
+| tag | `/en/blog/tags` · `/es/blog/etiquetas` | `…/tags/<slug>` · `…/etiquetas/<slug>` |
+| category | `/en/blog/categories` · `/es/blog/categorías` | `…/categories/<slug>` · `…/categorías/<slug>` |
+| year | `/en/blog/years` · `/es/blog/años` | `…/years/<year>` · `…/años/<year>` |
+
+Each index page is the `index.astro` of the directory its detail pages live in.
+
+Years are a taxonomy with no collection behind it: `getYears(lang)` reads them off the posts, in UTC
+to match `useFormatDate`, and `getYearAlternateUrls()` builds their hreflang from `year.path` rather
+than looking a `cid` up.
 
 `src/i18n/utils.ts` exposes the runtime helpers: `getLangFromUrl(Astro.url)` (parses the first path
 segment), `useTranslations`, `useUrl`, `useFormatDate` (formats in UTC on purpose — the ISO dates in
 frontmatter parse as UTC midnight and would otherwise shift a day in negative offsets).
 
-Dynamic pages get their paths from `staticPaths(collection, lang)` in `src/lib/blog.ts`, which
-filters a collection by `data.language` and keys params on `slug`.
+Dynamic pages get their paths from `src/lib/blog.ts`: `staticPaths(collection, lang)` filters a
+collection by `data.language` and keys params on `slug`, and it is what the post route uses.
+
+**Every post listing is paginated at `POSTS_PER_PAGE` (15)**, so each one is a `[...page]` route
+fed by `blogPaths(lang)`, `termPaths(type, lang)` or `yearPaths(lang)` — page one keeps the bare URL
+and the rest get `/2`, `/3`. A paginated route must map its alternates through `pageAlternates()`
+before handing them to the layout: `Layout` builds the canonical URL from the alternate matching the
+page's own language, so without it page two would canonicalise to page one.
 
 ## Layout stack
 
@@ -91,11 +114,26 @@ Everything else composes downward:
 ```
 Layout            html/head/header/footer, SEO, theme boot
 ├─ PostLayout         single post → ui/Post.astro
-├─ PostsListLayout    title + description + ui/GridList
-│  ├─ BlogLayout          all posts for a language
-│  └─ TermPostsLayout     posts for one tag/category
-└─ TermsLayout        list of all tags or all categories
+├─ PostsListLayout    header slot + ui/GridList + ui/Pagination, over one Page of posts
+│  ├─ BlogLayout          a page of every post in a language
+│  ├─ TermPostsLayout     a page of one tag's or category's posts, ui/TermHero in the header slot
+│  └─ (year routes)       a page of one year's posts, used directly
+└─ TermsLayout        index of every tag, category or year → ui/BubbleList
 ```
+
+`PostsListLayout` takes Astro's `Page` object, not an array: it owns the empty state and the
+pagination for every listing on the site. Its `header` slot falls back to `ui/PageTitle` with the
+`heading` prop, which is how a term page swaps in its hero instead.
+
+`Layout` also renders `components/Sidebar.astro` beside the main column — the five most-written
+categories and tags plus the five newest years, each block a `ui/Facet` ending in a link to that
+taxonomy's index page. It is on wherever the page is part of the blog, which is everywhere except
+about-me and the root redirect; both pass `sidebar={false}`.
+
+`Layout` splits its body in two for that: whatever a page puts in the **`lede` slot** — its title and
+standfirst — runs the full width, and only what follows shares a row with the rail. `PostsListLayout`
+forwards its `header` and `intro` slots into the lede, which is why a page hands it a hero or a byline
+rather than rendering one above it.
 
 Layouts do the content fetching (`getCollection` + mapping to the plain `PostInterface` shape from
 `src/types.ts`); `src/components/ui/` components stay presentational and are driven only by props, so
@@ -108,6 +146,11 @@ with DaisyUI and `@tailwindcss/typography`. Prefer DaisyUI and Tailwind utilitie
 `prose`) before custom CSS. Dark mode is a DaisyUI theme selected by `data-theme` on `<html>`, wired
 to a custom variant: `@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *))` — so
 `dark:` classes work off the attribute, not `prefers-color-scheme`.
+
+Nothing outside `.prose` styles headings, so a page heading is `ui/PageTitle` — `text-title`, centred
+— rather than a bare `<h1>`. A post title is the exception `ui/Post.astro` sets itself, `text-display`
+and ranged left in the prose column. The about-me page has no title of its own and instead promotes
+the site name in the header, by passing `logoTag="h1"` down to `ui/Logo`.
 
 Icons come from `astro-icon` with the `mdi` and `simple-icons` icon sets.
 
@@ -172,16 +215,11 @@ sole source of `site` in `astro.config.mjs`, and therefore of every canonical an
 
 ## Current state
 
-The site is mid-build; `notas.txt` (Spanish) is the working TODO list. Several term pages are still
-wired up incorrectly and are known to need work rather than being conventions to imitate:
+The site is mid-build; `notas.txt` (Spanish) is the working TODO list. What follows is known to need
+work rather than being a convention to imitate:
 
-- `src/pages/en/blog/tags.astro` passes `type="category"`.
-- `TermsLayout` maps every term field from `post.data.name`, and builds links from
-  `cid.toLowerCase()` rather than the term slug.
-- `PostTeaser` forwards leftover props to `Card`, so post `tags` land in the DOM as
-  `<article tags="[object Object]">`.
+- `PostTeaser` forwards leftover props to `Card`, so anything beyond the `PostInterface` fields it
+  destructures would land in the DOM as an attribute.
 - `npm run storybook-build` fails at the prerender step with `Cannot find module
   'virtual:astro-icon'`; `npm run storybook-dev` works.
-- The about-me pages (`/en/about-me`, `/es/sobre-mi`) are routed and linked but their body is still a
-  `@TODO` placeholder. The contact page doesn't exist yet — its `MenuLink` stays commented out in
-  `Header.astro`.
+- The contact page doesn't exist yet — its `MenuLink` stays commented out in `Header.astro`.
