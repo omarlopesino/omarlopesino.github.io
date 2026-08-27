@@ -1,6 +1,7 @@
 ---
 import type { Image as TypeImage } from '@/types';
 import ImageText from './ImageText.astro';
+import PageTitle from './PageTitle.astro';
 
 interface Props {
     type: 'tag' | 'category';
@@ -14,9 +15,9 @@ const { type, name, description, image, class: className } = Astro.props;
 ---
 
 <header class:list={['mb-8', className]}>
-    <h1 class="text-3xl md:text-4xl font-bold mb-4">
+    <PageTitle class="mb-4">
         {type === 'tag' && <span class="opacity-40">#</span>}{name}
-    </h1>
+    </PageTitle>
     {
         image
             ? <ImageText image={image} text={description} />
