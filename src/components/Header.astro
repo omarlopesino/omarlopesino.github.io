@@ -7,7 +7,7 @@ import ThemeSwitcher from './ui/ThemeSwitcher.astro';
 import { getLangFromUrl, useTranslations, useUrl } from '../i18n/utils';
 import type { Alternate } from '../i18n/routes';
 
-const { alternates = [] } : { alternates?: Alternate[] } = Astro.props;
+const { alternates = [], logoTag = 'div' } : { alternates?: Alternate[], logoTag?: string } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -15,7 +15,7 @@ const url = useUrl(lang);
 
 ---
 <Menu class="border-b border-base-300">
-  <Logo slot="start" />
+  <Logo slot="start" tag={logoTag} />
   <MenuLink href={url()}>{t('nav.blog')}</MenuLink>
   <MenuLink href={url(t('about.path'))}>{t('nav.about')}</MenuLink>
   <!-- <MenuLink href={url('contact')} class="px-4 rounded-lg border border-current">{t('nav.contact')}</MenuLink> -->

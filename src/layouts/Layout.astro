@@ -11,9 +11,11 @@ interface Props {
   refresh?: string;
   lang?: string;
   alternates?: Alternate[];
+  // The element the site name sits in: a heading on a page that has no title of its own.
+  logoTag?: string;
 }
 
-const { title, description, refresh, lang, alternates = [] } = Astro.props;
+const { title, description, refresh, lang, alternates = [], logoTag } = Astro.props;
 
 const origin = Astro.site?.origin ?? Astro.url.origin;
 const self = alternates.find((a) => a.lang === lang);
@@ -57,7 +59,7 @@ const xDefault = alternates.find((a) => a.lang === defaultLang);
   </head>
   <body class="max-w-5xl mx-auto">
     <header class="lg:px-4">
-      <Header alternates={alternates} />
+      <Header alternates={alternates} logoTag={logoTag} />
     </header>
     <main class="my-6 px-6">
       <slot />

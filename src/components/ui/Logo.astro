@@ -1,7 +1,19 @@
 ---
 import { getLangFromUrl, useUrl } from "@/i18n/utils";
 
+interface Props {
+  tag?: string;
+  class?: string;
+}
+
+// The site name doubles as the page heading where the page has no other title of its own.
+const { tag = 'div', class: className } = Astro.props;
+
 const lang = getLangFromUrl(Astro.url);
 const url = useUrl(lang);
+
+const LogoElement = tag;
 ---
-<a href={url()} class="text-xl font-bold text-base-content hover:opacity-80 p-4">Omar Lopesino</a>
+<LogoElement class:list={['m-0', className]}>
+  <a href={url()} class="text-xl font-bold text-base-content hover:opacity-80 p-4">Omar Lopesino</a>
+</LogoElement>
