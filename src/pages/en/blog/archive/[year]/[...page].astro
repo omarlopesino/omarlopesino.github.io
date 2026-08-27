@@ -3,6 +3,7 @@ import type { Page } from 'astro';
 import { useTranslations } from '@/i18n/utils';
 import { getYearAlternateUrls, pageAlternates, yearPaths } from '@/lib/blog';
 import type { PostInterface } from '@/types';
+import { collectionLd, pageContext } from '@/lib/seo';
 import PostsListLayout from '@/layouts/PostsListLayout.astro';
 
 interface Props {
@@ -17,12 +18,16 @@ const { page } = Astro.props;
 const t = useTranslations('en');
 
 const heading = `${t('year.postsTitle')} ${year}`;
+
+const alternates = pageAlternates(getYearAlternateUrls(year!), page.currentPage);
+const meta = { jsonLd: [collectionLd('CollectionPage', pageContext(Astro, heading, heading, 'en', alternates))] };
 ---
 
 <PostsListLayout
     title={heading}
     description={heading}
     lang="en"
-    alternates={pageAlternates(getYearAlternateUrls(year!), page.currentPage)}
+    alternates={alternates}
     page={page}
+    meta={meta}
 />
