@@ -2,7 +2,7 @@
 import type { Alternate } from '@/i18n/routes';
 import { defaultLang, ui } from '@/i18n/ui';
 import { useTranslations } from '@/i18n/utils';
-import { buildMeta } from '@/lib/seo';
+import { buildMeta, pageContext } from '@/lib/seo';
 import type { Meta } from '@/types';
 
 interface Props {
@@ -17,13 +17,13 @@ interface Props {
 
 const { title, description, lang, alternates = [], canonical = true, meta = {} } = Astro.props;
 
-const origin = Astro.site?.origin ?? Astro.url.origin;
-const self = alternates.find((a) => a.lang === lang);
-// og:url and the canonical must agree, so both pages of a paginated listing point at themselves.
-const url = meta.canonical ?? `${origin}${self ? self.path : Astro.url.pathname}`;
+const ctx = pageContext(Astro, title, description, lang ?? defaultLang, alternates);
+// og:url and the canonical must agree, so both come from the same place.
+const { origin } = ctx;
+const url = meta.canonical ?? ctx.url;
 const xDefault = alternates.find((a) => a.lang === defaultLang);
 
-const tags = buildMeta(meta, { title, description, lang: lang ?? defaultLang, url, origin });
+const tags = buildMeta(meta, { ...ctx, url });
 
 const graph = meta.jsonLd?.length
     ? { '@context': 'https://schema.org', '@graph': meta.jsonLd }

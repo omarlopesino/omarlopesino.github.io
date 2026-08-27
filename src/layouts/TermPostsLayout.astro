@@ -4,6 +4,7 @@ import type { CollectionEntry } from 'astro:content';
 import type { Alternate } from '@/i18n/routes';
 import { useTranslations } from '@/i18n/utils';
 import { getContentAlternateUrls, pageAlternates } from '@/lib/blog';
+import { collectionLd, pageContext } from '@/lib/seo';
 import type { PostInterface } from '@/types';
 import TermHero from '@/components/ui/TermHero.astro';
 import PostsListLayout from './PostsListLayout.astro';
@@ -22,6 +23,11 @@ const t = useTranslations(lang);
 
 const alternates : Alternate[] = pageAlternates(await getContentAlternateUrls(type, term.data), page.currentPage);
 
+const meta = {
+    image,
+    jsonLd: [collectionLd('CollectionPage', pageContext(Astro, name, description, lang, alternates))],
+};
+
 // The list heading repeats the '#' the hero shows, so a tag reads the same way in both places.
 const displayName = type === 'tag' ? `#${name}` : name;
 ---
@@ -33,6 +39,7 @@ const displayName = type === 'tag' ? `#${name}` : name;
     alternates={alternates}
     page={page}
     listTitle={`${t(`${type}.postsTitle`)} ${displayName}`}
+    meta={meta}
 >
     <TermHero slot="header" type={type} name={name} description={description} image={image} />
 </PostsListLayout>

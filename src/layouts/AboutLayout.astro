@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import type { Alternate } from '@/i18n/routes';
 import { useTranslations } from '@/i18n/utils';
 import { avatar, social } from '@/lib/profile';
+import { pageContext, personLd } from '@/lib/seo';
 import DefinitionTable from '@/components/ui/DefinitionTable.astro';
 import ImageText from '@/components/ui/ImageText.astro';
 import Section from '@/components/ui/Section.astro';
@@ -29,11 +30,17 @@ const anchors = { abilities: 'abilities' };
 
 const linkedin = social.linkedin;
 
+const meta = {
+    type: 'profile' as const,
+    image: avatar,
+    jsonLd: [personLd(pageContext(Astro, title, t('about.intro'), lang, alternates))],
+};
+
 const tableClass = 'md:w-2/3 mx-auto';
 ---
 
 {/* The page leads with the pitch rather than a title, so the site name in the header is its h1. */}
-<Layout title={title} description={description} lang={lang} alternates={alternates} logoTag="h1">
+<Layout title={title} description={description} lang={lang} alternates={alternates} logoTag="h1" meta={meta}>
     {/* Stacked on a phone, the avatar and the pitch centre on each other; beside each other from
         md up they read better ranged left. */}
     <ImageText

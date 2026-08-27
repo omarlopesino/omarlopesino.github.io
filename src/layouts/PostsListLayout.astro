@@ -2,7 +2,7 @@
 import type { Page } from 'astro';
 import type { Alternate } from '@/i18n/routes';
 import { useTranslations } from '@/i18n/utils';
-import type { PostInterface } from '@/types';
+import type { Meta, PostInterface } from '@/types';
 import GridList from '@/components/ui/GridList.astro';
 import PageTitle from '@/components/ui/PageTitle.astro';
 import Pagination from '@/components/ui/Pagination.astro';
@@ -16,17 +16,18 @@ interface Props {
     lang: 'en' | 'es';
     alternates?: Alternate[];
     page: Page<PostInterface>;
+    meta?: Meta;
 }
 
 // The heading falls back to the document title; the front page sets its own so the browser tab
 // keeps the site name while the page leads with 'Blog'. A listing that brings its own header —
 // a term hero — fills the header slot instead and uses neither.
-const { title, heading = title, listTitle, description, lang, alternates = [], page } = Astro.props;
+const { title, heading = title, listTitle, description, lang, alternates = [], page, meta } = Astro.props;
 
 const t = useTranslations(lang);
 ---
 
-<Layout title={title} description={description} lang={lang} alternates={alternates}>
+<Layout title={title} description={description} lang={lang} alternates={alternates} meta={meta}>
     <slot name="header">
         <PageTitle>{heading}</PageTitle>
     </slot>

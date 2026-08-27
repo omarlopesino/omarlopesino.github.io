@@ -1,4 +1,5 @@
 import type { CollectionEntry } from 'astro:content';
+import type { Alternate } from '@/i18n/routes';
 import type { Image, Meta, MetaTag, Term } from '@/types';
 import { name, avatar, social } from './profile';
 
@@ -24,6 +25,21 @@ export type MetaContext = {
 };
 
 const abs = (origin: string, path: string) => (path.startsWith('http') ? path : origin + path);
+
+// What a page says about itself, built the way the canonical URL is: from the alternate matching
+// its own language, so page two of a listing points at itself rather than at page one.
+export function pageContext(
+    astro: { site?: URL | undefined; url: URL },
+    title: string,
+    description: string | undefined,
+    lang: string,
+    alternates: Alternate[],
+): MetaContext {
+    const origin = astro.site?.origin ?? astro.url.origin;
+    const self = alternates.find((a) => a.lang === lang);
+
+    return { title, description, lang, origin, url: `${origin}${self ? self.path : astro.url.pathname}` };
+}
 
 // Every metatag the site emits, in one list: adding one is adding a line here.
 export function buildMeta(meta: Meta, ctx: MetaContext): MetaTag[] {

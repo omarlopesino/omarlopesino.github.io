@@ -2,6 +2,7 @@
 import type { Alternate } from '@/i18n/routes';
 import { useTranslations, useUrl } from '@/i18n/utils';
 import { getYears } from '@/lib/blog';
+import { collectionLd, pageContext } from '@/lib/seo';
 import Facet from '@/components/ui/Facet.astro';
 import PageTitle from '@/components/ui/PageTitle.astro';
 import Layout from './Layout.astro';
@@ -20,6 +21,8 @@ const localizedUrl = useUrl(lang);
 const title = t('year.title');
 const description = t('year.description');
 
+const meta = { jsonLd: [collectionLd('CollectionPage', pageContext(Astro, title, description, lang, alternates))] };
+
 const years = (await getYears(lang)).map(({ year, count }) => ({
   title: String(year),
   path: localizedUrl(t('year.path') + '/' + year),
@@ -27,7 +30,7 @@ const years = (await getYears(lang)).map(({ year, count }) => ({
 }));
 ---
 
-<Layout title={title} description={description} lang={lang} alternates={alternates}>
+<Layout title={title} description={description} lang={lang} alternates={alternates} meta={meta}>
     <PageTitle>{title}</PageTitle>
     <p class="text-lede text-center max-w-prose mx-auto">{description}</p>
     <Facet facets={years} class="w-full max-w-prose mx-auto" />
