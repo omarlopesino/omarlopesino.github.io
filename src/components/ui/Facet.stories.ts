@@ -12,17 +12,14 @@ export default {
 };
 export const Default = {};
 
-// The rail shows the five values with the most posts and sends the rest to the index page.
-export const WithMore = {
+// The archive, where the page title already says what the list is.
+export const Untitled = {
   args: {
-    title: 'Categories',
+    title: undefined,
     facets: [
-      { title: 'Drupal', path: '#', count: 12 },
-      { title: 'Backend', path: '#', count: 9 },
-      { title: 'DevOps', path: '#', count: 4 },
-      { title: 'Frontend', path: '#', count: 2 },
-      { title: 'Notes', path: '#', count: 1 },
+      { title: '2026', path: '#', count: 12 },
+      { title: '2025', path: '#', count: 31 },
+      { title: '2024', path: '#', count: 8 },
     ],
-    more: { title: 'View more', path: '#' },
   },
 };
