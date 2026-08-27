@@ -1,0 +1,6 @@
+---
+import { getAlternates } from '@/i18n/routes';
+import TermsLayout from '@/layouts/TermsLayout.astro';
+---
+
+<TermsLayout type="category" lang="en" alternates={getAlternates('blogCategories')} />
