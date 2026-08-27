@@ -1,3 +1,4 @@
+import type { CollectionEntry } from 'astro:content';
 import type { Image, Meta, MetaTag, Term } from '@/types';
 import { name, avatar, social } from './profile';
 
@@ -122,5 +123,28 @@ export function breadcrumbLd(trail: { label: string; href?: string }[], origin: 
             name: step.label,
             ...(step.href && { item: abs(origin, step.href) }),
         })),
+    };
+}
+
+// A post describes its own SEO: title, description, cover, date, category and tags are already in
+// the frontmatter, so the seo block only has to carry what should differ from them.
+export function postMeta(entry: CollectionEntry<'blog'>, category: Term, tags: Term[]): Meta {
+    const { seo, image, pubDate, updatedDate, author } = entry.data;
+
+    return {
+        title: seo?.title,
+        description: seo?.description,
+        image: seo?.image ?? image,
+        canonical: seo?.canonical,
+        robots: seo?.robots,
+        author,
+        type: 'article',
+        keywords: seo?.keywords ?? tags.map((tag) => tag.name),
+        article: {
+            publishedTime: pubDate,
+            modifiedTime: updatedDate,
+            section: category.name,
+            tags: tags.map((tag) => tag.name),
+        },
     };
 }

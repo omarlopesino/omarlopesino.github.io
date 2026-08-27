@@ -9,6 +9,19 @@ const typeImage = z.object({
 	height: z.int().default(540)
 });
 
+// Set only what should differ from the entry itself; everything left out is derived. Mirrors the
+// Meta type in src/types.ts, which is what these end up in.
+const typeSeo = z.optional(z.object({
+	title: z.optional(z.string()),
+	description: z.optional(z.string()),
+	// A social card, for when the cover crops badly at 1.91:1.
+	image: z.optional(typeImage),
+	keywords: z.optional(z.array(z.string())),
+	robots: z.optional(z.string()),
+	// The original, when the post is published somewhere else first.
+	canonical: z.optional(z.string()),
+}));
+
 // Every JSON collection is one file per language; the cid ties the translations together.
 const dataLoader = (collectionName : string) => {
 	return glob({
@@ -38,7 +51,7 @@ const taxonomyCollection =  (collectionName : string) => {
 	});
 }
 
-// A dated record on the about-me timeline: a job, a qualification, and anything else shaped alike.
+// A dated record: a job, a qualification, and anything else shaped alike. Only education uses it.
 const cvCollection = (collectionName : string) => {
 	return defineCollection({
 		loader: dataLoader(collectionName),
@@ -101,11 +114,14 @@ const blog = defineCollection({
 		description: z.string(),
 		language: z.string(),
 		pubDate: z.coerce.date(),
+		updatedDate: z.optional(z.coerce.date()),
+		author: z.optional(z.string()),
 		image: typeImage,
         category: reference('category'),
 		tags: z.array(reference('tag')) ,
         recommended: z.optional(z.array(reference("blog"))),
-		cid: z.string()
+		cid: z.string(),
+		seo: typeSeo
 	}).transform((data) => ({
 		...data,
 		url: '/' + data.language + '/blog/' + data.slug,
