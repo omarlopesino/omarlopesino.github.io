@@ -2,6 +2,7 @@
 import type { MarkdownHeading } from 'astro';
 import { Image } from 'astro:assets';
 import { getLangFromUrl, useTranslations, useUrl } from '@/i18n/utils';
+import { postTrail } from '@/lib/blog';
 import { avatar } from '@/lib/profile';
 import { type PostInterface } from '@/types';
 import Breadcrumb from './Breadcrumb.astro';
@@ -41,11 +42,7 @@ const shareId = `share_${crypto.randomUUID()}`;
 
 const authorLink = { href: localizedUrl(t('about.path')), text: t('nav.about') };
 
-const trail = [
-    { label: t('nav.blog'), href: localizedUrl('') },
-    { label: category.name, href: localizedUrl(t('category.path') + '/' + category.slug) },
-    { label: title },
-];
+const trail = postTrail(lang, category, title);
 ---
 
 <div class:list={['flex flex-col', className]} {...rest}>

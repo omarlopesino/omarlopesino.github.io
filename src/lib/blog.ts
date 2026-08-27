@@ -2,7 +2,8 @@ import type { GetStaticPaths } from "astro";
 import { getCollection, getEntry, type CollectionEntry, type CollectionKey, type DataEntryMap } from "astro:content";
 import type { Alternate } from "@/i18n/routes";
 import { ui } from "@/i18n/ui";
-import type { PostInterface } from "@/types";
+import { useTranslations, useUrl } from "@/i18n/utils";
+import type { PostInterface, Term } from "@/types";
 
 export function staticPaths(type: CollectionKey, language: string) : GetStaticPaths {
   return async () => {
@@ -186,4 +187,17 @@ export function pageAlternates(alternates: Alternate[], currentPage: number) : A
   }
 
   return alternates.map(({ lang, path }) => ({ lang, path: `${path.replace(/\/$/, '')}/${currentPage}` }));
+}
+
+// The trail from the blog down to one post. Google reads it twice — as the visible breadcrumb and
+// as BreadcrumbList — so both come from here.
+export function postTrail(lang: keyof typeof ui, category: Term, title: string) : { label: string; href?: string }[] {
+  const t = useTranslations(lang);
+  const localizedUrl = useUrl(lang);
+
+  return [
+    { label: t('nav.blog'), href: localizedUrl('') },
+    { label: category.name, href: localizedUrl(t('category.path') + '/' + category.slug) },
+    { label: title },
+  ];
 }
