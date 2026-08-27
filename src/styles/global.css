@@ -231,3 +231,92 @@
         transform: none;
     }
 }
+
+/* A listing as rows: the cover beside the copy, alternating side down the page. Below md every
+   row unflips and the cover goes back on top — side by side at phone width leaves the copy about
+   90px wide. */
+.posts-rows {
+    --cover: 18.75rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Three lines keeps a row about a row tall whatever the description runs to; the rest is on the
+   post. */
+.posts-rows .card-body p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+
+@media (width >= 48rem) {
+    .posts-rows > .card {
+        flex-direction: row;
+        /* The cover keeps 16:9 whatever the copy does, so a short description cannot squeeze it
+           into a letterbox. */
+        min-height: calc(var(--cover) * 9 / 16);
+    }
+
+    .posts-rows > .card:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+
+    .posts-rows > .card > figure {
+        flex: none;
+        align-items: stretch;
+        width: var(--cover);
+    }
+
+    .posts-rows > .card > figure img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* daisyUI rounds a first-child figure's top corners, which is the vertical card. In a row it
+       is the leading edge that follows the card, and it swaps sides with the row. */
+    .posts-rows > .card > figure:first-child {
+        border-start-start-radius: inherit;
+        border-end-start-radius: inherit;
+        border-start-end-radius: unset;
+        border-end-end-radius: unset;
+    }
+
+    .posts-rows > .card:nth-child(even) > figure:first-child {
+        border-start-start-radius: unset;
+        border-end-start-radius: unset;
+        border-start-end-radius: inherit;
+        border-end-end-radius: inherit;
+    }
+
+    /* Copy sits centred against the cover rather than hanging from its top edge. */
+    .posts-rows .card-body {
+        justify-content: center;
+    }
+
+    .posts-rows .card-body p {
+        flex-grow: 0;
+    }
+
+    /* The newest post leads at the same rhythm as the rest — a row, not a screen: a wider cover
+       and a display-sized title, which the 16:9 floor above turns into a taller row. */
+    .posts-rows-lead > .card:first-child {
+        --cover: 27.5rem;
+    }
+
+    /* One step up from a row title, not a page title: `--text-title` is the page's and would
+       out-shout the `<h1>` above the listing. */
+    .posts-rows-lead > .card:first-child .card-title {
+        font-size: 1.5rem;
+        line-height: 1.25;
+        letter-spacing: -0.025em;
+    }
+
+    .posts-rows-lead > .card:first-child .card-body {
+        padding: 1.75rem;
+        font-size: 1rem;
+    }
+}

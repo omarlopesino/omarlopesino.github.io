@@ -1,0 +1,19 @@
+---
+import type { PostsListProps } from '@/types';
+
+import PostsList from './PostsList.astro';
+
+interface Props extends PostsListProps {
+}
+
+const { title, posts, lead = false, class: className, itemClass, imageClass, ...rest } = Astro.props;
+---
+
+<PostsList
+    title={title}
+    posts={posts}
+    class:list={["posts-rows", lead && "posts-rows-lead", className]}
+    itemClass={itemClass}
+    imageClass={imageClass}
+    {...rest}
+/>
