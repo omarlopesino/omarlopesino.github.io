@@ -63,7 +63,7 @@ therefore not the listing URL but the post URL prefix: `getContentAlternateUrls(
 `url` transform in `src/content.config.ts` both build `/<lang>/blog/<slug>` from it.
 
 **Route segments are translated, and the page directory names match them literally**:
-`src/pages/es/categorías/[id]/[...page].astro`, `src/pages/es/años/[year]/[...page].astro`
+`src/pages/es/blog/categorías/[id]/[...page].astro`, `src/pages/es/blog/archivo/[year]/[...page].astro`
 (accented/Spanish directory names are intentional). Three things must agree when adding or changing
 a user-facing route or label:
 
@@ -74,16 +74,18 @@ a user-facing route or label:
    A taxonomy's key is the whole prefix, `blog/tags` and not `tags`, so every link to a term follows
    the routes below by changing one string.
 
-Everything about the blog lives under `/<lang>/blog/`. Posts can be browsed three ways, each with an
-index page listing every value and a detail page per value holding that value's posts:
+Everything about the blog lives under `/<lang>/blog/`. Posts can be browsed three ways, each with a
+detail page per value holding that value's posts:
 
-| | index | detail |
+| | detail | reached from |
 | --- | --- | --- |
-| tag | `/en/blog/tags` · `/es/blog/etiquetas` | `…/tags/<slug>` · `…/etiquetas/<slug>` |
-| category | `/en/blog/categories` · `/es/blog/categorías` | `…/categories/<slug>` · `…/categorías/<slug>` |
-| year | `/en/blog/years` · `/es/blog/años` | `…/years/<year>` · `…/años/<year>` |
+| tag | `…/tags/<slug>` · `…/etiquetas/<slug>` | the tag list on the blog page, and a post's own tags |
+| category | `…/categories/<slug>` · `…/categorías/<slug>` | a post's byline and breadcrumb |
+| year | `…/archive/<year>` · `…/archivo/<year>` | the archive |
 
-Each index page is the `index.astro` of the directory its detail pages live in.
+The archive — `/en/blog/archive` · `/es/blog/archivo`, the `index.astro` of the directory its year
+pages live in — is the only index page: tags and categories have none, so nothing but a term's own
+detail page is built from those collections.
 
 Years are a taxonomy with no collection behind it: `getYears(lang)` reads them off the posts, in UTC
 to match `useFormatDate`, and `getYearAlternateUrls()` builds their hreflang from `year.path` rather
@@ -118,22 +120,14 @@ Layout            html/head/header/footer, SEO, theme boot
 │  ├─ BlogLayout          a page of every post in a language
 │  ├─ TermPostsLayout     a page of one tag's or category's posts, ui/TermHero in the header slot
 │  └─ (year routes)       a page of one year's posts, used directly
-└─ TermsLayout        index of every tag, category or year → ui/BubbleList
+└─ YearsLayout        the archive: every year with a post → ui/Facet
 ```
 
 `PostsListLayout` takes Astro's `Page` object, not an array: it owns the empty state and the
 pagination for every listing on the site. Its `header` slot falls back to `ui/PageTitle` with the
-`heading` prop, which is how a term page swaps in its hero instead.
-
-`Layout` also renders `components/Sidebar.astro` beside the main column — the five most-written
-categories and tags plus the five newest years, each block a `ui/Facet` ending in a link to that
-taxonomy's index page. It is on wherever the page is part of the blog, which is everywhere except
-about-me and the root redirect; both pass `sidebar={false}`.
-
-`Layout` splits its body in two for that: whatever a page puts in the **`lede` slot** — its title and
-standfirst — runs the full width, and only what follows shares a row with the rail. `PostsListLayout`
-forwards its `header` and `intro` slots into the lede, which is why a page hands it a hero or a byline
-rather than rendering one above it.
+`heading` prop, which is how a term page swaps in its hero instead, and its `intro` slot is where
+`BlogLayout` puts the byline and the tag list. It passes `featured` to `ui/GridList`, so every
+listing leads with its newest post across the whole row rather than in a column.
 
 Layouts do the content fetching (`getCollection` + mapping to the plain `PostInterface` shape from
 `src/types.ts`); `src/components/ui/` components stay presentational and are driven only by props, so
