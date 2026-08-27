@@ -3,9 +3,9 @@ import type { Page } from 'astro';
 import type { Alternate } from '@/i18n/routes';
 import { useTranslations } from '@/i18n/utils';
 import type { Meta, PostInterface } from '@/types';
-import GridList from '@/components/ui/GridList.astro';
 import PageTitle from '@/components/ui/PageTitle.astro';
 import Pagination from '@/components/ui/Pagination.astro';
+import PostsRows from '@/components/ui/PostsRows.astro';
 import Layout from './Layout.astro';
 
 interface Props {
@@ -34,7 +34,7 @@ const t = useTranslations(lang);
     <slot name="intro" />
     {
         page.data.length > 0
-            ? <GridList featured title={listTitle} posts={page.data} />
+            ? <PostsRows lead title={listTitle} posts={page.data} />
             : <p class="text-center text-sm opacity-70 py-12">{t('posts.empty')}</p>
     }
     <Pagination
