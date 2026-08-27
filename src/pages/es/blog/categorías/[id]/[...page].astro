@@ -1,0 +1,18 @@
+---
+import type { Page } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { termPaths } from '@/lib/blog';
+import type { PostInterface } from '@/types';
+import TermPostsLayout from '@/layouts/TermPostsLayout.astro';
+
+interface Props {
+  entry: CollectionEntry<'category'>;
+  page: Page<PostInterface>;
+}
+
+export const getStaticPaths = termPaths('category', 'es');
+
+const { entry, page } = Astro.props;
+---
+
+<TermPostsLayout term={entry} type="category" page={page} />
