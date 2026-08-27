@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-@import "@fontsource-variable/geist";
+@import "@fontsource-variable/karla";
+/* Plex Mono has no variable build; the chrome only ever uses these two weights. */
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
 /* Stock themes off: they ship a prefers-color-scheme block that would set colours the
    `dark:` variant does not follow. The two themes below are the whole palette. */
 @plugin "daisyui" {
@@ -17,10 +20,10 @@
     prefersdark: false;
     color-scheme: light;
 
-    --color-base-100: oklch(99% 0.002 285);
-    --color-base-200: oklch(96.5% 0.004 285);
-    --color-base-300: oklch(92% 0.007 285);
-    --color-base-content: oklch(24% 0.015 285);
+    --color-base-100: oklch(97% 0.011 80);
+    --color-base-200: oklch(94.2% 0.015 80);
+    --color-base-300: oklch(89% 0.018 78);
+    --color-base-content: oklch(24.5% 0.019 68);
 
     --color-primary: oklch(50% 0.19 285);
     --color-primary-content: oklch(98% 0.008 285);
@@ -56,10 +59,10 @@
     prefersdark: false;
     color-scheme: dark;
 
-    --color-base-100: oklch(17% 0.012 285);
-    --color-base-200: oklch(21% 0.014 285);
-    --color-base-300: oklch(27% 0.016 285);
-    --color-base-content: oklch(92% 0.008 285);
+    --color-base-100: oklch(17.5% 0.012 75);
+    --color-base-200: oklch(21.5% 0.014 75);
+    --color-base-300: oklch(27% 0.016 75);
+    --color-base-content: oklch(92% 0.010 85);
 
     --color-primary: oklch(72% 0.15 285);
     --color-primary-content: oklch(18% 0.03 285);
@@ -92,16 +95,22 @@
 /* Display sizes sit above Tailwind's scale rather than replacing it: `text-display` for a post
    title, `text-lede` for a standfirst, `text-meta` for bylines and rails. */
 @theme {
-    --font-sans: 'Geist Variable', sans-serif;
+    /* Karla titles and reads; Plex Mono carries the chrome — nav, dates, tags, pagination.
+       `--text-*` cannot hold a family, so headings take `font-display` and chrome `font-mono` at
+       their component. Display is its own token though it points at the text face today: a title
+       face is then one line here rather than a sweep through the components. */
+    --font-sans: 'Karla Variable', 'Helvetica Neue', Arial, sans-serif;
+    --font-display: var(--font-sans);
+    --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
 
     --text-display: 2.75rem;
     --text-display--line-height: 1.1;
-    --text-display--letter-spacing: -0.022em;
+    --text-display--letter-spacing: -0.025em;
     --text-display--font-weight: 700;
 
     --text-title: 2rem;
     --text-title--line-height: 1.2;
-    --text-title--letter-spacing: -0.015em;
+    --text-title--letter-spacing: -0.025em;
     --text-title--font-weight: 700;
 
     --text-lede: 1.1875rem;
@@ -140,6 +149,13 @@
     --tw-prose-th-borders: var(--color-base-300);
     --tw-prose-td-borders: var(--color-base-300);
     max-width: var(--container-prose);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+}
+
+.prose :where(h1, h2, h3, h4) {
+    font-family: var(--font-display);
+    letter-spacing: -0.025em;
 }
 
 .prose :where(pre) {
