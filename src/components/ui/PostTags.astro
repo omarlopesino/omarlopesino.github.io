@@ -15,7 +15,7 @@ const localizedUrl = useUrl(lang);
 const { tags, class: className } = Astro.props;
 
 const items = tags.map((tag) => ({
-    label: tag.name,
+    label: `#${tag.name}`,
     href: localizedUrl(t('tag.path') + '/' + tag.slug),
 }));
 ---

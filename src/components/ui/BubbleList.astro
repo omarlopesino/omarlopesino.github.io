@@ -1,6 +1,4 @@
 ---
-import Bubble from './Bubble.astro';
-
 interface Props {
     items: { label: string; href: string }[];
     ariaLabel?: string;
@@ -12,7 +10,7 @@ interface Props {
 const {
     items,
     ariaLabel,
-    bubbleClass = 'badge-accent font-medium no-underline',
+    bubbleClass = 'font-mono font-bold text-sm text-base-content link link-hover',
     class: className,
     ...rest
 } = Astro.props;
@@ -22,7 +20,7 @@ const {
     {
         items.map((item) => (
             <li class="m-0 p-0">
-                <Bubble tag="a" href={item.href} class={bubbleClass}>{item.label}</Bubble>
+                <a href={item.href} class={bubbleClass}>{item.label}</a>
             </li>
         ))
     }

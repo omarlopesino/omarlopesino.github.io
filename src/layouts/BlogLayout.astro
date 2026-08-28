@@ -34,5 +34,5 @@ const tags = (await getCollection('tag', ({data}) => data.language == lang))
 ---
 
 <PostsListLayout title={title} heading={heading} description={description} lang={lang} alternates={alternates} page={page} meta={meta}>
-    <BubbleList slot="intro" class="justify-center w-full max-w-prose mx-auto" items={tags} ariaLabel={t('tag.title')} bubbleClass="badge-accent badge-lg font-medium no-underline" />
+    <BubbleList slot="intro" class="justify-center w-full max-w-prose mx-auto" items={tags} ariaLabel={t('tag.title')} />
 </PostsListLayout>
