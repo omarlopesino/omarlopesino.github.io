@@ -40,11 +40,11 @@ export async function getContentAlternateUrls(type : keyof DataEntryMap, entry :
 }
 
 export async function getPostCategory(post: CollectionEntry<'blog'>) {
-  return (await getEntry('category', post.data.category.id + '/' + post.data.language))?.data;
+  return (await getEntry('category', post.data.category + '/' + post.data.language))?.data;
 }
 
 export async function getPostTags(post: CollectionEntry<'blog'>) {
-  const tags = await Promise.all(post.data.tags.map((tag) => getEntry('tag', tag.id + '/' + post.data.language)));
+  const tags = await Promise.all(post.data.tags.map((tag) => getEntry('tag', tag + '/' + post.data.language)));
   return tags.map((tag) => tag?.data).filter((tag): tag is NonNullable<typeof tag> => Boolean(tag));
 }
 
@@ -69,8 +69,8 @@ export async function getTermPosts(type: 'tag' | 'category', term: {cid: string,
     }
 
     return type == 'category'
-      ? data.category.id == term.cid
-      : data.tags.some((tag) => tag.id == term.cid);
+      ? data.category == term.cid
+      : data.tags.some((tag) => tag == term.cid);
   });
 
   return await Promise.all(
@@ -84,7 +84,7 @@ export async function getTermPosts(type: 'tag' | 'category', term: {cid: string,
 // but a blog entry's id is keyed on its slug, which is translated — so unlike a tag or a category
 // the id cannot be rebuilt from the cid and the entries have to be matched on cid instead.
 export async function getRecommendedPosts(post: CollectionEntry<'blog'>) : Promise<PostInterface[]> {
-  const cids = (post.data.recommended ?? []).map((reference) => reference.id);
+  const cids = post.data.recommended ?? [];
 
   if (cids.length == 0) {
     return [];

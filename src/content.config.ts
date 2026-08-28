@@ -1,4 +1,4 @@
-import { defineCollection, reference } from 'astro:content';
+import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
@@ -106,9 +106,12 @@ const blog = defineCollection({
 		updatedDate: z.optional(z.coerce.date()),
 		author: z.optional(z.string()),
 		image: typeImage,
-        category: reference('category'),
-		tags: z.array(reference('tag')) ,
-        recommended: z.optional(z.array(reference("blog"))),
+        // Bare cids, not entry ids — Astro's reference() validates against the full `cid/language`
+        // id, which a bare cid never matches, so these stay plain strings and are resolved by hand
+        // in src/lib/blog.ts.
+        category: z.string(),
+		tags: z.array(z.string()),
+        recommended: z.optional(z.array(z.string())),
 		cid: z.string(),
 		seo: typeSeo
 	}).transform((data) => ({
