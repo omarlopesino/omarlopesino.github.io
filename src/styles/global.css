@@ -172,6 +172,12 @@
     border-radius: var(--radius-box);
 }
 
+/* Not italicised: short blockquotes at prose size otherwise read to accessibility checkers
+   (e.g. WAVE) as a mis-marked heading rather than a quote. */
+.prose :where(blockquote) {
+    font-style: normal;
+}
+
 /* Inline code as a chip; the plugin's backtick pseudo-elements would double up on the border. */
 .prose :where(code):not(:where(pre code)) {
     background-color: var(--color-base-200);
