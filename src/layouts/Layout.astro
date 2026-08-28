@@ -41,18 +41,29 @@ const { title, description, refresh, lang, alternates = [], logoTag, meta } = As
     <script is:inline>
       const theme = localStorage.getItem('theme');
       if (theme != null) {
-        document.documentElement.setAttribute(
-          'data-theme',
-          localStorage.getItem('theme') ?? 'light'
-        );
+        document.documentElement.setAttribute('data-theme', theme);
       }
 
-      document.addEventListener('DOMContentLoaded', () => {
+      // View transitions swap in a freshly-rendered <html> that knows nothing about
+      // localStorage, wiping data-theme; restore it on the incoming document before
+      // it swaps in so there's no flash of the wrong theme.
+      document.addEventListener('astro:before-swap', (event) => {
+        const theme = localStorage.getItem('theme');
+        if (theme != null) {
+          event.newDocument.documentElement.setAttribute('data-theme', theme);
+        }
+      });
+
+      // astro:page-load fires on the initial load and after every transition, unlike
+      // DOMContentLoaded which only fires once.
+      document.addEventListener('astro:page-load', () => {
         const toggle = document.querySelector('.theme-controller');
         if (!toggle) return;
         toggle.checked = (localStorage.getItem('theme') ?? 'light') === 'dark';
         toggle.addEventListener('change', (e) => {
-          localStorage.setItem('theme', e.target.checked ? 'dark' : 'light');
+          const theme = e.target.checked ? 'dark' : 'light';
+          localStorage.setItem('theme', theme);
+          document.documentElement.setAttribute('data-theme', theme);
         });
       });
     </script>
