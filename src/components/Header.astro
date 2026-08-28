@@ -14,7 +14,7 @@ const t = useTranslations(lang);
 const url = useUrl(lang);
 
 ---
-<Menu class="border-b border-base-300">
+<Menu class="border-b border-base-300" aria-label={t('nav.main')}>
   <Logo slot="start" tag={logoTag} />
   <MenuLink href={url(t('blog.path'))}>{t('nav.blog')}</MenuLink>
   <MenuLink href={url(t('year.path'))}>{t('nav.archive')}</MenuLink>
