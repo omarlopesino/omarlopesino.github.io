@@ -109,6 +109,7 @@ Newest first.
 
 | Date | Entry |
 | --- | --- |
+| 2026-08-28 | [Render-blocking CSS, lazy-loaded LCP images, and unlabelled nav landmarks fixed](2026-08-28-2-lighthouse-performance-and-a11y-fixes.md) |
 | 2026-08-28 | [Local and live-site checks for Lighthouse and accessibility, via make](2026-08-28-1-unlighthouse-and-pa11y-checks.md) |
 | 2026-08-27 | [The about-me page becomes the home page; the blog moves to /blog](2026-08-27-8-about-me-as-home-page.md) |
 | 2026-08-27 | [The listing becomes alternating rows, and a card shows when it is focused](2026-08-27-7-posts-listing-as-alternating-rows.md) |
