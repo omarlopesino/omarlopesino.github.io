@@ -31,3 +31,7 @@ docs/.obsidian
 # Storybook
 storybook-server
 storybook-static
+
+# Test reports
+tests/unlighthouse/report/
+tests/pa11y/report/
