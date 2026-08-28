@@ -5,6 +5,7 @@ import { getLangFromUrl, useTranslations, useUrl } from '@/i18n/utils';
 
 interface Props extends Term {
     class?: string;
+    asLink?: boolean;
     [key: string]: unknown;
 }
 
@@ -12,11 +13,16 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const localizedUrl = useUrl(lang);
 
-const { class: className, name, slug, cid, language, description, image, ...rest } = Astro.props;
+const { class: className, name, slug, cid, language, description, image, asLink = true, ...rest } = Astro.props;
+
+const Tag = asLink ? 'a' : 'span';
+// A category shown next to a breadcrumb that already links there (e.g. post meta) stays a plain
+// label, so the two don't read as the same redundant link back-to-back.
+const linkProps = asLink ? { href: localizedUrl(t('category.path') + '/' + slug) } : {};
 ---
 
-<a
-    href={localizedUrl(t('category.path') + '/' + slug)}
-    class:list={['inline-flex items-center gap-1.5 font-mono font-semibold text-primary link link-hover', className]}
+<Tag
+    {...linkProps}
+    class:list={['inline-flex items-center gap-1.5 font-mono font-semibold text-primary', asLink && 'link link-hover', className]}
     {...rest}
-><Icon name="mdi:folder-outline" class="w-4 h-4" aria-hidden="true" />{name}</a>
+><Icon name="mdi:folder-outline" class="w-4 h-4" aria-hidden="true" />{name}</Tag>

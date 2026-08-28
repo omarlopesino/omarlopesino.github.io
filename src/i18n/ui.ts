@@ -7,7 +7,6 @@ export const defaultLang = 'en';
 
 export const ui = {
   en: {
-    'nav.home': 'Home',
     'nav.about': 'About me',
     'nav.blog': 'Blog',
     'nav.archive': 'Archive',
@@ -28,6 +27,7 @@ export const ui = {
     'year.description': 'The blog by year, newest first.',
     'year.postsTitle': 'Posts from',
     'posts.empty': 'No posts here yet.',
+    'posts.listTitle': 'Posts',
     'pagination.label': 'Pagination',
     'pagination.previous': 'Previous',
     'pagination.next': 'Next',
@@ -48,7 +48,6 @@ export const ui = {
     'about.viewAllPosts': 'View all posts',
   },
   es: {
-    'nav.home': 'Inicio',
     'nav.about': 'Sobre mi',
     'nav.blog': 'Blog',
     'nav.archive': 'Archivo',
@@ -69,6 +68,7 @@ export const ui = {
     'year.description': 'El blog por años, del más reciente al más antiguo.',
     'year.postsTitle': 'Publicaciones de',
     'posts.empty': 'Aún no hay publicaciones aquí.',
+    'posts.listTitle': 'Publicaciones',
     'pagination.label': 'Paginación',
     'pagination.previous': 'Anterior',
     'pagination.next': 'Siguiente',

@@ -24,7 +24,7 @@ const { pubDate, category, readingTime, class: className, ...rest } = Astro.prop
         <Icon name="mdi:calendar-blank-outline" class="w-4 h-4" aria-hidden="true" />
         <Date date={pubDate} class="text-meta" />
     </span>
-    <PostCategory {...category} />
+    <PostCategory {...category} asLink={false} />
     {
         readingTime && (
             <span class="inline-flex items-center gap-1.5">

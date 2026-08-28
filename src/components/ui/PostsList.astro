@@ -1,6 +1,6 @@
 ---
 import type { PostsListProps } from '@/types';
-
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import PostTeaser from './PostTeaser.astro';
 
 interface Props extends PostsListProps {
@@ -8,10 +8,14 @@ interface Props extends PostsListProps {
 
 const { title, class: className, posts = [], itemClass = "", imageClass = "", ...rest } = Astro.props;
 
+const t = useTranslations(getLangFromUrl(Astro.url));
+
 ---
 
 <div class="rounded-box max-w-full p-4">
-    {title && <h2 class="text-center font-display font-bold text-lg mb-2">{title}</h2>}
+    <!-- Post titles below are h3s, so this h2 keeps the heading order unbroken even where no
+         visible section title is given. -->
+    <h2 class:list={['text-center font-display font-bold text-lg mb-2', !title && 'sr-only']}>{title ?? t('posts.listTitle')}</h2>
     <div class:list={[className, "md:justify-center"]} {...rest}>
         {
             posts.map((post) => (
