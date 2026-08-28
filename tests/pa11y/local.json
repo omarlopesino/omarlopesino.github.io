@@ -1,0 +1,17 @@
+{
+  "defaults": {
+    "chromeLaunchConfig": {
+      "args": ["--no-sandbox"],
+      "executablePath": "/home/pptruser/.cache/puppeteer/chrome/linux-152.0.7977.54/chrome-linux64/chrome"
+    },
+    "reporters": [
+      "cli",
+      ["pa11y-ci-reporter-html", { "destination": "../reports/pa11y-local" }]
+    ]
+  },
+  "urls": [
+    "http://localhost:4322/en/",
+    "http://localhost:4322/en/blog",
+    "http://localhost:4322/en/blog/archive"
+  ]
+}
