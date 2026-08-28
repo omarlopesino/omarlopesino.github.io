@@ -35,6 +35,8 @@ export type PostsListProps = {
     posts: PostInterface[];
     // Whether the first post leads the listing on a wider cover than the rows below it.
     lead?: boolean;
+    // Whether the first post's image should skip lazy-loading, e.g. because it leads the listing.
+    priority?: boolean;
     class?: string;
     itemClass?: string;
     [key: string]: unknown;

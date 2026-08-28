@@ -4,9 +4,11 @@ import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import PostTeaser from './PostTeaser.astro';
 
 interface Props extends PostsListProps {
+    // Whether the first post's image should skip lazy-loading, e.g. because it leads the listing.
+    priority?: boolean;
 }
 
-const { title, class: className, posts = [], itemClass = "", imageClass = "", ...rest } = Astro.props;
+const { title, class: className, posts = [], itemClass = "", imageClass = "", priority = false, ...rest } = Astro.props;
 
 const t = useTranslations(getLangFromUrl(Astro.url));
 
@@ -18,8 +20,8 @@ const t = useTranslations(getLangFromUrl(Astro.url));
     <h2 class:list={['text-center font-display font-bold text-lg mb-2', !title && 'sr-only']}>{title ?? t('posts.listTitle')}</h2>
     <div class:list={[className, "md:justify-center"]} {...rest}>
         {
-            posts.map((post) => (
-                <PostTeaser class={itemClass} imageClass={imageClass} {...post} />
+            posts.map((post, index) => (
+                <PostTeaser class={itemClass} imageClass={imageClass} priority={priority && index === 0} {...post} />
             ))
         }
     </div>

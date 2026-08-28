@@ -22,6 +22,7 @@ const {
 ---
 
 <div class:list={['flex max-md:flex-col md:items-center gap-4 md:gap-6', className]}>
-    <Image src={image.src} alt={image.alt} width={image.width} height={image.height} class:list={[imageClass]} />
+    {/* Both callers (AboutLayout, TermHero) put this at the top of the page, so it's the likely LCP. */}
+    <Image src={image.src} alt={image.alt} width={image.width} height={image.height} class:list={[imageClass]} loading="eager" fetchpriority="high" />
     <p class:list={[textClass]}>{Astro.slots.has('default') ? <slot /> : text}</p>
 </div>

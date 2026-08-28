@@ -60,6 +60,8 @@ const trail = postTrail(lang, category, title);
             width={image.width}
             height={image.height}
             class="w-full aspect-[16/9] rounded-box object-cover"
+            loading="eager"
+            fetchpriority="high"
         />
         <Toc open headings={headings} />
         <div class="prose max-w-none">
