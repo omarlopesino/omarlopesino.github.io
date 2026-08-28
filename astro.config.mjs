@@ -12,6 +12,11 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: process.env.BASE_URL,
+  // The whole Tailwind/DaisyUI bundle is one file per page and too big for Astro's 4kB auto-inline
+  // threshold, so it always ships as a render-blocking <link> unless forced inline.
+  build: {
+    inlineStylesheets: 'always',
+  },
   i18n: {
     locales: ["en", "es"],
     defaultLocale: "en"
