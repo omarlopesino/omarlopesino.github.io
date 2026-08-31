@@ -99,6 +99,20 @@ async function inferTemplate(baseAbs, pattern) {
 	return { template, sampleCount: samples.length, dominantExtension };
 }
 
+// A single rendered path segment must never itself contain a path separator — otherwise a
+// fallback value (e.g. a composite generateId like "my-post/en") would silently create nested
+// directories instead of the single segment it was meant to fill in.
+function sanitizeSegment(value) {
+	return String(value).replace(/[\\/]+/g, '-');
+}
+
+// Prefers a plain identifying field over the collection's own (possibly composite, slash-joined)
+// generateId output, so a fresh/empty collection's first entry doesn't get nested under a folder
+// named after its own filename.
+function fallbackId(answers, generatedId) {
+	return answers.slug ?? answers.id ?? answers.cid ?? generatedId ?? 'untitled';
+}
+
 function lookupField(answers, fieldPath) {
 	const parts = fieldPath.split('.');
 	let node = answers;
@@ -122,13 +136,13 @@ export async function inferGlobDestination({ projectRoot, loaderMeta, answers, g
 	let relativePath;
 	if (template) {
 		const rendered = template.map((segment) => {
-			if (segment.type === 'literal') return segment.value;
+			if (segment.type === 'literal') return sanitizeSegment(segment.value);
 			const value = lookupField(answers, segment.field);
-			return value !== undefined ? String(value) : String(generatedId ?? 'untitled');
+			return sanitizeSegment(value !== undefined ? value : fallbackId(answers, generatedId));
 		});
 		relativePath = rendered.join('/');
 	} else {
-		relativePath = String(generatedId ?? 'untitled');
+		relativePath = sanitizeSegment(fallbackId(answers, generatedId));
 	}
 
 	// If existing siblings agree on an extension, use it silently; otherwise (including an empty
