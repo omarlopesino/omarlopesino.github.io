@@ -44,7 +44,7 @@ export const ui = {
     'feed.path': 'rss.xml',
     'feed.title': "Omar Lopesino's blog",
     'feed.description': 'New posts by Omar Lopesino, in English.',
-    'about.intro': 'I am Omar Mohamad El Hassan Lopesino, a senior backend developer. I build and run web platforms — mostly Drupal — for NGOs, public administrations and news media.',
+    'about.intro': 'I am Omar Mohamad El Hassan Lopesino, a senior backend developer. I build and run web platforms, most of them made in Drupal. I have worked for NGOs, medical healthcare, public administrations, among other businesses.',
     'about.workAt': 'View my work at',
     'about.recentPosts': 'Recent blog posts',
     'about.viewAllPosts': 'View all posts',
