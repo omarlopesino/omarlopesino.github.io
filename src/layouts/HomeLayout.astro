@@ -1,10 +1,13 @@
 ---
+import { getCollection } from 'astro:content';
 import type { Alternate } from '@/i18n/routes';
 import { useTranslations, useUrl } from '@/i18n/utils';
 import { avatar } from '@/lib/profile';
-import { getLangPosts } from '@/lib/blog';
+import { getLangPosts, getTermPosts } from '@/lib/blog';
 import { pageContext, personLd } from '@/lib/seo';
 import { Icon } from 'astro-icon/components';
+import BubbleList from '@/components/ui/BubbleList.astro';
+import CategoryCard from '@/components/ui/CategoryCard.astro';
 import GridList from '@/components/ui/GridList.astro';
 import ImageText from '@/components/ui/ImageText.astro';
 import Layout from './Layout.astro';
@@ -28,6 +31,25 @@ const meta = {
 };
 
 const recentPosts = (await getLangPosts(lang)).slice(0, 6);
+
+const categories = await Promise.all(
+    (await getCollection('category', ({ data }) => data.language == lang))
+        .sort((a, b) => a.data.name.localeCompare(b.data.name, lang))
+        .map(async ({ data }) => ({
+            name: data.name,
+            description: data.description,
+            image: data.image,
+            href: localizedUrl(t('category.path') + '/' + data.slug),
+            count: (await getTermPosts('category', { cid: data.cid, language: lang })).length,
+        })),
+);
+
+const tags = (await getCollection('tag', ({ data }) => data.language == lang))
+    .sort((a, b) => a.data.name.localeCompare(b.data.name, lang))
+    .map(({ data }) => ({
+        label: `#${data.name}`,
+        href: localizedUrl(t('tag.path') + '/' + data.slug),
+    }));
 ---
 
 {/* The tagline leads instead of a title, so the site name in the header is its h1. */}
@@ -39,6 +61,23 @@ const recentPosts = (await getLangPosts(lang)).slice(0, 6);
         imageClass="w-12 h-12 shrink-0 rounded-full aspect-square object-cover"
         textClass="text-sm"
     />
+
+    {categories.length > 0 && (
+        <div>
+            <h2 class="mb-2 text-center font-display text-lg font-bold">{t('category.title')}</h2>
+            {categories.length > 3 ? (
+                <div class="carousel carousel-center gap-3 p-1">
+                    {categories.map((category) => <CategoryCard {...category} class="carousel-item w-40 sm:w-44" />)}
+                </div>
+            ) : (
+                <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+                    {categories.map((category) => <CategoryCard {...category} />)}
+                </div>
+            )}
+        </div>
+    )}
+
+    {tags.length > 0 && <BubbleList class="w-full max-w-prose mx-auto justify-center" items={tags} ariaLabel={t('tag.title')} />}
 
     {recentPosts.length > 0 && (
         <div>

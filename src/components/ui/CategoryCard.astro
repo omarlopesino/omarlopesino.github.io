@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import type { Image as ImageType } from '@/types';
+
+interface Props {
+    name: string;
+    description?: string;
+    image?: ImageType;
+    count: number;
+    href: string;
+    class?: string;
+    [key: string]: unknown;
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const { name, description, image, count, href, class: className, ...rest } = Astro.props;
+---
+
+<a
+    href={href}
+    class:list={[
+        'flex aspect-square flex-col gap-2 overflow-hidden rounded-box border border-transparent p-4 text-center no-underline hover:border-base-300 hover:bg-base-200',
+        className,
+    ]}
+    {...rest}
+>
+    <span class="font-display font-bold">{name}</span>
+    {description && <span class="text-sm text-base-content/70 line-clamp-3">{description}</span>}
+    {image && (
+        <Image
+            src={image.src}
+            alt=""
+            width={image.width}
+            height={image.height}
+            class="min-h-0 w-full flex-1 rounded-box object-cover"
+            loading="lazy"
+        />
+    )}
+    <span class="mt-auto inline-flex items-center justify-center gap-1.5 text-xs font-mono text-base-content/60">
+        <Icon name="mdi:file-document-outline" class="w-4 h-4" aria-hidden="true" />
+        {t('category.postCount').replace('{n}', String(count))}
+    </span>
+</a>
