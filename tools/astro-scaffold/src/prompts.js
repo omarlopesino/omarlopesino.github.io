@@ -33,7 +33,13 @@ async function promptText(field, { validate } = {}) {
 			message,
 			placeholder: field.hasDefault ? String(field.defaultValue) : undefined,
 			validate: (input) => {
-				if (input === '') {
+				// clack's TextPrompt passes the pre-submit value here, which is still undefined
+				// (not '') when Enter is pressed without typing anything. Checking only for ''
+				// let that slip past this check into a custom validator (e.g. the number/date
+				// checks below), rejecting an untouched, blank, *optional* field; for a required
+				// field it had the opposite effect — silently passing validation and then
+				// resolving to an empty value that a required field should never get.
+				if (input === '' || input === undefined) {
 					return field.optional || field.hasDefault ? undefined : 'This field is required.';
 				}
 				return validate?.(input);
