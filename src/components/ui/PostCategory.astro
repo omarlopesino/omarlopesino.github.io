@@ -23,6 +23,6 @@ const linkProps = asLink ? { href: localizedUrl(t('category.path') + '/' + slug)
 
 <Tag
     {...linkProps}
-    class:list={['inline-flex items-center gap-1.5 font-mono font-semibold text-primary', asLink && 'link link-hover', className]}
+    class:list={['inline-flex items-center gap-1.5 font-mono', asLink && 'link link-hover', className]}
     {...rest}
 ><Icon name="mdi:folder-outline" class="w-4 h-4" aria-hidden="true" />{name}</Tag>
