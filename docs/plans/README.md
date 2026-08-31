@@ -54,8 +54,9 @@ Read the relevant block before touching a subsystem.
   [2026-06-24](2026-06-24-1-i18n-and-translated-routes.md)
 - **Every page is prefixed `/en/` or `/es/`; no prefix stripping** —
   [2026-06-24](2026-06-24-1-i18n-and-translated-routes.md)
-- **`/<lang>/` *is* the about-me page**, the site's home page. The blog listing lives at
-  `/<lang>/blog` — [2026-08-27](2026-08-27-8-about-me-as-home-page.md)
+- **`/<lang>/` is a short pitch plus recent posts; the bio has its own route** (`/en/about-me` ·
+  `/es/sobre-mi`). The blog listing lives at `/<lang>/blog` —
+  [2026-08-31](2026-08-31-1-about-me-splits-from-the-home-page.md)
 - **`blog.path` is both the listing URL and the post URL *prefix*.** Changing it breaks every post's
   hreflang silently — [2026-08-27](2026-08-27-8-about-me-as-home-page.md)
 - **Route directory names match `t('*.path')` literally, accents included** —
@@ -109,6 +110,7 @@ Newest first.
 
 | Date | Entry |
 | --- | --- |
+| 2026-08-31 | [The about bio becomes markdown; about-me splits back out of the home page](2026-08-31-1-about-me-splits-from-the-home-page.md) |
 | 2026-08-28 | [Dark mode persists across view transitions; blog references stop false-failing validation](2026-08-28-3-theme-persistence-and-bare-cid-reference-fixes.md) |
 | 2026-08-28 | [Render-blocking CSS, lazy-loaded LCP images, and unlabelled nav landmarks fixed](2026-08-28-2-lighthouse-performance-and-a11y-fixes.md) |
 | 2026-08-28 | [Local and live-site checks for Lighthouse and accessibility, via make](2026-08-28-1-unlighthouse-and-pa11y-checks.md) |
