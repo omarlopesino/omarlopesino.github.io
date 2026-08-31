@@ -162,6 +162,12 @@
     line-height: 1.7;
 }
 
+/* A centered pitch (AboutLayout's intro) still needs its list markers to sit next to the
+   centered text rather than in prose's usual left-aligned column. */
+.text-center .prose :where(ul, ol) {
+    list-style-position: inside;
+}
+
 .prose :where(h1, h2, h3, h4) {
     font-family: var(--font-display);
     letter-spacing: -0.025em;
