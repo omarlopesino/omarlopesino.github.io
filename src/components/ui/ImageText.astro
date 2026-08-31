@@ -5,6 +5,7 @@ import type { Image as TypeImage } from '@/types';
 interface Props {
     image: TypeImage;
     text?: string;
+    stacked?: boolean;
     class?: string;
     imageClass?: string;
     textClass?: string;
@@ -15,14 +16,15 @@ interface Props {
 const {
     image,
     text,
+    stacked = false,
     class: className,
     imageClass = 'w-full md:w-1/3 rounded-box aspect-[16/9] object-cover',
     textClass = 'md:w-2/3 text-lg/relaxed',
 } = Astro.props;
 ---
 
-<div class:list={['flex max-md:flex-col md:items-center gap-4 md:gap-6', className]}>
+<div class:list={['flex', stacked ? 'flex-col md:items-center' : 'max-md:flex-col md:items-center', 'gap-4 md:gap-6', className]}>
     {/* Both callers (AboutLayout, TermHero) put this at the top of the page, so it's the likely LCP. */}
     <Image src={image.src} alt={image.alt} width={image.width} height={image.height} class:list={[imageClass]} loading="eager" fetchpriority="high" />
-    <p class:list={[textClass]}>{Astro.slots.has('default') ? <slot /> : text}</p>
+    <div class:list={[textClass]}>{Astro.slots.has('default') ? <slot /> : text}</div>
 </div>
