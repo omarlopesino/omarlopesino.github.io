@@ -1,0 +1,61 @@
+---
+import type { Alternate } from '@/i18n/routes';
+import { useTranslations, useUrl } from '@/i18n/utils';
+import { avatar } from '@/lib/profile';
+import { getLangPosts } from '@/lib/blog';
+import { pageContext, personLd } from '@/lib/seo';
+import { Icon } from 'astro-icon/components';
+import GridList from '@/components/ui/GridList.astro';
+import ImageText from '@/components/ui/ImageText.astro';
+import Layout from './Layout.astro';
+
+interface Props {
+    title: string;
+    description?: string;
+    lang: 'en' | 'es';
+    alternates?: Alternate[];
+}
+
+const { title, description, lang, alternates = [] } = Astro.props;
+
+const t = useTranslations(lang);
+const localizedUrl = useUrl(lang);
+
+const meta = {
+    type: 'profile' as const,
+    image: avatar,
+    jsonLd: [personLd(pageContext(Astro, title, t('home.intro'), lang, alternates))],
+};
+
+const recentPosts = (await getLangPosts(lang)).slice(0, 6);
+---
+
+{/* The tagline leads instead of a title, so the site name in the header is its h1. */}
+<Layout title={title} description={description} lang={lang} alternates={alternates} logoTag="h1" meta={meta}>
+    <ImageText
+        image={avatar}
+        text={t('home.intro')}
+        class="items-center max-w-prose mx-auto"
+        imageClass="w-12 h-12 shrink-0 rounded-full aspect-square object-cover"
+        textClass="text-sm"
+    />
+
+    {recentPosts.length > 0 && (
+        <div>
+            <GridList
+                title={t('home.recentPosts')}
+                posts={recentPosts}
+                imageClass="max-md:h-36 max-md:w-full max-md:object-cover"
+            />
+            <div class="flex justify-end">
+                <a
+                    href={localizedUrl(t('blog.path'))}
+                    class="link link-hover font-mono text-sm inline-flex items-center gap-1"
+                >
+                    {t('home.viewAllPosts')}
+                    <Icon name="mdi:arrow-right" class="w-4 h-4" aria-hidden="true" />
+                </a>
+            </div>
+        </div>
+    )}
+</Layout>

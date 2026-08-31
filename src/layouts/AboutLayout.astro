@@ -1,14 +1,14 @@
 ---
 import type { Alternate } from '@/i18n/routes';
 import { render } from 'astro:content';
-import { useTranslations, useUrl } from '@/i18n/utils';
+import { useTranslations } from '@/i18n/utils';
 import { avatar, social } from '@/lib/profile';
-import { getLangPosts, getEmbed } from '@/lib/blog';
+import { getEmbed } from '@/lib/blog';
 import { pageContext, personLd } from '@/lib/seo';
 import { Icon } from 'astro-icon/components';
 import ImageText from '@/components/ui/ImageText.astro';
 import Bubble from '@/components/ui/Bubble.astro';
-import GridList from '@/components/ui/GridList.astro';
+import PageTitle from '@/components/ui/PageTitle.astro';
 import Layout from './Layout.astro';
 
 interface Props {
@@ -21,7 +21,6 @@ interface Props {
 const { title, description, lang, alternates = [] } = Astro.props;
 
 const t = useTranslations(lang);
-const localizedUrl = useUrl(lang);
 
 const aboutIntro = await getEmbed('about-intro', lang);
 const { Content: AboutIntro } = await render(aboutIntro);
@@ -38,12 +37,11 @@ const profiles = [
     { name: 'GitHub', href: social.github, icon: 'simple-icons:github' },
     { name: 'Drupal.org', href: social.drupal, icon: 'simple-icons:drupal' },
 ];
-
-const recentPosts = (await getLangPosts(lang)).slice(0, 3);
 ---
 
-{/* The page leads with the pitch rather than a title, so the site name in the header is its h1. */}
-<Layout title={title} description={description} lang={lang} alternates={alternates} logoTag="h1" meta={meta}>
+<Layout title={title} description={description} lang={lang} alternates={alternates} meta={meta}>
+    <PageTitle>{t('nav.about')}</PageTitle>
+
     {/* Avatar sits above the pitch at every width, both centred on each other. */}
     <ImageText
         stacked
@@ -74,23 +72,4 @@ const recentPosts = (await getLangPosts(lang)).slice(0, 3);
             ))}
         </ul>
     </div>
-
-    {recentPosts.length > 0 && (
-        <div>
-            <GridList
-                title={t('about.recentPosts')}
-                posts={recentPosts}
-                imageClass="max-md:h-36 max-md:w-full max-md:object-cover"
-            />
-            <div class="flex justify-end">
-                <a
-                    href={localizedUrl(t('blog.path'))}
-                    class="link link-hover font-mono text-sm inline-flex items-center gap-1"
-                >
-                    {t('about.viewAllPosts')}
-                    <Icon name="mdi:arrow-right" class="w-4 h-4" aria-hidden="true" />
-                </a>
-            </div>
-        </div>
-    )}
 </Layout>
