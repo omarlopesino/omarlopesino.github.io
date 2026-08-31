@@ -78,7 +78,7 @@ a user-facing route or label:
 
 1. the directory under `src/pages/<lang>/`,
 2. `src/i18n/routes.ts` — the `routes` map, whose keys feed `getAlternates()` for hreflang,
-3. `src/i18n/ui.ts` — the `*.path` keys (`blog.path`, `tag.path`, `category.path`, `year.path`),
+3. `src/i18n/ui.ts` — the `*.path` keys (`blog.path`, `tag.path`, `category.path`, `archive.path`),
    which components use at runtime to build links via `useUrl(lang)` + `t('tag.path')`. A taxonomy's
    key is the whole prefix, `blog/tags` and not `tags`, so every link to a term follows the routes
    below by changing one string.
@@ -97,7 +97,7 @@ pages live in — is the only index page: tags and categories have none, so noth
 detail page is built from those collections.
 
 Years are a taxonomy with no collection behind it: `getYears(lang)` reads them off the posts, in UTC
-to match `useFormatDate`, and `getYearAlternateUrls()` builds their hreflang from `year.path` rather
+to match `useFormatDate`, and `getYearAlternateUrls()` builds their hreflang from `archive.path` rather
 than looking a `cid` up.
 
 `src/i18n/utils.ts` exposes the runtime helpers: `getLangFromUrl(Astro.url)` (parses the first path

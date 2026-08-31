@@ -183,7 +183,7 @@ export function yearPaths(language: string) : GetStaticPaths {
 export function getYearAlternateUrls(year: number | string) : Alternate[] {
   return (Object.keys(ui) as (keyof typeof ui)[]).map((lang) => ({
     lang,
-    path: '/' + lang + '/' + ui[lang]['year.path'] + '/' + year,
+    path: '/' + lang + '/' + ui[lang]['archive.path'] + '/' + year,
   }));
 }
 

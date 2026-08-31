@@ -18,14 +18,14 @@ const { lang, alternates } = Astro.props;
 const t = useTranslations(lang);
 const localizedUrl = useUrl(lang);
 
-const title = t('year.title');
-const description = t('year.description');
+const title = t('archive.title');
+const description = t('archive.description');
 
 const meta = { jsonLd: [collectionLd('CollectionPage', pageContext(Astro, title, description, lang, alternates))] };
 
 const years = (await getYears(lang)).map(({ year, count }) => ({
   title: String(year),
-  path: localizedUrl(t('year.path') + '/' + year),
+  path: localizedUrl(t('archive.path') + '/' + year),
   count,
 }));
 ---
