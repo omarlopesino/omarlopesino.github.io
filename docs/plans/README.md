@@ -110,6 +110,8 @@ Newest first.
 
 | Date | Entry |
 | --- | --- |
+| 2026-08-31 | [astro-scaffold: a generic content-entry CLI, added and immediately fixed twice](2026-08-31-3-astro-scaffold-content-cli.md) |
+| 2026-08-31 | [The `year.*` i18n keys are renamed to `archive.*`](2026-08-31-2-archive-ui-keys-renamed.md) |
 | 2026-08-31 | [The about bio becomes markdown; about-me splits back out of the home page](2026-08-31-1-about-me-splits-from-the-home-page.md) |
 | 2026-08-28 | [Dark mode persists across view transitions; blog references stop false-failing validation](2026-08-28-3-theme-persistence-and-bare-cid-reference-fixes.md) |
 | 2026-08-28 | [Render-blocking CSS, lazy-loaded LCP images, and unlabelled nav landmarks fixed](2026-08-28-2-lighthouse-performance-and-a11y-fixes.md) |
