@@ -48,6 +48,14 @@ export async function getPostTags(post: CollectionEntry<'blog'>) {
   return tags.map((tag) => tag?.data).filter((tag): tag is NonNullable<typeof tag> => Boolean(tag));
 }
 
+export async function getEmbed(cid: string, language: string) {
+  const entry = await getEntry('embed', cid + '/' + language);
+  if (!entry) {
+    throw new Error(`Missing embed entry: ${cid}/${language}`);
+  }
+  return entry;
+}
+
 export async function toPostInterface(post: CollectionEntry<'blog'>) : Promise<PostInterface> {
   return {
     title: post.data.title,

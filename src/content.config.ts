@@ -89,6 +89,22 @@ const spokenLanguage = defineCollection({
 	}),
 });
 
+// One MDX file per language; the cid ties translations together, same as the taxonomy
+// collections. There is no title/description/slug — the MDX body is the content itself, rendered
+// directly wherever the embed is used.
+const embed = defineCollection({
+	loader: glob({
+		base: './src/embeds',
+		pattern: '**/*.{md,mdx}',
+		generateId: ({data}) => {
+			return data.cid + '/' + data.language;
+		},
+	}),
+	schema: z.object({
+		...translatable,
+	}),
+});
+
 const blog = defineCollection({
   	loader: glob({ 
 		base: './src/blog', 
@@ -120,4 +136,4 @@ const blog = defineCollection({
 	})),
 });
 
-export const collections = { category, tag, blog, education, spokenLanguage };
+export const collections = { category, tag, blog, education, spokenLanguage, embed };

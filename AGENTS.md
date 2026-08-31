@@ -42,12 +42,15 @@ Do not run `astro check`.
 
 ## Content model
 
-Three collections in `src/content.config.ts`, all glob loaders. The crucial detail is that **entry
+Four collections in `src/content.config.ts`, all glob loaders. The crucial detail is that **entry
 IDs are composite**, because each piece of content exists once per language:
 
 - `blog` — `src/blog/<lang>/*.mdx`, ID is `` `${slug}/${language}` ``. The schema `.transform()`
   adds a derived `url` field: `/<language>/blog/<slug>`.
 - `category` / `tag` — `src/data/{categories,tags}/<lang>/*.json`, ID is `` `${cid}/${language}` ``.
+- `embed` — `src/embeds/<lang>/*.mdx`, ID is `` `${cid}/${language}` ``. No fields beyond
+  `cid`/`language` — the MDX body is rendered directly wherever the embed is used (e.g. the about
+  page's intro via `getEmbed()`).
 
 `cid` is the **language-independent content id** that ties translations together. A post's
 `category` / `tags` frontmatter references a bare `cid` (e.g. `"test"`), *not* a full entry ID, so
