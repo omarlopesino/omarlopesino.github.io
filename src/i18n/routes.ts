@@ -1,7 +1,8 @@
 export const routes = {
   home: { en: '/en/', es: '/es/' },
   blog: { en: '/en/blog', es: '/es/blog' },
-  blogArchive: { en: '/en/blog/archive', es: '/es/blog/archivo'}
+  blogArchive: { en: '/en/blog/archive', es: '/es/blog/archivo'},
+  about: { en: '/en/about-me', es: '/es/sobre-mi' },
 } as const;
 
 export type RouteKey = keyof typeof routes;
