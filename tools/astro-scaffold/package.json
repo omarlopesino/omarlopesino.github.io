@@ -1,0 +1,16 @@
+{
+  "name": "astro-scaffold",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "Interactively scaffold a new Astro content collection entry from the project's own content.config.ts",
+  "bin": {
+    "astro-scaffold": "./bin/astro-scaffold.mjs"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.7.0",
+    "esbuild": "^0.28.2"
+  }
+}
