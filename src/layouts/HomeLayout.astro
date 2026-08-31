@@ -7,6 +7,7 @@ import { getLangPosts, getTermPosts } from '@/lib/blog';
 import { pageContext, personLd } from '@/lib/seo';
 import { Icon } from 'astro-icon/components';
 import BubbleList from '@/components/ui/BubbleList.astro';
+import Button from '@/components/ui/Button.astro';
 import CategoryCard from '@/components/ui/CategoryCard.astro';
 import GridList from '@/components/ui/GridList.astro';
 import ImageText from '@/components/ui/ImageText.astro';
@@ -97,4 +98,12 @@ const tags = (await getCollection('tag', ({ data }) => data.language == lang))
             </div>
         </div>
     )}
+
+    <div class="flex flex-wrap items-center justify-between gap-4 rounded-box border border-base-300 px-6 py-4">
+        <p class="m-0 text-sm">{t('home.subscribeText')}</p>
+        <Button href={localizedUrl(t('feed.path'))} class="btn-outline gap-2 shrink-0">
+            <Icon name="mdi:rss" class="w-5 h-5" aria-hidden="true" />
+            {t('home.subscribe')}
+        </Button>
+    </div>
 </Layout>
