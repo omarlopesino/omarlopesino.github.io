@@ -110,6 +110,8 @@ Newest first.
 
 | Date | Entry |
 | --- | --- |
+| 2026-09-03 | [An interactive script generates content image variants](2026-09-03-1-image-variant-generator.md) |
+| 2026-08-31 | [The home page grows a topics/tags browser and an RSS call to action](2026-08-31-4-home-page-topics-tags-and-rss.md) |
 | 2026-08-31 | [astro-scaffold: a generic content-entry CLI, added and immediately fixed twice](2026-08-31-3-astro-scaffold-content-cli.md) |
 | 2026-08-31 | [The `year.*` i18n keys are renamed to `archive.*`](2026-08-31-2-archive-ui-keys-renamed.md) |
 | 2026-08-31 | [The about bio becomes markdown; about-me splits back out of the home page](2026-08-31-1-about-me-splits-from-the-home-page.md) |
