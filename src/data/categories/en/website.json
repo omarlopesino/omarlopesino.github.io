@@ -1,0 +1,11 @@
+{
+    "name": "Website",
+    "slug": "website",
+    "cid": "website",
+    "language": "en",
+    "description": "Posts about building and running this website.",
+    "image": {
+        "src": "/960x540.jpg",
+        "alt": "Image alt sample"
+    }
+}
