@@ -38,13 +38,14 @@ const translatable = {
 	cid: z.string(),
 };
 
-const taxonomyCollection =  (collectionName : string) => {
+const taxonomyCollection =  (collectionName : string, imageRequired = true) => {
 	return defineCollection({
 		loader: dataLoader(collectionName),
 		schema: z.object({
 			name: z.string(),
 			description: z.string(),
-			image: typeImage,
+			// Categories always show a cover; a tag reads fine as text alone, so its image is optional.
+			image: imageRequired ? typeImage : z.optional(typeImage),
 			slug: z.string(),
 			...translatable,
 		}),
@@ -74,7 +75,7 @@ const cvCollection = (collectionName : string) => {
 
 const category = taxonomyCollection('categories');
 
-const tag = taxonomyCollection('tags');
+const tag = taxonomyCollection('tags', false);
 
 const education = cvCollection('education');
 
