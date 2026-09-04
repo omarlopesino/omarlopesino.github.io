@@ -1,11 +1,11 @@
 {
-    "name": "Sitio web",
-    "slug": "sitio-web",
-    "cid": "website",
-    "language": "es",
-    "description": "Artículos sobre la construcción y mantenimiento de este sitio web.",
-    "image": {
-        "src": "/960x540.jpg",
-        "alt": "Image alt sample"
-    }
+  "name": "Sitio web",
+  "description": "Posts sobre la propia web",
+  "image": {
+    "src": "/960x540/recursion.jpg",
+    "alt": "Tubo 3D que forma un bucle representando la recursión implícita en escribir posts sobre la misma web."
+  },
+  "slug": "web",
+  "language": "es",
+  "cid": "website"
 }

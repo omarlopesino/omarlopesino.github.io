@@ -1,11 +1,11 @@
 {
-    "name": "Website",
-    "slug": "website",
-    "cid": "website",
-    "language": "en",
-    "description": "Posts about building and running this website.",
-    "image": {
-        "src": "/960x540.jpg",
-        "alt": "Image alt sample"
-    }
+  "name": "Website",
+  "description": "Self website related posts",
+  "image": {
+    "src": "/960x540/recursion.jpg",
+    "alt": "Bucle tube modeled in 3d that represents the implicit recursion on posts talking about the self page."
+  },
+  "slug": "website",
+  "language": "en",
+  "cid": "website"
 }
