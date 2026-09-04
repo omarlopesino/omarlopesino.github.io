@@ -28,8 +28,9 @@ const meta = {
     jsonLd: [collectionLd('CollectionPage', pageContext(Astro, name, description, lang, alternates))],
 };
 
-// The list heading repeats the '#' the hero shows, so a tag reads the same way in both places.
-const displayName = type === 'tag' ? `#${name}` : name;
+// A tag's hero already shows the '#name', so the list heading would just repeat it; category
+// keeps its own heading since the hero there doesn't say "posts in X".
+const listTitle = type === 'category' ? `${t(`${type}.postsTitle`)} ${name}` : undefined;
 ---
 
 <PostsListLayout
@@ -38,7 +39,7 @@ const displayName = type === 'tag' ? `#${name}` : name;
     lang={lang}
     alternates={alternates}
     page={page}
-    listTitle={`${t(`${type}.postsTitle`)} ${displayName}`}
+    listTitle={listTitle}
     meta={meta}
 >
     <TermHero slot="header" type={type} name={name} description={description} image={image} />
