@@ -15,12 +15,11 @@ const t = useTranslations(lang);
 
 const { headings, open = false, class: className, ...rest } = Astro.props;
 
-// Only the two levels a reader navigates by; deeper ones make the list longer than the post.
-// Sub-headings are indented rather than numbered, so the numbers count sections.
+// Only top-level sections; deeper headings would make the list longer than the post.
 let section = 0;
 const items = headings
-    .filter((heading) => heading.depth === 2 || heading.depth === 3)
-    .map((heading) => ({ ...heading, number: heading.depth === 2 ? ++section : null }));
+    .filter((heading) => heading.depth === 2)
+    .map((heading) => ({ ...heading, number: ++section }));
 ---
 
 {
@@ -35,12 +34,10 @@ const items = headings
             </summary>
             <ol class="flex flex-col gap-2 list-none m-0 px-4 py-3">
                 {items.map((heading) => (
-                    <li class:list={['flex gap-2.5', heading.depth === 3 && 'pl-6']}>
-                        {heading.number && (
-                            <span class="text-meta text-base-content/70 tabular-nums">
-                                {String(heading.number).padStart(2, '0')}
-                            </span>
-                        )}
+                    <li class="flex gap-2.5">
+                        <span class="text-meta text-base-content/70 tabular-nums">
+                            {String(heading.number).padStart(2, '0')}
+                        </span>
                         <a href={'#' + heading.slug} class="link link-hover text-sm leading-snug">{heading.text}</a>
                     </li>
                 ))}
