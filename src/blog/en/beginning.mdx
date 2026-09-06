@@ -22,13 +22,12 @@ source of fresh knowledge.
 
 The current development of Generative AI makes me dedicate time to self-learning how it works, especially for coding and apps that are using AI.
 I would like to talk also about more topics such as machine learning and some applications I am doing. Also, I plan to share some experiences from future events like [Drupal Camp Spain 2026](https://2026.drupalcamp.es/es).
-There are a lot of topics that I can express on a site.
 
-The main purpose of my personal page is to write technical posts. Other purposes cover having a way to promote ways to contact me, my work, and a brief presentation about me. Last, but not least, this helps enrich the internet with human content, as I plan to write the posts myself, countering the [Dead Internet Theory](https://en.wikipedia.org/wiki/Dead_Internet_theory).
-
-All the choices to make the website are based on all my experience through the years, especially my previous experience of making a personal website years earlier.
+In short, the main purpose of my personal page is to write technical posts. Other purposes cover having a way to promote ways to contact me, my work, and a brief presentation about me. Last, but not least, this helps enrich the internet with human content, as I plan to write the posts myself, countering the [Dead Internet Theory](https://en.wikipedia.org/wiki/Dead_Internet_theory).
 
 ## A bit of history
+
+Before digging into decisions, I would like to talk about my previous experience making a personal website.
 
 The first time I launched a website was [in 2018](https://github.com/omarlopesino/omarlopesino-nuxt-legacy). It was a basic portfolio made with Nuxt and Drupal. My idea was making a decoupled site where all the content was created with [Contenta CMS](https://www.contentacms.org/). It worked fine. Even it had an
 automated [Travis CI job](https://github.com/omarlopesino/omarlopesino-nuxt-legacy/blob/master/.travis.yml) that would automatically publish the site on GitHub Pages. I unpublished
@@ -41,22 +40,22 @@ With this purpose in mind and my previous background, these are the most importa
 
 ### Keeping it simple
 
-This is a decision I made unconsciously, as I want to take it easy: no complicated features, and a light maintenance process.
+This is a decision I made unconsciously, as I want to take it easy: no complicated features, and a light maintenance process. One example of this is the search.
+First I thought that it was a good idea to add a complex faceted search. Then I noted that the number of posts is manageable. By a simple clustering of the content by categories, tags and years, I ensure that every post won't get lost over time.
 
-### It will be a static website made in Astro
+### A personal website does not need to be sophisticated
+
+It was not only the search; the full stack of a website came to my mind in order to make it simple. For me, a website has search, cookie compliance, analytics, post subscription, comments, etc. Then I thought: do I really want that?
+My purpose is just publishing stuff. I want to collect nobody's information, neither emails nor their activity. I personally dislike telemetry; besides, it is hard to do it every time. Of course I want others' feedback, but that can be done with different methods.
+
+### The website will be made in Astro
 
 Astro can generate static HTML pages. It does not need a server to run. I must continue maintaining the packages used for development, but that is much lighter. I must only check that my production infrastructure, Cloudflare and GitHub Pages, are up.
 It also allows me to create a theme from scratch. And, the most important: creating content is pretty quick thanks to them being written in Markdown. It is true that I don't have
 the sophisticated tools that provide a CMS like Drupal or WordPress, but is enough for me.
 
-### The search must be simple
-First I thought that it was a good idea to add a complex faceted search. Then I noted that the number of posts is manageable. By a simple clustering of the content by categories, tags and years, I ensure that every post won't get lost over time.
-
-### A personal website does not need to be sophisticated
-It was not only the search; the full stack of a website came to my mind in order to make it simple. For me, a website has search, cookie compliance, analytics, post subscription, comments, etc. Then I thought: do I really want that?
-My purpose is just publishing stuff. I want to collect nobody's information, neither emails nor their activity. I personally dislike telemetry; besides, it is hard to do it every time. Of course I want others' feedback, but that can be done with different methods.
-
 ### The page will be focused on blog posts
+
 Of course, what did I want people to do on my page? I want them to read my posts, but also read about me. I don't pretend to provide a curriculum on my website; I have a more elaborate one if someone asks for it.
 That is why the homepage is just a brief introduction that lets you see the categories and recent posts. For a more detailed presentation, I have the about me page.
 
