@@ -63,7 +63,7 @@ const trail = postTrail(lang, category, title);
             loading="eager"
             fetchpriority="high"
         />
-        <Toc open headings={headings} />
+        <Toc headings={headings} />
         <div class="prose max-w-none">
             <slot name="content" />
         </div>
