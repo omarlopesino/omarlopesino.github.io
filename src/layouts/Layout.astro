@@ -57,13 +57,18 @@ const { title, description, refresh, lang, alternates = [], logoTag, meta } = As
       // astro:page-load fires on the initial load and after every transition, unlike
       // DOMContentLoaded which only fires once.
       document.addEventListener('astro:page-load', () => {
-        const toggle = document.querySelector('.theme-controller');
-        if (!toggle) return;
-        toggle.checked = (localStorage.getItem('theme') ?? 'light') === 'dark';
-        toggle.addEventListener('change', (e) => {
-          const theme = e.target.checked ? 'dark' : 'light';
-          localStorage.setItem('theme', theme);
-          document.documentElement.setAttribute('data-theme', theme);
+        // The mobile drawer duplicates the desktop toggle, so every instance
+        // must stay in sync rather than assuming there is only one on the page.
+        const toggles = document.querySelectorAll('.theme-controller');
+        const isDark = (localStorage.getItem('theme') ?? 'light') === 'dark';
+        toggles.forEach((toggle) => {
+          toggle.checked = isDark;
+          toggle.addEventListener('change', (e) => {
+            const theme = e.target.checked ? 'dark' : 'light';
+            localStorage.setItem('theme', theme);
+            document.documentElement.setAttribute('data-theme', theme);
+            toggles.forEach((t) => { t.checked = e.target.checked; });
+          });
         });
       });
     </script>

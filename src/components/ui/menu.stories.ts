@@ -11,7 +11,7 @@ const logo =
 export const Default = {
   args: {
     slots: {
-      logo,
+      start: logo,
       default: `
         <li><a href="/about">About</a></li>
         <li><a href="/blog">Blog</a></li>
@@ -24,7 +24,7 @@ export const Default = {
 export const Megamenu = {
   args: {
     slots: {
-      logo,
+      start: logo,
       default: `
         <li><a href="/about">About</a></li>
         <li>

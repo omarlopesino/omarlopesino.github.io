@@ -1,4 +1,7 @@
 ---
+import { Icon } from 'astro-icon/components';
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
 interface Props {
   class?: string;
   [key: string]: unknown;
@@ -6,15 +9,43 @@ interface Props {
 
 const { class: className, ...rest } = Astro.props;
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
-<nav role="navigation" class:list={['navbar max-md:flex-col max-md:items-center max-md:w-full max-md:max-w-full', className]} {...rest}>
-  <div class="flex-2 max-md:pl-0 max-md:w-full max-md:text-center">
-    <slot name="start" />
-  </div>
-  <div class="flex-none flex items-center">
-    <ul class="menu menu-horizontal items-center [&_a:hover]:bg-base-content [&_a:hover]:text-base-100 [&_a:hover]:transition-colors">
-      <slot />
-    </ul>
-    <slot name="end" />
+<nav role="navigation" class:list={['navbar', className]} {...rest}>
+  <div class="drawer w-full">
+    <input id="mobile-nav" type="checkbox" class="drawer-toggle" />
+
+    <div class="drawer-content flex w-full items-center gap-1">
+      <label for="mobile-nav" class="btn btn-ghost btn-square md:hidden" aria-label={t('nav.openMenu')}>
+        <Icon name="mdi:menu" class="w-6 h-6" aria-hidden="true" />
+      </label>
+      <div class="flex-2">
+        <slot name="start" />
+      </div>
+      <div class="hidden flex-none items-center md:flex">
+        <ul class="menu menu-horizontal items-center [&_a:hover]:bg-base-content [&_a:hover]:text-base-100 [&_a:hover]:transition-colors">
+          <slot />
+        </ul>
+        <slot name="end" />
+      </div>
+    </div>
+
+    <div class="drawer-side md:hidden">
+      <label for="mobile-nav" class="drawer-overlay" aria-label={t('nav.closeMenu')}></label>
+      <div class="flex min-h-full w-72 max-w-[80vw] flex-col gap-4 bg-base-100 p-4 shadow-xl">
+        <div class="flex justify-end">
+          <label for="mobile-nav" class="btn btn-ghost btn-sm btn-circle" aria-label={t('nav.closeMenu')}>
+            <Icon name="mdi:close" class="w-5 h-5" aria-hidden="true" />
+          </label>
+        </div>
+        <ul class="menu gap-1 p-0 [&_a:hover]:bg-base-content [&_a:hover]:text-base-100 [&_a:hover]:transition-colors">
+          <slot />
+        </ul>
+        <div class="mt-auto flex items-center gap-1 border-t border-base-300 pt-4">
+          <slot name="end" />
+        </div>
+      </div>
+    </div>
   </div>
 </nav>
