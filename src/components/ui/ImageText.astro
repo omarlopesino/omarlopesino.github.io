@@ -5,7 +5,10 @@ import type { Image as TypeImage } from '@/types';
 interface Props {
     image: TypeImage;
     text?: string;
-    stacked?: boolean;
+    // 'mobile' stacks below md only (the wide teaser default), 'always' stacks at every width
+    // (the about page's tall portrait), 'never' stays side-by-side even on mobile (the compact
+    // homepage avatar, where stacking would push the intro below the fold).
+    stack?: 'mobile' | 'always' | 'never';
     class?: string;
     imageClass?: string;
     textClass?: string;
@@ -16,14 +19,16 @@ interface Props {
 const {
     image,
     text,
-    stacked = false,
+    stack = 'mobile',
     class: className,
     imageClass = 'w-full md:w-1/3 rounded-box aspect-[16/9] object-cover',
     textClass = 'md:w-2/3 text-lg/relaxed',
 } = Astro.props;
+
+const stackClass = { mobile: 'max-md:flex-col', always: 'flex-col', never: '' }[stack];
 ---
 
-<div class:list={['flex', stacked ? 'flex-col md:items-center' : 'max-md:flex-col md:items-center', 'gap-4 md:gap-6', className]}>
+<div class:list={['flex', stackClass, 'md:items-center', 'gap-4 md:gap-6', className]}>
     {/* Both callers (AboutLayout, TermHero) put this at the top of the page, so it's the likely LCP. */}
     <Image src={image.src} alt={image.alt} width={image.width} height={image.height} class:list={[imageClass]} loading="eager" fetchpriority="high" />
     <div class:list={[textClass]}>{Astro.slots.has('default') ? <slot /> : text}</div>

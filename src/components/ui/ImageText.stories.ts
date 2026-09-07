@@ -45,3 +45,27 @@ export const SlottedText = {
     },
   },
 };
+
+export const AlwaysStacked = {
+  args: {
+    stack: 'always',
+    imageClass: 'w-32 shrink-0 rounded-full aspect-square object-cover mx-auto',
+    textClass: 'text-lede',
+    text: 'I am Omar Lopesino, a senior backend developer building and running web platforms for NGOs, public administrations and news media.',
+  },
+};
+
+export const NeverStacked = {
+  args: {
+    stack: 'never',
+    image: {
+      src: '/200x200.jpg',
+      alt: 'Omar Lopesino',
+      width: 200,
+      height: 200,
+    },
+    imageClass: 'w-12 h-12 shrink-0 rounded-full aspect-square object-cover',
+    textClass: 'text-sm',
+    text: 'I am a Senior Backend Developer with a passion on Open Source, Technology and AI.',
+  },
+};
