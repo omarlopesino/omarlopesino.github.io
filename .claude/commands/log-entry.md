@@ -9,6 +9,22 @@ newest entry in `docs/plans/`.
 Read `docs/plans/README.md` first — its contract and its "How to add an entry" steps govern this,
 and this command is only the mechanical part of them.
 
+## Scope
+
+This log records decisions about the codebase, never the content published through it. A commit
+that only adds, edits, or removes a blog post, its prose, or a category/tag data file (anything
+under `src/blog/`, `src/data/categories/`, `src/data/tags/`, or similar content-collection entries)
+is content authoring, not a decision — leave it out entirely, with no entry and no README row, no
+matter how many such commits are in range.
+
+If a range mixes content CRUD with a real code change (a schema field, a component, a layout, an
+i18n key used by the UI chrome), write the entry for the code change only. Don't narrate which posts
+or terms prompted it beyond what's needed to state the change's reason; the content itself stays out
+of "What this changed".
+
+If an entire range turns out to be content-only, produce no entry and say so — do not stretch a
+content change into a code decision to justify writing one.
+
 ## Gather
 
 ```bash
