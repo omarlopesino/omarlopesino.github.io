@@ -10,9 +10,9 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const localizedUrl = useUrl(lang);
 const menuLinkClass = 'hover:bg-transparent!';
-const iconClass = 'text-base-content w-6 h-6';
+const iconClass = 'text-base-content w-5 h-5';
 ---
-<Menu class="border-t border-base-300 text-center" aria-label={t('nav.footer')}>
+<Menu class="border-t border-base-300 text-center max-md:text-left [&_li]:mr-0.5" aria-label={t('nav.footer')}>
   <Small slot="start">2026 Omar Lopesino</Small>
   <MenuLink class={menuLinkClass} target="_blank" rel="noopener noreferrer" aria-label="GitHub" href={social.github}><Icon class={iconClass} name="simple-icons:github" /></MenuLink>
   <MenuLink class={menuLinkClass} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" href={social.linkedin}><Icon class={iconClass} name="simple-icons:linkedin" /></MenuLink>
