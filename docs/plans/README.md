@@ -110,6 +110,9 @@ Newest first.
 
 | Date | Entry |
 | --- | --- |
+| 2026-09-07 | [The drawer nav is refined, and the footer opts out of it](2026-09-07-5-mobile-drawer-polish-and-footer-opt-out.md) |
+| 2026-09-07 | [The header stays pinned while scrolling](2026-09-07-4-sticky-header.md) |
+| 2026-09-07 | [The post byline's avatar is sized on `ProfilePicture` itself](2026-09-07-3-web-intro-avatar-visible-on-mobile.md) |
 | 2026-09-07 | [The home page keeps avatar and intro side by side on mobile](2026-09-07-2-home-avatar-never-stacks-on-mobile.md) |
 | 2026-09-07 | [The mobile menu becomes a hamburger and a lateral drawer](2026-09-07-1-mobile-hamburger-drawer-menu.md) |
 | 2026-09-06 | [A copy pass, and the post byline's About-me link fixed](2026-09-06-3-copy-pass-and-post-byline-link-fix.md) |
