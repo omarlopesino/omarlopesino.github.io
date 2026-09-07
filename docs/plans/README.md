@@ -110,6 +110,11 @@ Newest first.
 
 | Date | Entry |
 | --- | --- |
+| 2026-09-07 | [The home page keeps avatar and intro side by side on mobile](2026-09-07-2-home-avatar-never-stacks-on-mobile.md) |
+| 2026-09-07 | [The mobile menu becomes a hamburger and a lateral drawer](2026-09-07-1-mobile-hamburger-drawer-menu.md) |
+| 2026-09-06 | [A copy pass, and the post byline's About-me link fixed](2026-09-06-3-copy-pass-and-post-byline-link-fix.md) |
+| 2026-09-06 | [The home page drops its tags block](2026-09-06-2-home-page-drops-tags-block.md) |
+| 2026-09-06 | [The post table of contents drops sub-headings and starts collapsed](2026-09-06-1-toc-limited-to-top-level-and-collapsed.md) |
 | 2026-09-03 | [An interactive script generates content image variants](2026-09-03-1-image-variant-generator.md) |
 | 2026-08-31 | [The home page grows a topics/tags browser and an RSS call to action](2026-08-31-4-home-page-topics-tags-and-rss.md) |
 | 2026-08-31 | [astro-scaffold: a generic content-entry CLI, added and immediately fixed twice](2026-08-31-3-astro-scaffold-content-cli.md) |
