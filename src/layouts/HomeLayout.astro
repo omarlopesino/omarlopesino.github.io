@@ -30,7 +30,8 @@ const meta = {
     jsonLd: [personLd(pageContext(Astro, title, t('home.intro'), lang, alternates))],
 };
 
-const recentPosts = (await getLangPosts(lang)).slice(0, 6);
+const RECENT_POSTS_COUNT = 6;
+const recentPosts = (await getLangPosts(lang)).slice(0, RECENT_POSTS_COUNT);
 
 const categories = await Promise.all(
     (await getCollection('category', ({ data }) => data.language == lang))
