@@ -56,8 +56,8 @@ const linkHover = '[&_a:hover]:bg-base-content [&_a:hover]:text-base-100 [&_a:ho
     </div>
   </nav>
 ) : (
-  <nav role="navigation" class:list={['navbar max-md:w-full max-md:max-w-full', className]} {...rest}>
-    <div class="flex-2 max-md:flex-none">
+  <nav role="navigation" class:list={['navbar max-md:flex-col max-md:items-center max-md:w-full max-md:max-w-full', className]} {...rest}>
+    <div class="flex-2 max-md:pl-0 max-md:w-full max-md:text-center">
       <slot name="start" />
     </div>
     <div class="flex-none flex items-center">
