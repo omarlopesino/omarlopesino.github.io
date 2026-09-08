@@ -44,3 +44,52 @@ Con este propósito en mente y mi background previo, aquí vienen las decisiones
 
 Esta decisión la tomé sin darme cuenta, ya que me lo quiero tomar con tranquilidad. Ya iba con la idea en mente de que no hayan funcionalidades complicadas y que el proceso de mantenimiento sea ligero. Un ejemplo de funcionalidad 
 aligerada es la búsqueda. primero pensé que era buena idea añadir una búsqueda facetada compleja. Entonces me di cuenta de que el número de posts va a ser manejable. Es más simple agrupar el contenido en categorías, etiquetas y años. De esta forma me aseguro de que cada post no se pierda a lo largo del tiempo.
+
+### Una página personal no necesita ser sofisticada
+
+No fue solamente la búsqueda; cuando quise hacer la web se me vino a la mente el stack completo que debe tener, lo cúal no es simple. Para mi, una web tiene búsqueda, banner de cookies, analítica, subscripción a newsletter, comentarios, etc. Entonces pensé, ¿realmente me hace falta?
+Mi propósito es solo publicar contenido. No quiero recolectar información de los usuarios, ni tener sus emails ni rastrear su actividad. Personalmente no me gusta la telemetría. Claro que quiero feedback de otras personas, pero eso se puede hacer mediante otros métodos.
+
+### La web se va a hacer en Astro.
+
+Astro puede generar contenido estático en HTML. No necesita cargar la página de lado de servidor mediante SSR. Eso me previene de estar actualizando constantemente la paquetería por posibles issues de seguridad.
+Debo continuar manteniendo los paquetes de desarrollo, pero es mucho más ligero. Solo debo de comprobar que la infraestructura de producción, CloudFlare y Github Pages , están funcionando.
+Con Astro puedo hacer un tema desde cero. Y, lo más importante, como el contenido se escribe en Markdown, escribo mucho más rápido cada artículo. Es verdad
+que no tengo las herramientas sofisticadas que trae un CMS como Drupal. Incluso sacrificando todas las utilidades y fantásticas funcionalidades que podría hacer fácilmente con Drupal, me basta con Astro.
+Finalmente, para ser sinceros, tenía curiosidad sobre como podría crear una web con Astro y Tailwind.
+
+### La página se enfocará en los posts
+
+Me pregunté a mi mismo, ¿qué quiero que hagan las personas en mi web? QUiero que lean mis posts, pero también lean sobre mi. No pretendo poner un currículum; tengo ya uno completo si alguien pregunta sobre el.
+Por eso mi página muestra principalmente los posts nada más entrar.
+
+### Una guía de estilo es la base para desarrollar el sitio completo
+
+Cuando se trata de diseñar los componentes y layouts de la web, prepararlo todo supone un reto para mí. Como una persona analítica,
+trabajo mejor bajo una forma estructurada de desarrollar Por eso empecé a hacer la página usando [Storybook](https://storybook.js.org/), el cual me permite crear cada componente antes de adentrarme en el tematizado de cada página.
+Desarrollar cada componente ha sido mi parte favorita durante la construcción de la web. Me ha permitido aprender muchas cosas de tematizado, desarrollo de componentes y Tailwind. Y muchas funcionalidades de CSS que son nuevas para mi como [View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API).
+
+EL desarrollo por componentes también permite descomponer todas las partes de la web con facilidad, sin necesidad de tener la imagen completa de ella en todo momento.
+
+### Debo iniciar el desarrollo, la IA generativa continúa mi trabajo
+
+Incluso ahora que con IA es posible programar la web completa de principio a fin, pienso que es más responsable empezar por mi mismo y después dejar que la IA haga el resto del trabajo. De esta forma, puedo aprender desde cero como funciona Astro,
+entender como serán construidos los componentes con DaisyUI y Tailwind, como como construir el Storybook. Después de construir la mayoría de componentes y páginas, He dejado que la IA siga haciendo el trabajo para obtener el resultado final.
+
+### Los posts los escribiré yo con revisiones de IA
+
+Esto rompe mi regla de "hacerlo todo simple". Pero, en los tiempos donde es posible automatizar cada acción, desde escribir hasta hacer straming, es importante ir en dirección 
+de la interacción humana. Mi proceso implica escribir todo el contenido inicialmente por mi mismo. Después, planeo usar IA para revisar todo lo que escriba y me de un feedback detallado. La IA no escribe nada, tan solo me aporta
+un segundo punto de vista.
+
+## El significado que tiene la web para mí
+
+Independienmente de el contenido que tenga o cuantas personas atraiga, es muy satisfactorio acabar un proyecto, por pequeño que sea. Hay muchas ideas de proyectos
+que nunca alcanzo a terminar por posponerlos infinitamente, conciliar la vida personal, o simplemente descartar una idea que al principio parecía asombrosa.
+
+Tener un espacio donde poder expresarme es cómodo. Puedo expresar mis opiniones que pueden conectar con los lectores. También mi conocimiento puede
+ayudar a otros a sumergirse en nuevos conceptos, o entender como funcionan ciertas cosas. Y, puedo aportar contenido fresco a internet, yendo en contra el contenido generado por IA carente de alma.
+
+Veamos como evoluciona esta página a través del tiempo, cuanto conocimiento y cuantas opiniones puedo compartir, y ver si pueden influir en alguien.
+
+Gracias por leer.
