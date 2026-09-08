@@ -6,8 +6,8 @@ import { name, avatar, social } from './profile';
 export const SITE = {
     name,
     author: name,
-    // Shown for a page that has no image of its own. @todo swap for a real social card.
-    image: { src: '/960x540.jpg', alt: name, width: 960, height: 540 } as Image,
+    // Shown for a page that has no image of its own.
+    image: avatar,
     // @todo drop when the site is ready.
     robots: 'noindex, nofollow',
 };
