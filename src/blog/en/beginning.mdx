@@ -1,38 +1,40 @@
 ---
-slug: "the-beginning"
-title: "The beginning"
-description: "Publishing a website is the result of a purpose and several decisions. Let me share them with you, along with the meaning it has for me."
+cid: "beginning"
+category: "website"
+tags: ["astro"]
+recommended: []
 language: "en"
-pubDate: "2026-09-07"
+slug: "beginning"
+title: "The beginning"
+description: "Publishing this website has been the result of having a purpose and taking decisions. In this first post I would like to share my experience."
+pubDate: "2026-09-07" 
 author: "Omar Lopesino"
 image:
   src: "/960x540/beginning.jpg"
   alt: "A lonely road going to mountains, representing the beginning of my website journey."
-category: "website"
-tags: ["astro"]
-cid: "beginning"
 ---
 
-Welcome to the first post of the website! This marks the end of the journey of getting a first version of my site ready to go. In this post I want to cover the purpose of the site, the decisions I made building it, and what it means to me.
+Welcome to the first post of the website! This marks the end of the challenge of getting a first version of my site ready to go. In this post I want to talk about its purpose, decisions taken, and what it means to me.
 
 ## The purpose
 
-I would like to have a space to express my technical learnings and thoughts. I have a lot of learnings from the current Computer Science career I am studying now, my professional experience, and readings / personal projects. Additionally, the rising of Generative AI is a great
+I would like to have a space to express my technical learnings and own my own opinion. I have a lot of learnings from the current Computer Science career I am studying now, my professional experience, and readings / personal projects. Additionally, the rising of Generative AI is a great
 source of fresh knowledge.
 
-The current development of Generative AI makes me dedicate time to self-learning how it works, especially for coding and apps that are using AI.
-I would like to talk also about more topics such as machine learning and some applications I am doing. Also, I plan to share some experiences from future events like [Drupal Camp Spain 2026](https://2026.drupalcamp.es/es).
+The current development of Generative AI makes me dedicate time to self-learning how it works, especially for coding and develop apps that are using AI as RAGs.
+I would like to talk also about more topics such as machine learning and any tech staff I do on my free time. Also, I plan to share some experiences from future events like [Drupal Camp Spain 2026](https://2026.drupalcamp.es/en).
 
-In short, the main purpose of my personal page is to write technical posts. Other purposes cover having a way to promote ways to contact me, my work, and a brief presentation about me. Last, but not least, this helps enrich the internet with human content, as I plan to write the posts myself, countering the [Dead Internet Theory](https://en.wikipedia.org/wiki/Dead_Internet_theory).
+In short, the main purpose of my personal page is to write technical posts. Other purposes are having a way to promote ways to contact me, and a brief presentation about me. Last, but not least, this helps enrich the internet with human content, as all the posts will be written by me helps reducing the [Dead Internet Theory](https://en.wikipedia.org/wiki/Dead_Internet_theory).
 
 ## A bit of history
 
 Before digging into decisions, I would like to talk about my previous experience making a personal website.
 
-The first time I launched a website was [in 2018](https://github.com/omarlopesino/omarlopesino-nuxt-legacy). It was a basic portfolio made with Nuxt and Drupal. My idea was making a decoupled site where all the content was created with [Contenta CMS](https://www.contentacms.org/). It worked fine. Even it had an
-automated [Travis CI job](https://github.com/omarlopesino/omarlopesino-nuxt-legacy/blob/master/.travis.yml) that would automatically publish the site on GitHub Pages. I unpublished
-the page as I felt it was unfinished. I've also felt that no matter how much automation I add, maintaining a decoupled site might consume a lot of my personal time. It involves maintaining the backend: PHP version and packages, Drupal upgrades,
-Contenta CMS compatibility, and unexpected issues. That made me unconsciously make a decision: if I want to have a personal website I want it to be extremely simple.
+The first time I dit it was in [2018](https://github.com/omarlopesino/omarlopesino-nuxt-legacy). It was a basic portfolio made with Nuxt and Drupal. My idea was making a decoupled site where all the content was created with [Contenta CMS](https://www.contentacms.org/). It worked fine. Even it had an
+[automated Travis CI job](https://github.com/omarlopesino/omarlopesino-nuxt-legacy/blob/master/.travis.yml) that was publishing automatically the site on GitHub Pages after every edit. I've unpublished
+it as I felt it was unfinished. I've also noted that no matter how much automation I add, maintaining a decoupled site might consume a lot of time. It involves maintaining 
+Nux app and Drupal at the same time, having to cover package updates from both technologies. Indeed, every update may bring unexpected problems that needs time and testing. This lead me to take unconsciounsly a decision: If I want to make
+a personal site I want it to be extremely simple.
 
 ## The decisions
 
@@ -40,7 +42,7 @@ With this purpose in mind and my previous background, these are the most importa
 
 ### Keeping it simple
 
-This is a decision I made unconsciously, as I want to take it easy: no complicated features, and a light maintenance process. One example of this is the search.
+This is a decision I made unconsciously, as I want to take it easy. I've went focused on not having complicated features, and a light maintenance process. One example of this is the search.
 First I thought that it was a good idea to add a complex faceted search. Then I noted that the number of posts is manageable. By a simple clustering of the content by categories, tags and years, I ensure that every post won't get lost over time.
 
 ### A personal website does not need to be sophisticated
@@ -52,7 +54,7 @@ My purpose is just publishing stuff. I want to collect nobody's information, nei
 
 Astro can generate static HTML pages. It does not need a server to run. I must continue maintaining the packages used for development, but that is much lighter. I must only check that my production infrastructure, Cloudflare and GitHub Pages, are up.
 It also allows me to create a theme from scratch. And, the most important: creating content is pretty quick thanks to them being written in Markdown. It is true that I don't have
-the sophisticated tools that provide a CMS like Drupal or WordPress, but is enough for me.
+the sophisticated tools that provide a CMS like Drupal. Even sacrificing all the utilities and amazing features that I could easily make with Drupal, with Astro I have enough.
 
 ### The page will be focused on blog posts
 
