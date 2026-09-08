@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "BASE_URL=https://omarlopesino.me astro build",
+    "build": "BASE_URL=https://omarlopesino.me astro build && mv dist/sitemap-index.xml dist/sitemap.xml",
     "preview": "astro preview",
     "astro": "astro",
     "storybook-dev": "storybook dev -p 6006",

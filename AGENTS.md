@@ -187,6 +187,10 @@ of the English post when the page is `/es/blog/hola-mundo`. Every URL is listed 
 pairing lives in each page's head, built from the `cid`. Its `filter` drops the redirect root and
 the non-HTML endpoints.
 
+The integration always names its top-level file `sitemap-index.xml` — there's no option to call it
+`sitemap.xml` — so `npm run build` renames it after `astro build` runs, and `robots.txt.ts` points at
+the renamed file.
+
 `/en/rss.xml` and `/es/rss.xml` are summary-only feeds built by `src/lib/feed.ts` from
 `getLangPosts()`; `/robots.txt` and `/llms.txt` are generated endpoints, not files in `public/`,
 because `BASE_URL` is the sole source of the site URL. All four fall back to the request origin,
