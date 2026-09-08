@@ -8,8 +8,6 @@ export const SITE = {
     author: name,
     // Shown for a page that has no image of its own.
     image: avatar,
-    // @todo drop when the site is ready.
-    robots: 'noindex, nofollow',
 };
 
 // Open Graph wants a territory, not a bare language code.
@@ -52,7 +50,7 @@ export function buildMeta(meta: Meta, ctx: MetaContext): MetaTag[] {
     const tags: (MetaTag | false | undefined)[] = [
         description && { name: 'description', content: description },
         { name: 'author', content: meta.author ?? SITE.author },
-        { name: 'robots', content: meta.robots ?? SITE.robots },
+        meta.robots && { name: 'robots', content: meta.robots },
         meta.keywords?.length ? { name: 'keywords', content: meta.keywords.join(', ') } : undefined,
 
         { property: 'og:type', content: meta.type ?? 'website' },
