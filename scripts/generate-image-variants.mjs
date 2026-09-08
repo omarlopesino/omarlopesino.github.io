@@ -2,7 +2,11 @@
 import * as clack from '@clack/prompts';
 import sharp from 'sharp';
 import { mkdir } from 'node:fs/promises';
-import { basename, join, relative } from 'node:path';
+import { basename, extname, join, relative } from 'node:path';
+
+// AVIF's quality scale isn't comparable to JPEG's — 50 is sharp's own default and the commonly
+// recommended value for photographic content, visually close to JPEG at ~75-80.
+const AVIF_QUALITY = 50;
 
 class Cancelled extends Error {
 	constructor() {
@@ -70,7 +74,8 @@ async function run(sourcePath) {
 	for (const size of selected) {
 		const dir = join('public', sizeKey(size));
 		await mkdir(dir, { recursive: true });
-		const outPath = join(dir, basename(sourcePath));
+		const name = basename(sourcePath, extname(sourcePath));
+		const outPath = join(dir, `${name}.avif`);
 
 		await sharp(sourcePath)
 			.resize(size.width, size.height, {
@@ -78,6 +83,7 @@ async function run(sourcePath) {
 				position: 'centre',
 				background: fit === 'contain' ? { r: 255, g: 255, b: 255, alpha: 1 } : undefined,
 			})
+			.avif({ quality: AVIF_QUALITY })
 			.toFile(outPath);
 
 		written.push(outPath);

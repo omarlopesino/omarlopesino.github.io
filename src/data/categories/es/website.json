@@ -2,7 +2,7 @@
   "name": "Web",
   "description": "Posts sobre la propia web",
   "image": {
-    "src": "/960x540/recursion.jpg",
+    "src": "/960x540/recursion.avif",
     "alt": "Tubo 3D que forma un bucle representando la recursión implícita en escribir posts sobre la misma web."
   },
   "slug": "web",
