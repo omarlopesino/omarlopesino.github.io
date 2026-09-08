@@ -1,7 +1,7 @@
 ---
-import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { coverSrcSet } from '@/lib/images';
 import type { Image as ImageType } from '@/types';
 
 interface Props {
@@ -31,13 +31,16 @@ const { name, description, image, count, href, class: className, ...rest } = Ast
     <span class="font-display font-bold">{name}</span>
     {description && <span class="text-sm text-base-content/70 line-clamp-3">{description}</span>}
     {image && (
-        <Image
+        <img
             src={image.src}
+            srcset={coverSrcSet(image.src)}
+            sizes="(min-width: 40rem) 11rem, 50vw"
             alt=""
             width={image.width}
             height={image.height}
             class="min-h-0 w-full flex-1 rounded-box object-cover"
             loading="lazy"
+            decoding="async"
         />
     )}
     <span class="mt-auto inline-flex items-center justify-center gap-1.5 text-xs font-mono text-base-content/70">

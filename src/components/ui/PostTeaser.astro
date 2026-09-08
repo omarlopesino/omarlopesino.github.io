@@ -1,8 +1,8 @@
 ---
-import { Image } from 'astro:assets';
 import Card from './Card.astro';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import type { PostInterface } from '@/types';
+import { coverSrcSet } from '@/lib/images';
 import PostCategory from './PostCategory.astro';
 import Date from './Date.astro';
 
@@ -18,15 +18,18 @@ const t = useTranslations(lang);
 ---
 
 <Card url={url} tag="article" title={title} class:list={[className]} {...rest}>
-    <Image
+    <img
         slot="image"
         src={image.src}
+        srcset={coverSrcSet(image.src)}
+        sizes="(min-width: 48rem) 20rem, 100vw"
         alt={image.alt}
         width={image.width}
         height={image.height}
         class={imageClass}
         loading={priority ? 'eager' : 'lazy'}
         fetchpriority={priority ? 'high' : 'auto'}
+        decoding="async"
     />
     <div slot="content" class="flex gap-3 py-2">
         <Date date={pubDate} />

@@ -1,7 +1,7 @@
 ---
 import type { MarkdownHeading } from 'astro';
-import { Image } from 'astro:assets';
 import { getLangFromUrl, useTranslations, useUrl } from '@/i18n/utils';
+import { coverSrcSet } from '@/lib/images';
 import { postTrail } from '@/lib/blog';
 import { avatar } from '@/lib/profile';
 import { type PostInterface } from '@/types';
@@ -54,14 +54,17 @@ const trail = postTrail(lang, category, title);
             <div class="h-px bg-base-300"></div>
             <PostMeta pubDate={pubDate} category={category} readingTime={readingTime} />
         </div>
-        <Image
+        <img
             src={image.src}
+            srcset={coverSrcSet(image.src)}
+            sizes="min(100vw, 64rem)"
             alt={image.alt}
             width={image.width}
             height={image.height}
             class="w-full aspect-[16/9] rounded-box object-cover"
             loading="eager"
             fetchpriority="high"
+            decoding="async"
         />
         <Toc headings={headings} />
         <div class="prose max-w-none">

@@ -22,13 +22,20 @@ function checkCancel(value) {
 // One entry per size the site actually needs. Adding a size — a new purpose at an existing
 // dimension, or a whole new dimension/ratio — is just a new row here; everything else (prompt
 // groups, labels, output folders) is derived from this table.
+//
+// The 16:9 pair is a @1x/@2x set: post/category/tag covers are never shown past double their own
+// folder name, so `coverSrcSet()` (src/lib/images.ts) builds the `srcset` by halving the large
+// path's own folder name, not a lookup table. Pick both sizes when generating a new one of these,
+// or the srcset it renders 404s on the half it's missing.
 const SIZES = [
-	{ width: 960, height: 540, ratio: '16:9', purposes: ['post', 'category', 'tag'] },
+	{ width: 960, height: 540, ratio: '16:9', purposes: ['post', 'category', 'tag'], note: '@2x' },
+	{ width: 480, height: 270, ratio: '16:9', purposes: ['post', 'category', 'tag'], note: '@1x' },
 	{ width: 1200, height: 630, ratio: '1.91:1', purposes: ['social'] },
 ];
 
 function sizeLabel(size) {
-	return `${size.width}x${size.height} — ${size.purposes.join(' / ')} cover`;
+	const suffix = size.note ? ` (${size.note})` : '';
+	return `${size.width}x${size.height} — ${size.purposes.join(' / ')} cover${suffix}`;
 }
 
 function sizeKey(size) {
