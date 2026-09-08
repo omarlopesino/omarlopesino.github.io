@@ -1,6 +1,6 @@
 ---
 import type { Image as TypeImage } from '@/types';
-import { Image } from 'astro:assets';
+import { coverSrcSet } from '@/lib/images';
 
 interface Props {
   image: TypeImage,
@@ -14,6 +14,14 @@ const { class: className, image, ...rest } = Astro.props;
 
 <div class="avatar">
     <div class:list={[className]} {...rest}>
-        <Image src={image.src} alt={image.alt} height={image.height} width={image.width} />
+        <img
+            src={image.src}
+            srcset={coverSrcSet(image.src)}
+            sizes="4rem"
+            alt={image.alt}
+            height={image.height}
+            width={image.width}
+            decoding="async"
+        />
     </div>
 </div>

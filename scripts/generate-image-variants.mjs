@@ -23,13 +23,16 @@ function checkCancel(value) {
 // dimension, or a whole new dimension/ratio — is just a new row here; everything else (prompt
 // groups, labels, output folders) is derived from this table.
 //
-// The 16:9 pair is a @1x/@2x set: post/category/tag covers are never shown past double their own
-// folder name, so `coverSrcSet()` (src/lib/images.ts) builds the `srcset` by halving the large
-// path's own folder name, not a lookup table. Pick both sizes when generating a new one of these,
-// or the srcset it renders 404s on the half it's missing.
+// A ratio with a '@2x'/'@1x' pair — the covers, and the avatar — is a responsive set: the large
+// one is never shown past double its own folder name, so `coverSrcSet()` (src/lib/images.ts)
+// builds the `srcset` by halving the large path's own folder name, not a lookup table. Pick both
+// sizes of a pair when generating a new image, or the srcset it renders 404s on the half it's
+// missing.
 const SIZES = [
 	{ width: 960, height: 540, ratio: '16:9', purposes: ['post', 'category', 'tag'], note: '@2x' },
 	{ width: 480, height: 270, ratio: '16:9', purposes: ['post', 'category', 'tag'], note: '@1x' },
+	{ width: 400, height: 400, ratio: '1:1', purposes: ['profile'], note: '@2x' },
+	{ width: 200, height: 200, ratio: '1:1', purposes: ['profile'], note: '@1x' },
 	{ width: 1200, height: 630, ratio: '1.91:1', purposes: ['social'] },
 ];
 
