@@ -72,7 +72,7 @@ post URL prefix: `getContentAlternateUrls('blog', …)` and the `url` transform 
 `src/content.config.ts` both build `/<lang>/blog/<slug>` from it.
 
 **Route segments are translated, and the page directory names match them literally**:
-`src/pages/es/blog/categorías/[id]/[...page].astro`, `src/pages/es/blog/archivo/[year]/[...page].astro`
+`src/pages/es/blog/categorias/[id]/[...page].astro`, `src/pages/es/blog/archivo/[year]/[...page].astro`
 (accented/Spanish directory names are intentional). Three things must agree when adding or changing
 a user-facing route or label:
 
@@ -89,7 +89,7 @@ detail page per value holding that value's posts:
 | | detail | reached from |
 | --- | --- | --- |
 | tag | `…/tags/<slug>` · `…/etiquetas/<slug>` | the tag list on the blog page, and a post's own tags |
-| category | `…/categories/<slug>` · `…/categorías/<slug>` | a post's byline and breadcrumb |
+| category | `…/categories/<slug>` · `…/categorias/<slug>` | a post's byline and breadcrumb |
 | year | `…/archive/<year>` · `…/archivo/<year>` | the archive |
 
 The archive — `/en/blog/archive` · `/es/blog/archivo`, the `index.astro` of the directory its year

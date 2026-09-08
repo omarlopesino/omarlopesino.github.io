@@ -94,7 +94,7 @@ export const ui = {
     'search.clear': 'Limpiar',
     'blog.path': 'blog',
     'tag.path': 'blog/etiquetas',
-    'category.path': 'blog/categorías',
+    'category.path': 'blog/categorias',
     'archive.path': 'blog/archivo',
     'about.path': 'sobre-mi',
     'feed.path': 'rss.xml',
