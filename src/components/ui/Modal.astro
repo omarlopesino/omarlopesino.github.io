@@ -18,7 +18,7 @@ const { id, closeLabel, label, triggerClass, boxClass, class: className, ...rest
 <input type="checkbox" id={id} class="modal-toggle" />
 <div class:list={['modal', className]} role="dialog" {...rest}>
     <div class:list={['modal-box', boxClass]}>
-        <label for={id} role="button" class="btn btn-sm btn-circle btn-ghost absolute end-3 top-3" aria-label={closeLabel}>✕</label>
+        <label for={id} class="btn btn-sm btn-circle btn-ghost absolute end-3 top-3" aria-label={closeLabel}>✕</label>
         <slot />
     </div>
     <label class="modal-backdrop" for={id}>{closeLabel}</label>

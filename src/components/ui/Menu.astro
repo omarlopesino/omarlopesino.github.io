@@ -32,16 +32,16 @@ const linkHover = '[&_a:hover]:bg-base-content [&_a:hover]:text-base-100 [&_a:ho
           </ul>
           <slot name="end" />
         </div>
-        <label for="mobile-nav" role="button" class="btn btn-ghost btn-square md:hidden" aria-label={t('nav.openMenu')}>
+        <label for="mobile-nav" class="btn btn-ghost btn-square md:hidden" aria-label={t('nav.openMenu')}>
           <Icon name="mdi:menu" class="w-6 h-6" aria-hidden="true" />
         </label>
       </div>
 
       <div class="drawer-side md:hidden">
-        <label for="mobile-nav" role="button" class="drawer-overlay" aria-label={t('nav.closeMenu')}></label>
+        <label for="mobile-nav" class="drawer-overlay" aria-label={t('nav.closeMenu')}></label>
         <div class="flex min-h-full w-72 max-w-[80vw] flex-col gap-4 bg-base-100 p-4 shadow-xl">
           <div class="flex justify-end">
-            <label for="mobile-nav" role="button" class="btn btn-ghost btn-sm btn-circle" aria-label={t('nav.closeMenu')}>
+            <label for="mobile-nav" class="btn btn-ghost btn-sm btn-circle" aria-label={t('nav.closeMenu')}>
               <Icon name="mdi:close" class="w-5 h-5" aria-hidden="true" />
             </label>
           </div>
