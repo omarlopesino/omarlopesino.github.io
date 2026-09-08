@@ -1,5 +1,5 @@
-# Shared by all of the Makefile's test-* targets (local and production alike). Meant to be
-# `source`d, not executed.
+# Shared by the Makefile's test-pa11y-* targets (open_static_report) and view-unlighthouse-*
+# targets (serve_static_report). Meant to be `source`d, not executed.
 
 # For a self-contained report (one HTML file, no JS module imports): just open it.
 open_static_report() {
@@ -14,17 +14,16 @@ open_static_report() {
 # browsers refuse to run from a file:// URL (CORS), so opening index.html directly is blank.
 # It needs serving over HTTP — Unlighthouse's own docs suggest `npx sirv-cli`. Blocks in the
 # foreground (like `npm run preview`/`storybook-dev` already do in this project) until Ctrl+C,
-# then tears the server down — same lifecycle as the site preview server (test-*-local only) uses.
+# then tears the server down.
 serve_static_report() {
 	local dir="$1" port="$2" url="http://localhost:$2"
 	fuser -k "$port"/tcp 2>/dev/null || true
-	# sirv-cli reads $PORT before its own --port flag, and test-*-local targets already export
-	# $PORT for the site preview server — override it here or sirv-cli would bind to that instead.
+	# sirv-cli reads $PORT before its own --port flag — override it here or a $PORT already
+	# exported in the caller's shell would make sirv-cli bind to that instead.
 	PORT="$port" npx --yes sirv-cli@3.0.1 "$dir" --single --port "$port" &
 	local sirv_pid=$!
 
 	cleanup() {
-		if [ -n "${PREVIEW_PID:-}" ]; then kill "$PREVIEW_PID" 2>/dev/null || true; fi
 		kill "$sirv_pid" 2>/dev/null || true
 	}
 	trap cleanup EXIT

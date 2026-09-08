@@ -21,33 +21,35 @@ PA11Y_HTML_REPORTER_PKG := pa11y-ci-reporter-html@8.1.1
 # can write to the shared tests/reports/ alongside it via a relative `../reports/...` path.
 DOCKER_RUN := docker run --rm --user "$$(id -u):$$(id -g)" -e HOME=/tmp -v "$(CURDIR)/tests:/work"
 
-.PHONY: test-unlighthouse-local test-unlighthouse-production test-pa11y-local test-pa11y-production clean
+.PHONY: test-unlighthouse-local view-unlighthouse-local test-unlighthouse-production view-unlighthouse-production test-pa11y-local test-pa11y-production clean
 
 test-unlighthouse-local:
 	set -euo pipefail
 	rm -rf tests/reports/unlighthouse-local
 	export PORT=$(PORT) SITE=$(SITE)
 	source tests/with-preview-server.sh
-	source tests/with-report-server.sh
-	status=0
 	$(DOCKER_RUN) --network host -w /work/unlighthouse \
 		$(PUPPETEER_IMAGE) \
 		npx --yes --package $(UNLIGHTHOUSE_PKG) -- \
-		unlighthouse-ci --site $(SITE) --config-file local.config.ts --build-static || status=$$?
+		unlighthouse-ci --site $(SITE) --config-file local.config.ts --build-static
+	echo "Report written to tests/reports/unlighthouse-local — run 'make view-unlighthouse-local' to view it."
+
+view-unlighthouse-local:
+	source tests/with-report-server.sh
 	serve_static_report tests/reports/unlighthouse-local $(REPORT_PORT)
-	exit $$status
 
 test-unlighthouse-production:
 	set -euo pipefail
 	rm -rf tests/reports/unlighthouse-production
-	source tests/with-report-server.sh
-	status=0
 	$(DOCKER_RUN) -w /work/unlighthouse \
 		$(PUPPETEER_IMAGE) \
 		npx --yes --package $(UNLIGHTHOUSE_PKG) -- \
-		unlighthouse-ci --site $(SITE_PRODUCTION) --config-file production.config.ts --build-static || status=$$?
+		unlighthouse-ci --site $(SITE_PRODUCTION) --config-file production.config.ts --build-static
+	echo "Report written to tests/reports/unlighthouse-production — run 'make view-unlighthouse-production' to view it."
+
+view-unlighthouse-production:
+	source tests/with-report-server.sh
 	serve_static_report tests/reports/unlighthouse-production $(REPORT_PORT)
-	exit $$status
 
 test-pa11y-local:
 	set -euo pipefail
