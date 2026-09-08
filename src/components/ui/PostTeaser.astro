@@ -3,7 +3,6 @@ import Card from './Card.astro';
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 import type { PostInterface } from '@/types';
 import { coverSrcSet } from '@/lib/images';
-import PostCategory from './PostCategory.astro';
 import Date from './Date.astro';
 
 interface Props extends PostInterface {
@@ -33,7 +32,6 @@ const t = useTranslations(lang);
     />
     <div slot="content" class="flex gap-3 py-2">
         <Date date={pubDate} />
-        <PostCategory {...category} />
     </div>
     <p slot="content">{description}</p>
 </Card>
