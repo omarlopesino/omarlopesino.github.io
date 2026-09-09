@@ -1,7 +1,7 @@
 import type { CollectionEntry } from 'astro:content';
 import type { Alternate } from '@/i18n/routes';
 import type { Image, Meta, MetaTag, Term } from '@/types';
-import { name, avatar, social } from './profile';
+import { name, fullName, jobTitle, worksFor, avatar, social } from './profile';
 
 export const SITE = {
     name,
@@ -112,6 +112,11 @@ export type ArticleLdInput = {
 export function personLd(ctx: MetaContext): Record<string, unknown> {
     return {
         ...person(ctx.origin, ctx.lang),
+        // The full legal name, so search engines can tie this page to profiles (e.g.
+        // LinkedIn) that display it in full rather than the short form used as the site name.
+        alternateName: fullName,
+        jobTitle: jobTitle[ctx.lang] ?? jobTitle.en,
+        worksFor: { '@type': 'Organization', name: worksFor },
         image: abs(ctx.origin, avatar.src),
         description: ctx.description,
         sameAs: [social.github, social.linkedin, social.drupal],

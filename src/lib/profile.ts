@@ -1,6 +1,14 @@
 import type { Image } from '@/types';
 
 export const name = 'Omar Lopesino';
+// Legal name, used only where it helps search engines tie this site to the same person
+// across profiles that display it in full (e.g. LinkedIn).
+export const fullName = 'Omar Mohamad El Hassan Lopesino';
+export const jobTitle: Record<string, string> = {
+    en: 'Senior Backend Developer',
+    es: 'Desarrollador Backend Senior',
+};
+export const worksFor = 'Metadrop';
 
 // The profile shows up on the blog, at the foot of every post and on the about-me page, and all
 // three should change together.
