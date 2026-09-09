@@ -1,20 +1,19 @@
-This is my personal website.
+This is my personal website. It contains my blog posts and a little bit about me.
 
 ---
 
-## Working on this site
-
-An [Astro](https://astro.build) static site, bilingual (English default, Spanish), built to static
+## Architecture
+The site is made with [Astro](https://astro.build), bilingual (English default, Spanish), built to static
 HTML and deployed to GitHub Pages.
 
-**Why the code looks the way it does — and which alternatives were tried and rejected — is in
-[`docs/plans/`](docs/plans/README.md).** It is an append-only decision log; start at its index
-before changing a subsystem. [`AGENTS.md`](AGENTS.md) is the architecture and conventions document,
-and `docs/Requirements.md` with `docs/design/` hold the product intent.
+Most important coding evolutions are maintenance are documented at [`docs/plans/`](docs/plans/README.md).**. 
+[`AGENTS.md`](AGENTS.md) is the document used by AIs to understand the system, and `docs/Requirements.md` with `docs/design/` hold the product initial specifications.
 
-### Running it
+### Usage
 
-Node `>=22.12.0`.
+Node version must be 22.12.0 or higher.
+
+These are the available comands:
 
 | | |
 | --- | --- |
@@ -27,7 +26,7 @@ Node `>=22.12.0`.
 
 ### Routes
 
-Every page is under `/en/` or `/es/`; `/` is a meta-refresh to `/en/`.
+Every page lives under `/en/` or `/es/`; `/` is a meta-refresh to `/en/`.
 
 | | English | Spanish |
 | --- | --- | --- |
@@ -39,11 +38,10 @@ Every page is under `/en/` or `/es/`; `/` is a meta-refresh to `/en/`.
 | one year | `/en/blog/archive/<year>` | `/es/blog/archivo/<year>` |
 | about me | `/en/about-me` | `/es/sobre-mi` |
 
-### Where the words live
+### Content
 
-- **Interface copy** — `src/i18n/ui.ts`. It is `as const` and the type comes off the English keys,
-  so **every key must exist in both languages** or the build fails.
-- **Route segments** — the `*.path` keys in the same file. Changing one means renaming the matching
+- **Interface string** — `src/i18n/ui.ts`..
+- **Route paths** — the `*.path` keys in the same file. Changing one means renaming the matching
   directory under `src/pages/<lang>/` and updating `src/i18n/routes.ts` in the same move.
 - **Posts** — `src/blog/<lang>/*.mdx`, one file per language, tied together by the `cid` in their
   frontmatter.
