@@ -1,8 +1,9 @@
-import { ui, defaultLang } from './ui';
+import { ui, defaultLang, langPrefix } from './ui';
 
 export function getLangFromUrl(url: URL) {
   const [, lang] = url.pathname.split('/');
   if (lang in ui) return lang as keyof typeof ui;
+  // English is the root, so an unprefixed path has no segment to match.
   return defaultLang;
 }
 
@@ -14,7 +15,7 @@ export function useTranslations(lang: keyof typeof ui) {
 
 export function useUrl(lang: keyof typeof ui) {
   return function url(slug = '') {
-    return `/${lang}/${slug}`;
+    return `${langPrefix(lang)}/${slug}`;
   }
 }
 

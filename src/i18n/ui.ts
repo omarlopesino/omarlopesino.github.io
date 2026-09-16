@@ -5,6 +5,9 @@ export const languages = {
 
 export const defaultLang = 'en';
 
+// The URL prefix a language owns. English is the site root, so it has none.
+export const langPrefix = (lang: string) => (lang === defaultLang ? '' : `/${lang}`);
+
 export const ui = {
   en: {
     'nav.about': 'About me',
