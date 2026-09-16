@@ -15,7 +15,6 @@ import ibmPlexMono500Woff2 from '@fontsource/ibm-plex-mono/files/ibm-plex-mono-l
 interface Props {
   title: string;
   description?: string;
-  refresh?: string;
   lang?: string;
   alternates?: Alternate[];
   // The element the site name sits in: a heading on a page that has no title of its own.
@@ -23,7 +22,7 @@ interface Props {
   meta?: Meta;
 }
 
-const { title, description, refresh, lang, alternates = [], logoTag, meta } = Astro.props;
+const { title, description, lang, alternates = [], logoTag, meta } = Astro.props;
 ---
 
 <html lang={lang}>
@@ -39,10 +38,8 @@ const { title, description, refresh, lang, alternates = [], logoTag, meta } = As
       description={description}
       lang={lang}
       alternates={alternates}
-      canonical={!refresh}
       meta={meta}
     />
-    {refresh && <meta http-equiv="refresh" content={refresh} />}
     <title>{title}</title>
     <ClientRouter />
     <script is:inline>

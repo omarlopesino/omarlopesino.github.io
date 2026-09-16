@@ -10,12 +10,10 @@ interface Props {
     description?: string;
     lang?: string;
     alternates?: Alternate[];
-    // False on the redirect stub, which has no URL of its own to point at.
-    canonical?: boolean;
     meta?: Meta;
 }
 
-const { title, description, lang, alternates = [], canonical = true, meta = {} } = Astro.props;
+const { title, description, lang, alternates = [], meta = {} } = Astro.props;
 
 const ctx = pageContext(Astro, title, description, lang ?? defaultLang, alternates);
 // og:url and the canonical must agree, so both come from the same place.
@@ -34,7 +32,7 @@ const t = feedLang ? useTranslations(feedLang) : null;
 ---
 
 {tags.map(({ name, property, content }) => <meta name={name} property={property} content={content} />)}
-{canonical && <link rel="canonical" href={url} />}
+<link rel="canonical" href={url} />
 {alternates.map(({ lang: code, path }) => <link rel="alternate" hreflang={code} href={`${origin}${path}`} />)}
 {xDefault && <link rel="alternate" hreflang="x-default" href={`${origin}${xDefault.path}`} />}
 {
