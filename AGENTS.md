@@ -12,8 +12,8 @@ adding an entry (`/log-entry` drafts one from a commit range); never rewrite an 
 
 ## Project Structure & Module Organization
 
-- `src/pages/` contains routes. English pages live under `src/pages/en/`, Spanish pages under
-  `src/pages/es/`, and `src/pages/index.astro` is the root route.
+- `src/pages/` contains routes. English pages live at the root of `src/pages/`, Spanish pages
+  under `src/pages/es/`.
 - `src/components/` holds shared Astro components; reusable UI primitives are in
   `src/components/ui/`.
 - `src/components/ui/*.stories.ts` contains Storybook examples for component states.
@@ -62,29 +62,31 @@ reference id.
 
 ## Routing and i18n
 
-Astro i18n config (`astro.config.mjs`) declares locales `["en", "es"]`, default `en`, with no prefix
-stripping — every real page lives under `/en/` or `/es/`. `src/pages/index.astro` is a meta-refresh
-redirect to `/en/` (GitHub Pages can't do server redirects).
+Astro i18n config (`astro.config.mjs`) declares locales `["en", "es"]`, default `en`. English is the
+site root and owns no prefix; Spanish lives under `/es/`. `src/i18n/ui.ts`'s `langPrefix(lang)` is
+the single place that decides a language's prefix (`''` for English, `/es` for Spanish) — every URL
+builder (`useUrl`, `getContentAlternateUrls`, `getYearAlternateUrls`, the blog `url` transform in
+`src/content.config.ts`, `personLd`'s author URL) goes through it rather than reimplementing the
+ternary.
 
-`/<lang>/` **is** the about-me page — it is the site's home page. The blog listing lives at
-`/<lang>/blog`, and `blog.path` (`'blog'` in both languages) doubles as that listing's path and the
-post URL prefix: `getContentAlternateUrls('blog', …)` and the `url` transform in
-`src/content.config.ts` both build `/<lang>/blog/<slug>` from it.
+The home page lives at `/` (English) or `/es/`. The blog listing lives at `/blog` or `/es/blog`, and
+`blog.path` (`'blog'` in both languages) doubles as that listing's path and the post URL prefix.
 
 **Route segments are translated, and the page directory names match them literally**:
 `src/pages/es/blog/categorias/[id]/[...page].astro`, `src/pages/es/blog/archivo/[year]/[...page].astro`
-(accented/Spanish directory names are intentional). Three things must agree when adding or changing
-a user-facing route or label:
+(accented/Spanish directory names are intentional). English pages have no language directory of their
+own — they sit at the root of `src/pages/`. Three things must agree when adding or changing a
+user-facing route or label:
 
-1. the directory under `src/pages/<lang>/`,
+1. the directory — the root of `src/pages/` for English, `src/pages/es/` for Spanish,
 2. `src/i18n/routes.ts` — the `routes` map, whose keys feed `getAlternates()` for hreflang,
 3. `src/i18n/ui.ts` — the `*.path` keys (`blog.path`, `tag.path`, `category.path`, `archive.path`),
    which components use at runtime to build links via `useUrl(lang)` + `t('tag.path')`. A taxonomy's
    key is the whole prefix, `blog/tags` and not `tags`, so every link to a term follows the routes
    below by changing one string.
 
-Everything about the blog lives under `/<lang>/blog/`. Posts can be browsed three ways, each with a
-detail page per value holding that value's posts:
+Everything about the blog lives under `/blog/` (English) or `/es/blog/`. Posts can be browsed three
+ways, each with a detail page per value holding that value's posts:
 
 | | detail | reached from |
 | --- | --- | --- |
@@ -92,7 +94,7 @@ detail page per value holding that value's posts:
 | category | `…/categories/<slug>` · `…/categorias/<slug>` | a post's byline and breadcrumb |
 | year | `…/archive/<year>` · `…/archivo/<year>` | the archive |
 
-The archive — `/en/blog/archive` · `/es/blog/archivo`, the `index.astro` of the directory its year
+The archive — `/blog/archive` · `/es/blog/archivo`, the `index.astro` of the directory its year
 pages live in — is the only index page: tags and categories have none, so nothing but a term's own
 detail page is built from those collections.
 
@@ -115,8 +117,8 @@ page's own language, so without it page two would canonicalise to page one.
 
 ## Layout stack
 
-`Layout.astro` is the only place that emits `<html>`. It keeps charset, viewport, favicons, the
-meta-refresh, the `<title>` and the inline pre-hydration script that reads `localStorage.theme` onto
+`Layout.astro` is the only place that emits `<html>`. It keeps charset, viewport, favicons,
+the `<title>` and the inline pre-hydration script that reads `localStorage.theme` onto
 `data-theme`; everything about discovery it hands to `components/Seo.astro` — see **Discovery**
 below.
 
@@ -184,14 +186,13 @@ top level, being facts about the post rather than overrides.
 `@astrojs/sitemap` runs with **no `i18n` option, deliberately**: it derives alternates by swapping
 the locale prefix, and slugs are translated, so it would declare `/es/blog/hello-world` as the twin
 of the English post when the page is `/es/blog/hola-mundo`. Every URL is listed either way; the
-pairing lives in each page's head, built from the `cid`. Its `filter` drops the redirect root and
-the non-HTML endpoints.
+pairing lives in each page's head, built from the `cid`. Its `filter` drops the non-HTML endpoints.
 
 The integration always names its top-level file `sitemap-index.xml` — there's no option to call it
 `sitemap.xml` — so `npm run build` renames it after `astro build` runs, and `robots.txt.ts` points at
 the renamed file.
 
-`/en/rss.xml` and `/es/rss.xml` are summary-only feeds built by `src/lib/feed.ts` from
+`/rss.xml` and `/es/rss.xml` are summary-only feeds built by `src/lib/feed.ts` from
 `getLangPosts()`; `/robots.txt` and `/llms.txt` are generated endpoints, not files in `public/`,
 because `BASE_URL` is the sole source of the site URL. All four fall back to the request origin,
 since `Astro.site` is unset under `astro dev` and `rss()` throws without it.
@@ -280,7 +281,7 @@ missing; this file does not duplicate that list.
 **Easily mistaken for removals, but current:** `Modal.astro` and `RecordCard.astro`, kept as
 reusable primitives; `cvCollection()` in `src/content.config.ts`, which `education` still uses;
 `SearchBar.astro` and `TagsSelector.astro`, unwired **by decision** rather than by oversight; and
-the archive at `/en/blog/archive`. The rail is *deferred*, not forbidden — `futuro.txt` asks for it.
+the archive at `/blog/archive`. The rail is *deferred*, not forbidden — `futuro.txt` asks for it.
 
 ## Current state
 
