@@ -1,7 +1,7 @@
 import type { GetStaticPaths } from "astro";
 import { getCollection, getEntry, type CollectionEntry, type CollectionKey, type DataEntryMap } from "astro:content";
 import type { Alternate } from "@/i18n/routes";
-import { ui } from "@/i18n/ui";
+import { ui, langPrefix } from "@/i18n/ui";
 import { useTranslations, useUrl } from "@/i18n/utils";
 import type { PostInterface, Term } from "@/types";
 
@@ -33,7 +33,7 @@ export async function getContentAlternateUrls(type : keyof DataEntryMap, entry :
       const pathSegment = ui[lang][`${type}.path`];
       return {
         'lang': lang,
-        'path': '/' + lang + '/' + pathSegment + '/' + entry.data.slug,
+        'path': langPrefix(lang) + '/' + pathSegment + '/' + entry.data.slug,
       };
     }
   );
@@ -183,7 +183,7 @@ export function yearPaths(language: string) : GetStaticPaths {
 export function getYearAlternateUrls(year: number | string) : Alternate[] {
   return (Object.keys(ui) as (keyof typeof ui)[]).map((lang) => ({
     lang,
-    path: '/' + lang + '/' + ui[lang]['archive.path'] + '/' + year,
+    path: langPrefix(lang) + '/' + ui[lang]['archive.path'] + '/' + year,
   }));
 }
 

@@ -1,6 +1,7 @@
 import type { CollectionEntry } from 'astro:content';
 import type { Alternate } from '@/i18n/routes';
 import type { Image, Meta, MetaTag, Term } from '@/types';
+import { langPrefix } from '@/i18n/ui';
 import { name, fullName, jobTitle, worksFor, avatar, social } from './profile';
 
 export const SITE = {
@@ -78,7 +79,7 @@ export function buildMeta(meta: Meta, ctx: MetaContext): MetaTag[] {
 const person = (origin: string, lang: string) => ({
     '@type': 'Person',
     name: SITE.author,
-    url: abs(origin, `/${lang}/`),
+    url: abs(origin, `${langPrefix(lang)}/`),
 });
 
 // One node per thing the page is. A listing is og:type website but schema.org Blog, and a post
