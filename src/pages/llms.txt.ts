@@ -1,5 +1,5 @@
 import type { APIContext } from 'astro';
-import { ui } from '@/i18n/ui';
+import { ui, langPrefix } from '@/i18n/ui';
 import { useTranslations } from '@/i18n/utils';
 import { getLangPosts } from '@/lib/blog';
 import { SITE } from '@/lib/seo';
@@ -18,7 +18,7 @@ export const GET = async ({ site, url }: APIContext) => {
       return [
         `## ${ui[lang]['nav.blog']} (${lang})`,
         '',
-        `${t('feed.description')} Feed: ${new URL(`${lang}/${t('feed.path')}`, origin).href}`,
+        `${t('feed.description')} Feed: ${origin.origin}${langPrefix(lang)}/${t('feed.path')}`,
         '',
         ...posts.map((post) => `- [${post.title}](${new URL(post.url.slice(1), origin).href}): ${post.description}`),
       ].join('\n');

@@ -1,6 +1,6 @@
 ---
 import type { Alternate } from '@/i18n/routes';
-import { defaultLang, ui } from '@/i18n/ui';
+import { defaultLang, ui, langPrefix } from '@/i18n/ui';
 import { useTranslations } from '@/i18n/utils';
 import { buildMeta, pageContext } from '@/lib/seo';
 import type { Meta } from '@/types';
@@ -43,7 +43,7 @@ const t = feedLang ? useTranslations(feedLang) : null;
             rel="alternate"
             type="application/rss+xml"
             title={t('feed.title')}
-            href={`${origin}/${feedLang}/${t('feed.path')}`}
+            href={`${origin}${langPrefix(feedLang)}/${t('feed.path')}`}
         />
     )
 }
