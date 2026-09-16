@@ -36,13 +36,13 @@ export default defineConfig({
     mdx(),
     icon(),
     // No i18n option on purpose: it derives alternates by swapping the locale prefix, and slugs are
-    // translated, so it would point /en/blog/hello-world at /es/blog/hello-world instead of
+    // translated, so it would point /blog/hello-world at /es/blog/hello-world instead of
     // /es/blog/hola-mundo. The hreflang links in every page's head are built from the cid.
     sitemap({
       filter: (page) => {
         const { pathname } = new URL(page);
-        // '/' is the meta-refresh redirect; the feeds and llms.txt are not pages.
-        return pathname !== '/' && !/\.(xml|txt)$/.test(pathname);
+        // The feeds and llms.txt are not pages.
+        return !/\.(xml|txt)$/.test(pathname);
       },
     }),
   ],
