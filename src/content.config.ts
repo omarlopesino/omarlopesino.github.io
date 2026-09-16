@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
+import { langPrefix } from '@/i18n/ui';
 
 const typeImage = z.object({
 	src: z.string(),
@@ -133,7 +134,7 @@ const blog = defineCollection({
 		seo: typeSeo
 	}).transform((data) => ({
 		...data,
-		url: '/' + data.language + '/blog/' + data.slug,
+		url: langPrefix(data.language) + '/blog/' + data.slug,
 	})),
 });
 
