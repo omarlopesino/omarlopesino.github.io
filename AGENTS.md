@@ -34,9 +34,19 @@ Use Node `>=22.12.0`.
 - `npm run preview`: preview the built site locally.
 - `npm run storybook-dev`: run Storybook on port `6006`.
 - `npm run storybook-build`: build the static Storybook output.
+- `npm run scaffold`: interactively create a content entry (`tools/astro-scaffold`, which reads the
+  schemas straight from `src/content.config.ts`).
+- `npm run image:variants`: cut a source image into the sized folders under `public/` (`960x540`,
+  `480x270`, `400x400`, …). `coverSrcSet()` in `src/lib/images.ts` derives the `@1x` path from the
+  `@2x` folder name, so generate both sizes of a pair or the srcset 404s on the missing half.
 
-There is no dedicated test command. `npm run build` is the regression check — it type-checks
-`.astro` frontmatter and validates every content collection entry against its Zod schema.
+There are no unit tests. `npm run build` is the regression check — it type-checks `.astro`
+frontmatter and validates every content collection entry against its Zod schema.
+
+Lighthouse and accessibility audits run in Docker through `make`: `make test-pa11y-local` /
+`make test-unlighthouse-local` build and preview the site on port 4322 (never the dev server's
+4321) and write to `tests/reports/`; the `-production` variants hit the live site, and
+`make view-unlighthouse-{local,production}` serves a report.
 
 Do not run `astro check`.
 
@@ -46,7 +56,7 @@ Four collections in `src/content.config.ts`, all glob loaders. The crucial detai
 IDs are composite**, because each piece of content exists once per language:
 
 - `blog` — `src/blog/<lang>/*.mdx`, ID is `` `${slug}/${language}` ``. The schema `.transform()`
-  adds a derived `url` field: `/<language>/blog/<slug>`.
+  adds a derived `url` field: `langPrefix(language) + '/blog/' + slug`.
 - `category` / `tag` — `src/data/{categories,tags}/<lang>/*.json`, ID is `` `${cid}/${language}` ``.
 - `embed` — `src/embeds/<lang>/*.mdx`, ID is `` `${cid}/${language}` ``. No fields beyond
   `cid`/`language` — the MDX body is rendered directly wherever the embed is used (e.g. the about
@@ -126,6 +136,8 @@ Everything else composes downward:
 
 ```
 Layout            html/head/header/footer, theme boot; Seo for discovery
+├─ HomeLayout         the home page: intro, latest posts (ui/GridList), categories, feed link
+├─ AboutLayout        the about-me page
 ├─ PostLayout         single post → ui/Post.astro
 ├─ PostsListLayout    header slot + ui/PostsRows + ui/Pagination, over one Page of posts
 │  ├─ BlogLayout          a page of every post in a language
@@ -141,8 +153,8 @@ pagination for every listing on the site. Its `header` slot falls back to `ui/Pa
 leads with its newest post on a wider cover than the rows below it.
 
 `ui/PostsRows` and `ui/GridList` are both thin wrappers over `ui/PostsList`, and they are not
-interchangeable: rows are every paginated listing, the 3-up grid is only the post page's "Keep
-reading" strip. The row layout itself — the alternating cover, its 16:9 floor, the lead — is
+interchangeable: rows are every paginated listing, the 3-up grid is the home page's latest posts
+and the post page's "Keep reading" strip. The row layout itself — the alternating cover, its 16:9 floor, the lead — is
 `.posts-rows` in `src/styles/global.css`, because nth-child alternation and logical corner radii
 read worse as arbitrary Tailwind variants than as a dozen lines of CSS.
 
@@ -207,7 +219,7 @@ to a custom variant: `@custom-variant dark (&:where([data-theme=dark], [data-the
 
 Nothing outside `.prose` styles headings, so a page heading is `ui/PageTitle` — `text-title`, centred
 — rather than a bare `<h1>`. A post title is the exception `ui/Post.astro` sets itself, `text-display`
-and ranged left in the prose column. The about-me page has no title of its own and instead promotes
+and ranged left in the prose column. The home page has no title of its own and instead promotes
 the site name in the header, by passing `logoTag="h1"` down to `ui/Logo`.
 
 Icons come from `astro-icon` with the `mdi` and `simple-icons` icon sets.
@@ -296,7 +308,7 @@ work rather than being a convention to imitate:
 - `education` and `spokenLanguage` are declared in `src/content.config.ts` but have no data behind
   them — `src/data/education/` and `src/data/spoken-languages/` were deleted and the collections
   were not. Both resolve to zero entries.
-- These `src/components/ui/` components currently have no caller: `Button`, `DefinitionTable`,
+- These `src/components/ui/` components currently have no caller: `DefinitionTable`,
   `Details`, `IconCardLink`, `Modal`, `RecommendedPosts`, `RecordCard`, `Section`, `SearchBar`,
   `Submenu`, `Tab`, `Table`, `Tabs`, `TagsSelector`. They are primitives with stories, not dead
   code — check `docs/plans/` before deleting one.
