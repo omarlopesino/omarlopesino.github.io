@@ -57,6 +57,9 @@ IDs are composite**, because each piece of content exists once per language:
 
 - `blog` — `src/blog/<lang>/*.mdx`, ID is `` `${slug}/${language}` ``. The schema `.transform()`
   adds a derived `url` field: `langPrefix(language) + '/blog/' + slug`.
+  `draft: true` keeps a post out of the production build — no page, listing, feed or sitemap entry —
+  while `astro dev` still renders it; `isPublished()` in `src/lib/blog.ts` is the one filter every
+  post query goes through.
 - `category` / `tag` — `src/data/{categories,tags}/<lang>/*.json`, ID is `` `${cid}/${language}` ``.
 - `embed` — `src/embeds/<lang>/*.mdx`, ID is `` `${cid}/${language}` ``. No fields beyond
   `cid`/`language` — the MDX body is rendered directly wherever the embed is used (e.g. the about
