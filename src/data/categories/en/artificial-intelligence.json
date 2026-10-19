@@ -1,0 +1,11 @@
+{
+  "name": "Artificial intelligence",
+  "description": "Posts about artificial intelligence models and how to use them",
+  "image": {
+    "src": "/960x540/artificial-intelligence.avif",
+    "alt": "TODO"
+  },
+  "slug": "artificial-intelligence",
+  "language": "en",
+  "cid": "artificial-intelligence"
+}

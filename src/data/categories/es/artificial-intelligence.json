@@ -1,0 +1,11 @@
+{
+  "name": "Inteligencia artificial",
+  "description": "Posts sobre modelos de inteligencia artificial y cómo usarlos",
+  "image": {
+    "src": "/960x540/artificial-intelligence.avif",
+    "alt": "TODO"
+  },
+  "slug": "inteligencia-artificial",
+  "language": "es",
+  "cid": "artificial-intelligence"
+}
