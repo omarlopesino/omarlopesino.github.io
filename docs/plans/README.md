@@ -52,10 +52,10 @@ Read the relevant block before touching a subsystem.
 
 - **No language redirection inside the app** — it causes SEO problems —
   [2026-06-24](2026-06-24-1-i18n-and-translated-routes.md)
-- **Every page is prefixed `/en/` or `/es/`; no prefix stripping** —
-  [2026-06-24](2026-06-24-1-i18n-and-translated-routes.md)
-- **`/<lang>/` is a short pitch plus recent posts; the bio has its own route** (`/en/about-me` ·
-  `/es/sobre-mi`). The blog listing lives at `/<lang>/blog` —
+- **English owns the site root; only Spanish is prefixed (`/es/`).** `langPrefix()` is the one
+  place that decides a prefix — [2026-09-17](2026-09-17-1-english-at-the-site-root.md)
+- **The home page is a short pitch plus recent posts; the bio has its own route** (`/about-me` ·
+  `/es/sobre-mi`). The blog listing lives at `/blog` · `/es/blog` —
   [2026-08-31](2026-08-31-1-about-me-splits-from-the-home-page.md)
 - **`blog.path` is both the listing URL and the post URL *prefix*.** Changing it breaks every post's
   hreflang silently — [2026-08-27](2026-08-27-8-about-me-as-home-page.md)
@@ -111,6 +111,7 @@ Newest first.
 | Date | Entry |
 | --- | --- |
 | 2026-10-19 | [Posts can be drafts, outlined by a skill, and every commit request logs itself](2026-10-19-1-draft-posts-and-post-outline-skill.md) |
+| 2026-09-17 | [English moves to the site root; Spanish keeps `/es/`](2026-09-17-1-english-at-the-site-root.md) |
 | 2026-09-08 | [The site opens to search engines, with lighter images, cleaner a11y and sharper titles](2026-09-08-1-launch-indexing-images-a11y-and-seo.md) |
 | 2026-09-07 | [The mobile footer stacks again, and category cards keep their image on mobile](2026-09-07-6-mobile-footer-and-category-card-fixes.md) |
 | 2026-09-07 | [The drawer nav is refined, and the footer opts out of it](2026-09-07-5-mobile-drawer-polish-and-footer-opt-out.md) |
