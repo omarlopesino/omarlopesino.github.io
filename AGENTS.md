@@ -273,6 +273,11 @@ trailing period, whole line under ~70 chars. Body: a few sentences on why the ch
 is, prose wrapped at 97 chars, no bullet lists — and no body at all when the subject is the whole
 story.
 
+Every commit request includes its `docs/plans/` entry: commit the change in its pieces, then run
+`/log-entry` over the commits just made and commit the entry with its README row last, as
+`docs(plans): …`. The entry is drafted from the commits because it cites them; `/log-entry`'s
+scope decides whether one is due, so content-only work gets none.
+
 Pull requests should include a brief description, testing performed, and screenshots or Storybook
 links for visual changes. Link related issues or docs when relevant, and note any i18n impact
 explicitly.
