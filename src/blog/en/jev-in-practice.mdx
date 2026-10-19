@@ -1,0 +1,63 @@
+---
+cid: "jev-in-practice"
+category: "artificial-intelligence"
+tags: ["jev", "classification", "rlcd"]
+recommended: []
+language: "en"
+slug: "jev-in-practice"
+title: "Using Jev in practice"
+description: "Jev generates no text: it answers questions with calibrated probabilities. Here is why it is practical, how to ask it things and where it is already used, as in Drupal."
+pubDate: "2026-10-19"
+author: "Omar Lopesino"
+image:
+  src: "/960x540/jev-in-practice.avif"
+  alt: "TODO"
+---
+
+## What Jev is
+
+Explain what Jev is, why it generates no text and what it returns.
+
+- TypeSafe's decision model
+- Generates no text
+- Calibrated probabilities
+- RLCD: calibrated decisions
+- `jev-latest` and `jev-preview` aliases
+
+## Why Jev is practical
+
+Explain what Jev offers over a generative LLM when making decisions.
+
+- Structured answers, no parsing
+- Predictable, verifiable output
+- You only pay input
+- Several questions, one request
+
+## Question types, with an example of each
+
+Present the four question types with a generic request and response example.
+
+- `noul`: yes or no
+- `choice`: one option among many
+- `score`: ordered levels
+- `box`: where something is
+- Best practices when asking
+
+## Reading the answer and deciding
+
+Explain how to turn probabilities into stored values and choose sensible thresholds.
+
+- Probabilities, not closed answers
+- Thresholds tuned with examples
+- Read `confidence` too
+- When to defer to humans
+
+## Real use cases
+
+Tell where Jev is used today, starting with its Drupal integration.
+
+- The `ai_provider_typesafeai` provider
+- AI Automators Decision rules
+- Text classification
+- Content moderation
+- Locating objects in images
