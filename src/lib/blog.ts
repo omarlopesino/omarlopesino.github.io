@@ -5,10 +5,13 @@ import { ui, langPrefix } from "@/i18n/ui";
 import { useTranslations, useUrl } from "@/i18n/utils";
 import type { PostInterface, Term } from "@/types";
 
+// Drafts only exist under `astro dev`, so every query below skips them in a build.
+const isPublished = (data: object) => !import.meta.env.PROD || !('draft' in data && data.draft);
+
 export function staticPaths(type: CollectionKey, language: string) : GetStaticPaths {
   return async () => {
     const posts = await getCollection(type, ({data}) => {
-      return data.language == language;
+      return data.language == language && isPublished(data);
     });
 
     return posts.map(entry => ({
@@ -21,7 +24,7 @@ export function staticPaths(type: CollectionKey, language: string) : GetStaticPa
 export async function getContentAlternates(type : keyof DataEntryMap, entry : {language: string, cid: string}) {
   return await Promise.all(
     await getCollection(type, ({data}) => {
-      return data.cid == entry.cid
+      return data.cid == entry.cid && isPublished(data)
   }));
 }
 
@@ -72,7 +75,7 @@ export async function toPostInterface(post: CollectionEntry<'blog'>) : Promise<P
 // term's own cid is what the reference id must match.
 export async function getTermPosts(type: 'tag' | 'category', term: {cid: string, language: string}) : Promise<PostInterface[]> {
   const posts = await getCollection('blog', ({data}) => {
-    if (data.language != term.language) {
+    if (data.language != term.language || !isPublished(data)) {
       return false;
     }
 
@@ -99,7 +102,7 @@ export async function getRecommendedPosts(post: CollectionEntry<'blog'>) : Promi
   }
 
   const posts = await getCollection('blog', ({data}) => {
-    return data.language == post.data.language && cids.includes(data.cid);
+    return data.language == post.data.language && cids.includes(data.cid) && isPublished(data);
   });
 
   return await Promise.all(
@@ -117,7 +120,7 @@ const byNewest = (a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) =>
   b.data.pubDate.getTime() - a.data.pubDate.getTime();
 
 export async function getLangPosts(language: string) : Promise<PostInterface[]> {
-  const posts = await getCollection('blog', ({data}) => data.language == language);
+  const posts = await getCollection('blog', ({data}) => data.language == language && isPublished(data));
 
   return await Promise.all(posts.sort(byNewest).map(toPostInterface));
 }
@@ -125,7 +128,7 @@ export async function getLangPosts(language: string) : Promise<PostInterface[]> 
 // The years that have posts, newest first. Read in UTC to match useFormatDate, so a post never
 // counts towards the year before the one its date shows.
 export async function getYears(language: string) : Promise<{year: number, count: number}[]> {
-  const posts = await getCollection('blog', ({data}) => data.language == language);
+  const posts = await getCollection('blog', ({data}) => data.language == language && isPublished(data));
 
   const counts = new Map<number, number>();
   for (const post of posts) {
@@ -140,7 +143,7 @@ export async function getYears(language: string) : Promise<{year: number, count:
 
 export async function getYearPosts(language: string, year: number) : Promise<PostInterface[]> {
   const posts = await getCollection('blog', ({data}) => {
-    return data.language == language && data.pubDate.getUTCFullYear() == year;
+    return data.language == language && data.pubDate.getUTCFullYear() == year && isPublished(data);
   });
 
   return await Promise.all(posts.sort(byNewest).map(toPostInterface));
