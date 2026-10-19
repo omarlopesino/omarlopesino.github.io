@@ -59,8 +59,8 @@ Read the relevant block before touching a subsystem.
   [2026-08-31](2026-08-31-1-about-me-splits-from-the-home-page.md)
 - **`blog.path` is both the listing URL and the post URL *prefix*.** Changing it breaks every post's
   hreflang silently — [2026-08-27](2026-08-27-8-about-me-as-home-page.md)
-- **Route directory names match `t('*.path')` literally, accents included** —
-  [2026-06-24](2026-06-24-1-i18n-and-translated-routes.md)
+- **Route directory names match `t('*.path')` literally**; the Spanish category segment is
+  unaccented (`categorias`) — [2026-09-08](2026-09-08-1-launch-indexing-images-a11y-and-seo.md)
 - **Every paginated route maps its alternates through `pageAlternates()`**, or page two
   canonicalises to page one — [2026-08-27](2026-08-27-2-blog-listings-pagination-and-archives.md)
 - **The archive is the only taxonomy index.** Tags and categories are reached from the blog page
@@ -111,6 +111,7 @@ Newest first.
 | Date | Entry |
 | --- | --- |
 | 2026-10-19 | [Posts can be drafts, outlined by a skill, and every commit request logs itself](2026-10-19-1-draft-posts-and-post-outline-skill.md) |
+| 2026-09-08 | [The site opens to search engines, with lighter images, cleaner a11y and sharper titles](2026-09-08-1-launch-indexing-images-a11y-and-seo.md) |
 | 2026-09-07 | [The mobile footer stacks again, and category cards keep their image on mobile](2026-09-07-6-mobile-footer-and-category-card-fixes.md) |
 | 2026-09-07 | [The drawer nav is refined, and the footer opts out of it](2026-09-07-5-mobile-drawer-polish-and-footer-opt-out.md) |
 | 2026-09-07 | [The header stays pinned while scrolling](2026-09-07-4-sticky-header.md) |
