@@ -36,6 +36,7 @@ Create `src/blog/en/<cid>.mdx` and `src/blog/es/<cid>.mdx` with the schema in
 `src/content.config.ts`:
 
 - `cid`, `language`, `category` and `tags` as bare cids, `recommended: []`.
+- `draft: true`: an outline must never ship. The user removes it once the post is written.
 - `slug` translated per language; `title` and `description` written in each language (a
   description is one or two sentences saying what the reader gets).
 - `pubDate` today, `author: "Omar Lopesino"`.
