@@ -171,9 +171,7 @@ they render standalone in Storybook.
 
 ## Discovery
 
-The site is `noindex, nofollow` on every page. The value is `SITE.robots` in `src/lib/seo.ts`,
-carrying the `@todo`; **it is a single-word change and not one to make in passing** — flipping it
-publishes the site.
+The site is indexable: no `robots` metatag is emitted unless a post sets `seo.robots`.
 
 `src/components/Seo.astro` owns the whole discovery block of the head: canonical, `hreflang` plus
 `x-default`, every metatag, the JSON-LD, and the feed link. `Layout` renders it and forwards one
@@ -305,14 +303,12 @@ the archive at `/blog/archive`. The rail is *deferred*, not forbidden — `futur
 
 ## Current state
 
-The site is mid-build; `notas.txt` (Spanish) is the working TODO list. What follows is known to need
-work rather than being a convention to imitate:
+What follows is known to need work rather than being a convention to imitate:
 
 - `PostTeaser` forwards leftover props to `Card`, so anything beyond the `PostInterface` fields it
   destructures would land in the DOM as an attribute.
 - `npm run storybook-build` fails at the prerender step with `Cannot find module
   'virtual:astro-icon'`; `npm run storybook-dev` works.
-- The contact page doesn't exist yet — its `MenuLink` stays commented out in `Header.astro`.
 - `education` and `spokenLanguage` are declared in `src/content.config.ts` but have no data behind
   them — `src/data/education/` and `src/data/spoken-languages/` were deleted and the collections
   were not. Both resolve to zero entries.
