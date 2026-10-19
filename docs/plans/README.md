@@ -111,6 +111,7 @@ Newest first.
 | Date | Entry |
 | --- | --- |
 | 2026-10-19 | [Posts can be drafts, outlined by a skill, and every commit request logs itself](2026-10-19-1-draft-posts-and-post-outline-skill.md) |
+| 2026-09-07 | [The mobile footer stacks again, and category cards keep their image on mobile](2026-09-07-6-mobile-footer-and-category-card-fixes.md) |
 | 2026-09-07 | [The drawer nav is refined, and the footer opts out of it](2026-09-07-5-mobile-drawer-polish-and-footer-opt-out.md) |
 | 2026-09-07 | [The header stays pinned while scrolling](2026-09-07-4-sticky-header.md) |
 | 2026-09-07 | [The post byline's avatar is sized on `ProfilePicture` itself](2026-09-07-3-web-intro-avatar-visible-on-mobile.md) |
