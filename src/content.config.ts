@@ -130,6 +130,8 @@ const blog = defineCollection({
         category: z.string(),
 		tags: z.array(z.string()),
         recommended: z.optional(z.array(z.string())),
+		// Left out of the production build; `astro dev` still renders it for review.
+		draft: z.optional(z.boolean()),
 		cid: z.string(),
 		seo: typeSeo
 	}).transform((data) => ({
