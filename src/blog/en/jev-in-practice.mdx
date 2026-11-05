@@ -6,8 +6,8 @@ recommended: []
 draft: true
 language: "en"
 slug: "jev-in-practice"
-title: "Using Jev in practice"
-description: "Jev generates no text: it answers questions with calibrated probabilities. Here is why it is practical, how to ask it things and where it is already used, as in Drupal."
+title: "Automate Classification and Decision-Making Quickly with Jev"
+description: "Over the past few years, Generative AI has been gaining a lot of traction. But is it optimal for every use case? Is generating content from prompts the pinnacle of AI? Far from it, Jev can outperform Generative AI in tasks such as classification or decision-making. In this article, I will talk about what Jev is, its possibilities, and how you can use it in your projects."
 pubDate: "2026-10-19"
 author: "Omar Lopesino"
 image:
@@ -15,17 +15,35 @@ image:
   alt: "TODO"
 ---
 
-## What Jev is
+Over the past few years, Generative AI has been gaining a lot of traction. But is it optimal for every use case? Is generating content from prompts the pinnacle of
+AI? Far from it, Jev can outperform Generative AI in tasks such as classification or decision-making. In this article, I will talk about what Jev is, its possibilities, and how you can use it in your projects.
 
-Explain what Jev is, why it generates no text and what it returns.
+## What is Jev
 
-- TypeSafe's decision model
-- Generates no text
-- Calibrated probabilities
-- RLCD: calibrated decisions
-- `jev-latest` and `jev-preview` aliases
+If you are aware of the latest AI advances, you will have noticed that a new artificial intelligence model has arisen. 
+Its name is JEV and it is not generative as the trending models released nowadays such as GPT-4, Claude or Gemini. Instead, it does 
+one job and pretty well: given your prompt, it provides a percentage along with its responses.
 
-## Why Jev is practical
+Let's put it in an example. Suppose you just want to know if a plate contains sugar. You can then instruct JEV to tell you if a dish contains sugar. Then you 
+ask it if a jam toast has sugar. Its answer will be, for example: yes 88% and no 12%.
+
+These results can help you to solve problems such as:
+
+* Verify if some statement is true or false.
+* Classify some statement into some specific category.
+* Score a sentence into different sections.
+
+Besides classifying or scoring, JEV provides features on top of it such as indicating the region of a specific image that meets a criterion. We will see it later.
+
+In short, JEV excels in its response speed for problems that do not need a generated response. Usually, we have machine learning models (which are still very good). Jev aims to be
+a generic model to make such classifications, thanks to its ability to read natural language. 
+
+For those interested in how it works, you must know that JEV:
+
+* Is the first [System One](https://www.sanity.io/glossary/system-one-model) released model, which bases its responses on providing probabilities rather than generated text.
+* It is based on [Reinforced Learning from Calibrated Decisions](https://github.com/gethamster/skills/blob/main/methods/reinforcement-learning-for-calibrated-decisions-rlcd/METHOD.md) (RLCD), a post-training machine method that rewards the model when its returned probabilities match the real probabilities. For example: if the model predicts it is raining with an 80% certainty, and the real frequency of rain is 80%, then it will be rewarded.
+
+## The potential of doing fast and precise classifications
 
 Explain what Jev offers over a generative LLM when making decisions.
 
