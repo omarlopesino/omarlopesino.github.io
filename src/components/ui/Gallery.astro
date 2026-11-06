@@ -1,0 +1,62 @@
+---
+import type { Image } from '@/types';
+import { coverSrcSet } from '@/lib/images';
+
+interface Props {
+    // Prefixes every slide's anchor id, so two galleries on one page don't collide.
+    id: string;
+    images: (Image & { caption?: string })[];
+    previousLabel: string;
+    nextLabel: string;
+    class?: string;
+    imageClass?: string;
+    sizes?: string;
+}
+
+const {
+    id,
+    images,
+    previousLabel,
+    nextLabel,
+    class: className,
+    imageClass = 'w-full aspect-[16/9] object-cover',
+    sizes = '(min-width: 48rem) 48rem, 100vw',
+} = Astro.props;
+
+const slideId = (index: number) => `${id}-${(index + images.length) % images.length + 1}`;
+---
+
+{/* DaisyUI's anchor-driven carousel: it slides with no JavaScript, and swiping scrolls it too. */}
+<div class:list={['not-prose', className]}>
+    <div class="carousel w-full rounded-box">
+        {images.map((image, index) => (
+            <figure id={slideId(index)} class="carousel-item relative w-full flex-col">
+                <img
+                    src={image.src}
+                    srcset={coverSrcSet(image.src)}
+                    sizes={sizes}
+                    alt={image.alt}
+                    width={image.width}
+                    height={image.height}
+                    class:list={[imageClass]}
+                    loading="lazy"
+                    decoding="async"
+                />
+                {image.caption && <figcaption class="text-sm text-base-content/70 p-2 text-center">{image.caption}</figcaption>}
+                {images.length > 1 && (
+                    <div class="absolute inset-x-3 top-1/2 flex -translate-y-1/2 justify-between">
+                        <a href={`#${slideId(index - 1)}`} class="btn btn-circle btn-sm" aria-label={previousLabel}>❮</a>
+                        <a href={`#${slideId(index + 1)}`} class="btn btn-circle btn-sm" aria-label={nextLabel}>❯</a>
+                    </div>
+                )}
+            </figure>
+        ))}
+    </div>
+    {images.length > 1 && (
+        <div class="flex justify-center gap-2 py-2">
+            {images.map((image, index) => (
+                <a href={`#${slideId(index)}`} class="btn btn-xs" aria-label={image.alt}>{index + 1}</a>
+            ))}
+        </div>
+    )}
+</div>
