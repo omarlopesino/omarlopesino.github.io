@@ -110,6 +110,7 @@ Newest first.
 
 | Date | Entry |
 | --- | --- |
+| 2026-11-06 | [A photo gallery primitive for posts](2026-11-06-1-gallery-component.md) |
 | 2026-10-19 | [Posts can be drafts, outlined by a skill, and every commit request logs itself](2026-10-19-1-draft-posts-and-post-outline-skill.md) |
 | 2026-09-17 | [English moves to the site root; Spanish keeps `/es/`](2026-09-17-1-english-at-the-site-root.md) |
 | 2026-09-08 | [The site opens to search engines, with lighter images, cleaner a11y and sharper titles](2026-09-08-1-launch-indexing-images-a11y-and-seo.md) |
